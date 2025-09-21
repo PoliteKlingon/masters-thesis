@@ -1,0 +1,186 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% I, the copyright holder of this work, release this work into the
+%% public domain. This applies worldwide. In some countries this may
+%% not be legally possible; if so: I~grant anyone the right to use
+%% this work for any purpose, without any conditions, unless such
+%% conditions are required by law.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[
+  digital,     %% The `digital` option enables the default options for the
+               %% digital version of a~document. Replace with `printed`
+               %% to enable the default options for the printed version
+               %% of a~document.
+  color,       %% Uncomment these lines (by removing the %% at the
+               %% beginning) to use color in the printed version of your
+               %% document
+  oneside,     %% The `oneside` option enables one-sided typesetting,
+               %% which is preferred if you are only going to submit a
+               %% digital version of your thesis. Replace with `twoside`
+               %% for double-sided typesetting if you are planning to
+               %% also print your thesis. For double-sided typesetting,
+               %% use at least 120 g/m² paper to prevent show-through.
+  nosansbold,  %% The `nosansbold` option prevents the use of the
+               %% sans-serif type face for bold text. Replace with
+               %% `sansbold` to use sans-serif type face for bold text.
+  nocolorbold, %% The `nocolorbold` option disables the usage of the
+               %% blue color for bold text, instead using black. Replace
+               %% with `colorbold` to use blue for bold text.
+  lof,         %% The `lof` option prints the List of Figures. Replace
+               %% with `nolof` to hide the List of Figures.
+  lot,         %% The `lot` option prints the List of Tables. Replace
+               %% with `nolot` to hide the List of Tables.
+]{fithesis4}
+%% The following section sets up the locales used in the thesis.
+\usepackage[resetfonts]{cmap} %% We need to load the T2A font encoding
+\usepackage[T1,T2A]{fontenc}  %% to use the Cyrillic fonts with Russian texts.
+\usepackage[
+  main=english, %% By using `czech` or `slovak` as the main locale
+                %% instead of `english`, you can typeset the thesis
+                %% in either Czech or Slovak, respectively.
+  english, german, russian, czech, slovak %% The additional keys allow
+]{babel}        %% foreign texts to be typeset as follows:
+%%
+%%   \begin{otherlanguage}{german}  ... \end{otherlanguage}
+%%   \begin{otherlanguage}{russian} ... \end{otherlanguage}
+%%   \begin{otherlanguage}{czech}   ... \end{otherlanguage}
+%%   \begin{otherlanguage}{slovak}  ... \end{otherlanguage}
+%%
+%% For non-Latin scripts, it may be necessary to load additional
+%% fonts:
+\usepackage{paratype}
+\def\textrussian#1{{\usefont{T2A}{PTSerif-TLF}{m}{rm}#1}}
+%%
+%% The following section sets up the metadata of the thesis.
+\thesissetup{
+    date        = 2025/10/01,
+    university  = mu,
+    faculty     = fi,
+    type        = mgr,
+    department  = Department of Computer Systems and Communications,
+    author      = Jiří Loun,
+    gender      = m,
+    advisor     = {RNDr. Pavel Novák},
+    title       = {Design and Implementation of a Mobile Application with Offline Support},
+    TeXtitle    = {Design and Implementation of a Mobile Application with Offline Support},
+    keywords    = {Mobile, React, React Native, Kotlin, Offline mode, Architecture, Synchronization},
+    TeXkeywords = {Mobile, React, React Native, Kotlin, Offline mode, Architecture, Synchronization},
+    abstract    = {%
+      In this thesis, .... !present tense!
+    },
+    thanks      = {%
+      TBA
+    },
+    bib         = references.bib,
+    %% Remove the following line to use the JVS 2018 faculty logo.
+    facultyLogo = fithesis-fi,
+}
+\usepackage{makeidx}      %% The `makeidx` package contains
+\makeindex                %% helper commands for index typesetting.
+%% These additional packages are used within the document:
+\usepackage{paralist} %% Compact list environments
+\usepackage{amsmath}  %% Mathematics
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{url}      %% Hyperlinks
+\usepackage{markdown} %% Lightweight markup
+\usepackage{listings} %% Source code highlighting
+\lstset{
+  basicstyle      = \ttfamily,
+  identifierstyle = \color{black},
+  keywordstyle    = \color{blue},
+  keywordstyle    = {[2]\color{cyan}},
+  keywordstyle    = {[3]\color{olive}},
+  stringstyle     = \color{teal},
+  commentstyle    = \itshape\color{magenta},
+  breaklines      = true,
+}
+\usepackage{floatrow} %% Putting captions above tables
+\floatsetup[table]{capposition=top}
+\usepackage[babel]{csquotes} %% Context-sensitive quotation marks
+
+\newrobustcmd*{\citefullauthor}{\AtNextCite{\DeclareNameAlias{labelname}{given-family}}\citeauthor}
+
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+\begin{document}
+%% The \chapter* command can be used to produce unnumbered chapters:
+\chapter*{Introduction}
+%% Unlike \chapter, \chapter* does not update the headings and does not
+%% enter the chapter to the table of contents. If we want correct
+%% headings and a~table of contents entry, we must add them manually:
+\markright{\textsc{Introduction}}
+\addcontentsline{toc}{chapter}{Introduction}
+
+The primary objective of this thesis is to ... 
+
+It consists of ... chapters; the first chapter contains ... 
+
+The end application is ...
+
+~
+
+Decribe motivation and purpose, business context ...
+
+Why does the app solve the problem? What value does it bring?
+
+\chapter{Offline-enabled mobile applications}
+\section{Concept}
+thick client app capable of managing its own state not relying on server
+\section{Issues to be tackled}
+\subsection{Offline data availability}
+data have to be downloaded in advance, kept updated; security concerns
+\subsection{Partial changes management}
+BE and FE must cooperate on keeping the data up to date without bulk-downloading over and over
+\subsection{Local data management}
+local DB, need to essentially fake your own BE on FE - the client thickness
+\subsection{Server synchronization}
+synchronize data client->server, manage conflicts - describe strategies, options
+\subsection{Offline authentication, authorization}
+app usability strongly relies on the user remaining authenticated while offline
+
+\chapter{Technical approaches}
+\section{Frameworks}
+list of FE approaches to take with their (dis)advantages
+\subsection{React-Native}
+\subsection{React PWA}
+\subsection{Native approaches}
+\subsubsection{Kotlin}
+\subsubsection{Flutter}
+\subsection{Others}
+\section{Local data management}
+approaches to tackle the local data management
+\subsection{Local database}
+fake database
+\subsection{Request intercepting, processing}
+fake server
+\subsection{TBA?}
+\section{Synchronization}
+\subsection{Mitigation}
+\subsection{Duplication}
+\subsection{Atribute timestamping}
+\subsection{Advanced synchronization management}
+(approaches based on advanced methods like GIT etc)
+
+\chapter{Implementation}
+\section{Functional and non-functional requirements}
+\section{Architecture, technology stack}
+\section{Axios Interceptor}
+\section{Local data management}
+\section{Synchronization}
+
+\chapter{Issues and future work}
+
+\chapter*{Conclusion}
+\addcontentsline{toc}{chapter}{Conclusion}
+
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+\printbibliography[heading=bibintoc] %% Print the bibliography.
+
+\appendix %% Start the appendices.
+\chapter{Electronic attachments}
+
+
+\end{document}
