@@ -16,5 +16,46 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{nextJsArticle}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=1abf626204b6de9eac7c5efb90eb5d16}{%
+           family={Moretti},
+           familyi={M\bibinitperiod},
+           given={Francisco},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{1abf626204b6de9eac7c5efb90eb5d16}
+      \strng{fullhash}{1abf626204b6de9eac7c5efb90eb5d16}
+      \strng{fullhashraw}{1abf626204b6de9eac7c5efb90eb5d16}
+      \strng{bibnamehash}{1abf626204b6de9eac7c5efb90eb5d16}
+      \strng{authorbibnamehash}{1abf626204b6de9eac7c5efb90eb5d16}
+      \strng{authornamehash}{1abf626204b6de9eac7c5efb90eb5d16}
+      \strng{authorfullhash}{1abf626204b6de9eac7c5efb90eb5d16}
+      \strng{authorfullhashraw}{1abf626204b6de9eac7c5efb90eb5d16}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{26}
+      \field{month}{9}
+      \field{title}{Next.js Revolution — The framework popularity rises in 2023}
+      \field{urlday}{27}
+      \field{urlmonth}{9}
+      \field{urlyear}{2025}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://medium.com/@franciscomoretti/next-js-revolution-the-framework-popularity-rises-in-2023-a8ebc52d673a
+      \endverb
+      \verb{url}
+      \verb https://medium.com/@franciscomoretti/next-js-revolution-the-framework-popularity-rises-in-2023-a8ebc52d673a
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 

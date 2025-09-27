@@ -66,7 +66,7 @@
     keywords    = {Mobile, React, React Native, Kotlin, Offline mode, Architecture, Synchronization},
     TeXkeywords = {Mobile, React, React Native, Kotlin, Offline mode, Architecture, Synchronization},
     abstract    = {%
-      In this thesis, .... !present tense!
+      This thesis documents the process of designing and implementing an enterprise mobile application with offline support in a real-world scenario with specific functional requirements to be fulfilled. By analyzing viable solutions and architectures, this thesis also serves as a reference for architects to be consulted when designing an optimal approach for a similar application.
     },
     thanks      = {%
       TBA
@@ -113,21 +113,31 @@
 \markright{\textsc{Introduction}}
 \addcontentsline{toc}{chapter}{Introduction}
 
-The primary objective of this thesis is to ... 
+The primary objective of this thesis is to ...
 
-It consists of ... chapters; the first chapter contains ... 
+It consists of 4 chapters; the first chapter investigates the concept of offline-enabled mobile applications, their advantages, disadvantages, and specific challenges and architectural demands. The second chapter explores the approaches to be taken when designing an architecture and technology stack of such app - each approach is further documented, stating its strengths and weaknesses and practical scenarios in which each of them play their prime. Here the thesis not only focuses on different frameworks or languages, but also, the challenges introduced in the first chapter are confronted with different technical solutions and evaluated.
 
-The end application is ...
+The third and fourth chapters focus on selecting the right approaches in different areas based on the functional and non-functional requirenments, implementation, testing, and other aspects of the practical execution of the project in the context of a real project for a real customer.
+
+The end application conforms with the requirements and is deployed to production for the end users to work with.
 
 ~
 
-Decribe motivation and purpose, business context ...
-
+Decribe motivation and purpose, business context ... TODO Tibi + nejaky clanek idealne?
 Why does the app solve the problem? What value does it bring?
 
 \chapter{Offline-enabled mobile applications}
+First, we need to take a look at offline-enabled enterprise mobile applications as a whole and identify the challenges they have to solve in addition to conventional mobile applications. By offline-enabled I mean an application that provides a significant part of its functionality without access to the server, while the extent of said functionality may vary based on a particular project and customer's needs.
 \section{Concept}
-thick client app capable of managing its own state not relying on server
+Mobile applications in the context of enterprise solutions always conform with the server-client schema --- this thesis does not consider local-only applications as those have little to no use on the relevant market. In this server-client schema, there are two basic ideologies to pursue --- server-heavy or client-heavy solution. 
+
+A server-heavy solution will rely largely on the backend capabilities. Any list filtering or sorting will be done through an endpoint, for example using a data search engine such as Elasticsearch\footnote{https://www.elastic.co/elasticsearch}. The app will store as little state as possible on the client and will depend on server-managed state, settings, or data. 
+
+If this concept is deepened further in the context of web applications, whole pages can be rendered on the server and sent already partially prepared (pre-rendered, waiting to be hydrated --- enriched by client-rendered functionality --- on the client) to the client's browser. Such approach is called SSR (Server Side Rendering) and is currently on the rise with frameworks such as Next.js\footnote{https://nextjs.org/} --- a framework which has gained a lot of popularity in the recent years, according to \citefullauthor{nextJsArticle}.
+
+A client-heavy application, on the other hand, will rather utilize the client's resources to process or transform data instead of asking the server to do it. It will prefer sorting or filtering data in the browser or managing state locally --- for example, by using a state-management library like Redux\footnote{https://redux.js.org/} or Zustand\footnote{https://github.com/pmndrs/zustand}.
+
+When considering any offline capabilities, the application must not be heavily dependent on the server and thus will go in the cleint-heavy direction. To accomodate the offline needs, the concept of the application will need to further deepen the client's independence in order to be able to retain its functionality even when the server is not responsive due to signal loss. TODO dokoncit odstavec
 \section{Issues to be tackled}
 \subsection{Offline data availability}
 data have to be downloaded in advance, kept updated; security concerns

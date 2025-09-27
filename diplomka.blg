@@ -1,9 +1,15 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
 [0] Config.pm:331> INFO - Logfile is 'diplomka.blg'
-[39] biber:342> INFO - === ne zář 21, 2025, 22:52:59
-[53] Biber.pm:421> INFO - Reading 'diplomka.bcf'
-[92] Biber.pm:1002> INFO - Found 0 citekeys in bib section 0
-[102] bbl.pm:676> INFO - Writing 'diplomka.bbl' with encoding 'UTF-8'
-[102] bbl.pm:779> INFO - Output to diplomka.bbl
-[102] Biber.pm:132> WARN - The file 'diplomka.bcf' does not contain any citations!
-[102] Biber.pm:134> INFO - WARNINGS: 1
+[70] biber:342> INFO - === so zář 27, 2025, 19:29:16
+[86] Biber.pm:421> INFO - Reading 'diplomka.bcf'
+[153] Biber.pm:1002> INFO - Found 1 citekeys in bib section 0
+[172] Biber.pm:4487> INFO - Processing section 0
+[185] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
+[186] bibtex.pm:1713> INFO - LaTeX decoding ...
+[190] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[231] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[231] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[231] Biber.pm:4307> INFO - Sorting list 'none/global//global/global/global' of type 'entry' with template 'none' and locale 'en-US'
+[231] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
+[239] bbl.pm:676> INFO - Writing 'diplomka.bbl' with encoding 'UTF-8'
+[240] bbl.pm:779> INFO - Output to diplomka.bbl
