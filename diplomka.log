@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.9.21)  27 SEP 2025 19:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.9.21)  27 SEP 2025 22:02
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1525,7 +1525,7 @@ Package biblatex Info: Reference section=0 on input line 107.
 Package biblatex Info: Reference segment=0 on input line 107.
 \@logowidth=\skip105
 \@logoheight=\skip106
-<fithesis/logo/mu/fithesis-base-english.pdf, id=145, 202.7575pt x 52.195pt>
+<fithesis/logo/mu/fithesis-base-english.pdf, id=149, 202.7575pt x 52.195pt>
 File: fithesis/logo/mu/fithesis-base-english.pdf Graphic file (type pdf)
 <use fithesis/logo/mu/fithesis-base-english.pdf>
 Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english.pdf  used on input line 107.
@@ -1565,7 +1565,7 @@ LaTeX Font Info:    Font shape `T1/qhv/m/n' will be
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec.enc} <./fithesis/logo/mu/fithesis-base-english.pdf>]
 \@logowidth=\skip107
 \@logoheight=\skip108
-<fithesis/logo/mu/fithesis-base-english-color.pdf, id=154, 202.7575pt x 52.195pt>
+<fithesis/logo/mu/fithesis-base-english-color.pdf, id=158, 202.7575pt x 52.195pt>
 File: fithesis/logo/mu/fithesis-base-english-color.pdf Graphic file (type pdf)
 <use fithesis/logo/mu/fithesis-base-english-color.pdf>
 Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english-color.pdf  used on input line 107.
@@ -1583,7 +1583,7 @@ Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english-color.pdf  used 
 [1 <./fithesis/logo/mu/fithesis-base-english-color.pdf>]
 \@logowidth=\skip109
 \@logoheight=\skip110
-<fithesis/logo/mu/fithesis-fi-color.pdf, id=160, 291.0875pt x 291.0875pt>
+<fithesis/logo/mu/fithesis-fi-color.pdf, id=164, 291.0875pt x 291.0875pt>
 File: fithesis/logo/mu/fithesis-fi-color.pdf Graphic file (type pdf)
 <use fithesis/logo/mu/fithesis-fi-color.pdf>
 Package pdftex.def Info: fithesis/logo/mu/fithesis-fi-color.pdf  used on input line 107.
@@ -1679,6 +1679,9 @@ Overfull \vbox (4.69153pt too high) has occurred while \output is active []
 
 
 [2]
+Overfull \vbox (6.72218pt too high) has occurred while \output is active []
+
+
 
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/qpl/m/sc/12'.
@@ -1705,7 +1708,7 @@ Chapter 4.
 [8]
 
 [9]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 190.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 194.
  (/usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1725,24 +1728,24 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `diplomka.out' has not changed.
-(rerunfilecheck)             Checksum: 0612BD36A53DE701DD8B85E0668FD5D3;2377.
+(rerunfilecheck)             Checksum: 6537E7C7298294BEA98800EB24A0679D;2441.
 Package logreq Info: Writing requests to 'diplomka.run.xml'.
 \openout1 = `diplomka.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 41915 strings out of 474529
- 800292 string characters out of 5755266
- 1696964 words of memory out of 5000000
- 64012 multiletter control sequences out of 15000+600000
- 618268 words of font info for 130 fonts, out of 8000000 for 9000
+ 41925 strings out of 474529
+ 800394 string characters out of 5755266
+ 1697964 words of memory out of 5000000
+ 64013 multiletter control sequences out of 15000+600000
+ 618828 words of font info for 134 fonts, out of 8000000 for 9000
  464 hyphenation exceptions out of 8191
  100i,7n,123p,1239b,3032s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplr.pfb>
-Output written on diplomka.pdf (21 pages, 228193 bytes).
+Output written on diplomka.pdf (21 pages, 231006 bytes).
 PDF statistics:
- 346 PDF objects out of 1000 (max. 8388607)
- 305 compressed objects within 4 object streams
- 70 named destinations out of 1000 (max. 500000)
- 34628 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 351 PDF objects out of 1000 (max. 8388607)
+ 310 compressed objects within 4 object streams
+ 71 named destinations out of 1000 (max. 500000)
+ 34636 words of extra memory for PDF output out of 35830 (max. 10000000)
 

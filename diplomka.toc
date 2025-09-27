@@ -4,9 +4,9 @@
 \contentsline {section}{\numberline {1.1}Concept}{2}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Issues to be tackled}{3}{section.1.2}%
 \contentsline {subsection}{\numberline {1.2.1}Offline data availability}{3}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Partial changes management}{3}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Local data management}{3}{subsection.1.2.3}%
-\contentsline {subsection}{\numberline {1.2.4}Server synchronization}{3}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.2}Partial changes management}{4}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Local data management}{4}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Server synchronization}{4}{subsection.1.2.4}%
 \contentsline {subsection}{\numberline {1.2.5}Offline authentication, authorization}{4}{subsection.1.2.5}%
 \contentsline {chapter}{\numberline {2}\bfseries Technical approaches}{5}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Frameworks}{5}{section.2.1}%
@@ -28,9 +28,10 @@
 \contentsline {chapter}{\numberline {3}\bfseries Implementation}{7}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Functional and non-functional requirements}{7}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Architecture, technology stack}{7}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Axios Interceptor}{7}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Local data management}{7}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Synchronization}{7}{section.3.5}%
+\contentsline {section}{\numberline {3.3}Service Worker}{7}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Axios Interceptor}{7}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Local data management}{7}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Synchronization}{7}{section.3.6}%
 \contentsline {chapter}{\numberline {4}\bfseries Issues and future work}{8}{chapter.4}%
 \contentsline {chapter}{Conclusion}{9}{chapter*.11}%
 \contentsline {chapter}{Bibliography}{10}{chapter*.12}%

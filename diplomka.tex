@@ -137,10 +137,13 @@ If this concept is deepened further in the context of web applications, whole pa
 
 A client-heavy application, on the other hand, will rather utilize the client's resources to process or transform data instead of asking the server to do it. It will prefer sorting or filtering data in the browser or managing state locally --- for example, by using a state-management library like Redux\footnote{https://redux.js.org/} or Zustand\footnote{https://github.com/pmndrs/zustand}.
 
-When considering any offline capabilities, the application must not be heavily dependent on the server and thus will go in the cleint-heavy direction. To accomodate the offline needs, the concept of the application will need to further deepen the client's independence in order to be able to retain its functionality even when the server is not responsive due to signal loss. TODO dokoncit odstavec
+When considering any offline capabilities, the application must not be heavily dependent on the server and thus will go in the cleint-heavy direction. To accomodate the offline needs, the concept of the application will need to further deepen the client's independence in order to be able to retain its functionality even when the server is not responsive due to signal loss. The specific problems that one encounters while developing such an app are further explored in the next section.
 \section{Issues to be tackled}
+The first and the most obvious task is to make the application available offline as a whole. While it may seem trivial for certain platforms --- e.g. installing an Android application from Google Play Store --- it may be the first obstacle in other approaches, e.g. React PWA (Progressive Web Application). These specifics will be examined in the following chapter; at present, we turn to more conceptual issues.
 \subsection{Offline data availability}
-data have to be downloaded in advance, kept updated; security concerns
+In order for the aplication to be able to work with data in offline mode, these data must be downloaded in advance and kept updated. This presents a unique challenge that is not dependent on platform or framework choice --- it is, generally, not a good practice to download all data that could pośsibly be accessed in the application --- that would practically mean data mirroring of whole database or a large part of it. It is, therefore, quite imperative to try to limit the amount of data that should be available offline from the business logic side.
+
+As an example, let's imagine a remote-synchronized enterprise calendar application for planning meetings. Meetings can be input from a device and synchronized to a server. All devices that are subscribed to a certain calendar (e.g. meetings for project X) have it automatically synced with the server to display events submitted from other devices. It might very well suffice to automatically download only the current week or month for offline purposes as there is probably low business value in viewing meeting plans several months in advance or in history. 
 \subsection{Partial changes management}
 BE and FE must cooperate on keeping the data up to date without bulk-downloading over and over
 \subsection{Local data management}
@@ -176,6 +179,7 @@ fake server
 \chapter{Implementation}
 \section{Functional and non-functional requirements}
 \section{Architecture, technology stack}
+\section{Service Worker}
 \section{Axios Interceptor}
 \section{Local data management}
 \section{Synchronization}
