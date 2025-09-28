@@ -127,7 +127,9 @@ Decribe motivation and purpose, business context ... TODO Tibi + nejaky clanek i
 Why does the app solve the problem? What value does it bring?
 
 \chapter{Offline-enabled mobile applications}
-First, we need to take a look at offline-enabled enterprise mobile applications as a whole and identify the challenges they have to solve in addition to conventional mobile applications. By offline-enabled I mean an application that provides a significant part of its functionality without access to the server, while the extent of said functionality may vary based on a particular project and customer's needs.
+First, we need to take a look at offline-enabled enterprise mobile applications as a whole and identify the challenges they have to solve in addition to conventional mobile applications. By offline-enabled I mean an application that provides a significant part of its functionality without access to the server, while the extent of said functionality may vary based on a particular project and customer's needs. 
+
+What also tends to vary, and has a great influence on the project complexity, is the "extent" of offline capabilities. There may be applications that only need to display some data offline without modifying anything, or applications that need to survive only a couple of hours without synchronizing data with the server, but there may be applications that need to be backend-independent for days and then be able to synchronize the data with the server while running into as few conflicts as possible.
 \section{Concept}
 Mobile applications in the context of enterprise solutions always conform with the server-client schema --- this thesis does not consider local-only applications as those have little to no use on the relevant market. In this server-client schema, there are two basic ideologies to pursue --- server-heavy or client-heavy solution. 
 
@@ -141,17 +143,58 @@ When considering any offline capabilities, the application must not be heavily d
 \section{Issues to be tackled}
 The first and the most obvious task is to make the application available offline as a whole. While it may seem trivial for certain platforms --- e.g. installing an Android application from Google Play Store --- it may be the first obstacle in other approaches, e.g. React PWA (Progressive Web Application). These specifics will be examined in the following chapter; at present, we turn to more conceptual issues.
 \subsection{Offline data availability}
-In order for the aplication to be able to work with data in offline mode, these data must be downloaded in advance and kept updated. This presents a unique challenge that is not dependent on platform or framework choice --- it is, generally, not a good practice to download all data that could pośsibly be accessed in the application --- that would practically mean data mirroring of whole database or a large part of it. It is, therefore, quite imperative to try to limit the amount of data that should be available offline from the business logic side.
+In order for the aplication to be able to work with data in offline mode, these data must be downloaded in advance and kept updated. This presents a unique challenge that is not dependent on platform or framework choice --- it is, generally, not a good practice to download all data that could possibly be accessed in the application --- that would practically mean data mirroring of whole database or a large part of it. That might not even be possible due to the database size. It is, therefore, quite imperative to try to limit the amount of data that should be available offline from the business logic side.
 
 As an example, let's imagine a remote-synchronized enterprise calendar application for planning meetings. Meetings can be input from a device and synchronized to a server. All devices that are subscribed to a certain calendar (e.g. meetings for project X) have it automatically synced with the server to display events submitted from other devices. It might very well suffice to automatically download only the current week or month for offline purposes as there is probably low business value in viewing meeting plans several months in advance or in history. 
+
 \subsection{Partial changes management}
-BE and FE must cooperate on keeping the data up to date without bulk-downloading over and over
+A related topic to the previous section is partial changes management --- a concept of recording changes of data, not entire snapshots. 
+
+The use-case here is updating the local data to match the server state --- the longer the application has been in offline mode, the higher the probability of the data being out of date. Specifically, the probability of the data being out of date after a certain period of time follows the Poisson's distribution\cite{poissonArticle}: \begin{equation}P(X = k) = \frac{ \lambda^k }{k!} e^{-\lambda} \end{equation} where $\lambda$ is expected rate of occurence and $k$ is the number of occurences. Let's assume that on average during working hours, each instance receives an update every two hours. That is 4 requests during a whole working day. Therefore $\lambda = 4$. The probability that the instance is still up to date the next day (after 8 working hours), in other words, $k = 0$, is approximately 1.83\%.
+
+Therefore, the local data should be periodically or manually updated to minimize the occurence of synchronization conflicts. The reason why the system should support partial changes mangement is that if there is none, the only option of a local data update is to bulk-download all data, as if there were none stored, and overwrite them. 
+
+There are two layers of this principle that a system can implement:
+
+\subsubsection{Tracking instances} 
+The first layer is keeping track of whole objects (instances) that have been changed since a particular point in time --- essentially, having an \texttt{updated} attribute in each instance that holds the timestamp of the last change of its attributes. In this case, when the client is asking the server for fresh data to update its local copy, it can only request fresh data of instances that were updated since the last data download. 
+
+There also has to be a check for any new relevant instances or any deleted ones - those must be deleted (or soft-deleted\footnote{Soft-delete is a technique when an instance is marked as deleted instead of being deleted.}) from the local data on the client.
+
+Going back to the meeting calendar application example, the client would like to update its local list of planned meetings with their details. There would have to be an endpoint, say \texttt{POST /meetings/data/update} and the structure of the body of such a request could, for example, look like this: 
+
+\begin{lstlisting}
+{
+  "since": ISO string,
+  "knownIds": uuid[],
+}
+
+\end{lstlisting}
+where \texttt{since} is the timestamp of last data update on the device (every newer change needs to be provided) and \texttt{knownIds} is an array of IDs of planned meetings that the device currently tracks.
+
+The response to such request could have this structure:
+\begin{lstlisting}
+{
+  "added": Meeting[],
+  "deleted": uuid[],
+  "updated": Meeting[],
+}
+
+\end{lstlisting}
+
+where in the \texttt{updated} and \texttt{deleted} parts, only the instances from the sent \texttt{knownIds} are considered by the server.
+
+\subsubsection{Tracking attributes}
+Going even deeper in granularity, each attribute can have its timestamp and thus the response to the local-data-updating request may only contain changes in attributes and does not have to send the whole data object. While timestamping every attribute might sound like an overkill, as will be demonstrated later, in a complex offline-ready system, it may serve multiple purposes and therefore might be worth implementing.
+
+Extending the simple request-response schema from the previous section, the only change would be that \texttt{updated} would be of type \texttt{MeetingPartial} - containing only meeting ID and attributes that have been changed.
+
 \subsection{Local data management}
 local DB, need to essentially fake your own BE on FE - the client thickness
 \subsection{Server synchronization}
 synchronize data client->server, manage conflicts - describe strategies, options
 \subsection{Offline authentication, authorization}
-app usability strongly relies on the user remaining authenticated while offline
+app usability strongly relies on the user remaining authenticated while offline. local data can be sensitive and without authorization, someone can see them when they should not
 
 \chapter{Technical approaches}
 \section{Frameworks}

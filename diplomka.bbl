@@ -55,6 +55,65 @@
       \verb https://medium.com/@franciscomoretti/next-js-revolution-the-framework-popularity-rises-in-2023-a8ebc52d673a
       \endverb
     \endentry
+    \entry{poissonArticle}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=cc9895337565b86a51d8526b71d6f73d}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Jing},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ae021641a8f85fd2607152ab99ed115b}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Fan},
+           giveni={F\bibinitperiod}}}%
+        {{hash=b9749d38cefa5213b5a281a3f3c9bf6d}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Chao},
+           giveni={C\bibinitperiod}}}%
+        {{hash=6af5eb141ad012670b4eb92a956339a0}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Gang},
+           giveni={G\bibinitperiod}}}%
+        {{hash=a152c6aef45773cc823863a6a51f0d90}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Haitao},
+           giveni={H\bibinitperiod}}}%
+        {{hash=981389eef150a1d4cfdf5c542be0b4c6}{%
+           family={Cao},
+           familyi={C\bibinitperiod},
+           given={Xinyu},
+           giveni={X\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IOP Publishing}%
+      }
+      \strng{namehash}{a04750013a16e9840786571ebfd1ba02}
+      \strng{fullhash}{a04750013a16e9840786571ebfd1ba02}
+      \strng{fullhashraw}{a04750013a16e9840786571ebfd1ba02}
+      \strng{bibnamehash}{a04750013a16e9840786571ebfd1ba02}
+      \strng{authorbibnamehash}{a04750013a16e9840786571ebfd1ba02}
+      \strng{authornamehash}{a04750013a16e9840786571ebfd1ba02}
+      \strng{authorfullhash}{a04750013a16e9840786571ebfd1ba02}
+      \strng{authorfullhashraw}{a04750013a16e9840786571ebfd1ba02}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Journal of Physics: Conference Series}
+      \field{number}{3}
+      \field{title}{The Properties and Application of Poisson Distribution}
+      \field{volume}{1550}
+      \field{year}{2020}
+      \field{pages}{032109}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1088/1742-6596/1550/3/032109
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
