@@ -190,11 +190,34 @@ Going even deeper in granularity, each attribute can have its timestamp and thus
 Extending the simple request-response schema from the previous section, the only change would be that \texttt{updated} would be of type \texttt{MeetingPartial} - containing only meeting ID and attributes that have been changed.
 
 \subsection{Local data management}
-local DB, need to essentially fake your own BE on FE - the client thickness
+In a traditional client-server based application, the client should not persist any data that might be volatile. The aim is to fetch a fresh copy of data each time the user displays a certain page for them to work with the latest version of data\footnote{Here I am ommiting the realm of real-time applications as those are rather specific.}. That is especially important for data updates --- in case there is any form of version control (even a simple one --- every instance has a current version $v$ and every PUT request must have version $v + 1$, otherwise the server refuses to process the request due to version inconsistency), the data freshness might be the differentiator between having the request processed or not. 
+
+After working with the data and possibly mutating them, they are sent to the server to process them and after receiving a positive response, the data is refreshed. Hence, the local copy of data is fresh once again and the old copy is thrown away - as an example, let's imagine a \texttt{updated} attribute --- one that stores the date and time of the last change that has been done to the instance. Updating the value of this attribute will only be done on the server, but the client definitely wants to see this attribute updated after submitting a mutation to the entity.
+
+In the offline world, there is no fresh data and there is no server. All mutations have to be done on the local data copy, including attributes like \texttt{updated}. The server interaction needs to be faked by the application itself --- which, in reality, means implementing a lot of server functionality on the client, which represents the client thickness. 
+
 \subsection{Server synchronization}
-synchronize data client->server, manage conflicts - describe strategies, options
+Synchronizing the changes ade on the client to the server and managing potential conflicts is arguably one of the most difficult tasks to tackle in the field of offline-enabled applications. The task is to synchronize all changes made in offline mode to the server when coming back online as seamlessly as possible. 
+
+The reason why conflicts arise is that the system, and therefore (generally) any data in it can be accessed and mutated by other users, while one or more users are making changes in offline mode. There may be two general approaches:
+\subsubsection{State-based synchronization}
+All the mutating changes done in offline mode affect directly the local copy of data while marking it $dirty$ --- when switching back to online, every dirty instance is synchronized to the server in one mutation - one PUT request. Newly created (POST) instances that have later been updated are synchronized as one POST with all the updates already put in. Updating an instance and then deleting it means only the DELETE request is synchronized and the updates are thrown away.
+
+\subsubsection{Operation-based synchronization}
+Each and every update is propagated to the server. That means, there is a layer that tracks all the requests that have been done (preferably with a timestamp) and when the device comes back online, transmits them all for the server to deal with each change in sequence\footnote{Optimally, the server also accepts the client's timestamp and records the change to have been done in the time of the timestamp, not the request time. Therefore, the real timing of changes, creation, or deletion is also recorded.}. This approach may lead to a lot more conflicts to be resolved --- every request might generate a conflict, so more requests means more potential conflicts. 
+
+There is one more issue that arises in this approach: when creating a new instance, it is assigned an ID (locally) for unique identification. Later, but still in offline, the instance might be updated --- this change will be recorded as a PUT with the generated ID. When the synchronization to server starts and the POST is transmitted, the server may assign it an ID based on its ID-generation strategy and this ID will probably be different than the locally generated one. The subsequent PUT would then have an invalid ID. To resolve the issue, the client needs to keep a relation of local and server IDs, much like a translation table, and use it to modify any subsequent calls that reference the instance.
+
+Despite these limitations and added complexity, there are several reasons to prefer this approach: 
+
+\begin{enumerate}
+  \item Auditability: each change is recorded, so there is full control over who did what and when it has been done.
+  \item Granularity: when one change out of ten causes a conflict, in the operation-based approach it is clear which one it is, while the state-based approach will diffuse it.
+  \item Business logic: it may not be possible to implement the state-based approach in some cases due to functional requirements --- when a change of an attribute has its meaning. Imagine a package delivery app where the pacakge has a state (in warehouse, in delivery, delivered). The courier's phone is currently not connected to the interet as he picks up the package from a warehouse and delivers it to the customer. It is only after that when their phone finally connects to the internet. In state-based approach, the package would go straight from $in-warehouse$ state to $delivered$ state --- which is probably not the expected behaviour.
+\end{enumerate}
+  
 \subsection{Offline authentication, authorization}
-app usability strongly relies on the user remaining authenticated while offline. local data can be sensitive and without authorization, someone can see them when they should not
+Application usability strongly relies on the user remaining authenticated while offline. local data can be sensitive and without authorization, someone can see them when they should not
 
 \chapter{Technical approaches}
 \section{Frameworks}
@@ -216,6 +239,7 @@ fake server
 \subsection{Mitigation}
 \subsection{Duplication}
 \subsection{Atribute timestamping}
+\subsection{CRDT}
 \subsection{Advanced synchronization management}
 (approaches based on advanced methods like GIT etc)
 
