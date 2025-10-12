@@ -658,8 +658,6 @@ INPUT /usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmtt12.tfm
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
-INPUT /usr/share/texmf-dist/fonts/vf/public/mathpazo/zplmr7y.vf
-INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT diplomka.aux
 INPUT ./diplomka.out
 INPUT ./diplomka.out

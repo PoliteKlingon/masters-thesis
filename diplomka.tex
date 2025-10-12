@@ -213,13 +213,18 @@ Despite these limitations and added complexity, there are several reasons to pre
 \begin{enumerate}
   \item Auditability: each change is recorded, so there is full control over who did what and when it has been done.
   \item Granularity: when one change out of ten causes a conflict, in the operation-based approach it is clear which one it is, while the state-based approach will diffuse it.
-  \item Business logic: it may not be possible to implement the state-based approach in some cases due to functional requirements --- when a change of an attribute has its meaning. Imagine a package delivery app where the pacakge has a state (in warehouse, in delivery, delivered). The courier's phone is currently not connected to the interet as he picks up the package from a warehouse and delivers it to the customer. It is only after that when their phone finally connects to the internet. In state-based approach, the package would go straight from $in-warehouse$ state to $delivered$ state --- which is probably not the expected behaviour.
+  \item Business logic: it may not be possible to implement the state-based approach in some cases due to functional requirements --- when a change of an attribute has its meaning. Imagine a package delivery app where the pacakge has a state (in warehouse, in delivery, delivered). The courier's phone is currently not connected to the interet as he picks up the package from a warehouse and delivers it to the customer. It is only after that when their phone finally connects to the internet. In state-based approach, the package would go straight from $inWarehouse$ state to $delivered$ state --- which is probably not the expected behaviour.
 \end{enumerate}
   
 \subsection{Offline authentication, authorization}
-Application usability strongly relies on the user remaining authenticated while offline. local data can be sensitive and without authorization, someone can see them when they should not
+Application usability strongly relies on the user remaining authenticated while offline --- they cannot be automatically signed out when their token expires. Either the token-checking logic has to be suspended while offline, or the server response to such request must be mocked to a succesful call.
+
+But, remaining signed into the application while offline may cause a security issue --- the local data can be sensitive and without authorization, an intruder that has taken over the device, even after a long time trying, can see the data unauthorized, provided that the device remains offline. This risk can be mitigated by, for example, signing the user out after a specific amount of time in offline, but that has to be agreed-upon from the business side. 
+
+Yet there is still an additional issue. Even when the user is signed out from the application, the local data is still present in the storage of the device. In case this poses a considerable security issue in the customer's context, the data must be encrypted by the application.
 
 \chapter{Technical approaches}
+
 \section{Frameworks}
 list of FE approaches to take with their (dis)advantages
 \subsection{React-Native}
