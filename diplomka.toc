@@ -37,10 +37,9 @@
 \contentsline {section}{\numberline {3.4}Axios Interceptor}{12}{section.3.4}%
 \contentsline {section}{\numberline {3.5}Local data management}{12}{section.3.5}%
 \contentsline {section}{\numberline {3.6}Synchronization}{12}{section.3.6}%
-\contentsline {chapter}{\numberline {4}\bfseries Testing}{13}{chapter.4}%
-\contentsline {chapter}{\numberline {5}\bfseries Issues and future work}{14}{chapter.5}%
-\contentsline {chapter}{Conclusion}{15}{chapter*.15}%
-\contentsline {chapter}{Bibliography}{16}{chapter*.16}%
+\contentsline {chapter}{\numberline {4}\bfseries Testing, issues and future work}{13}{chapter.4}%
+\contentsline {chapter}{Conclusion}{14}{chapter*.15}%
+\contentsline {chapter}{Bibliography}{15}{chapter*.16}%
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
@@ -51,4 +50,4 @@
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{\numberline {A}\bfseries Electronic attachments}{17}{appendix.A}%
+\contentsline {chapter}{\numberline {A}\bfseries Electronic attachments}{16}{appendix.A}%

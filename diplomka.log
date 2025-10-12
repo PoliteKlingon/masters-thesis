@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.9.21)  12 OCT 2025 20:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.9.21)  13 OCT 2025 00:59
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1525,7 +1525,7 @@ Package biblatex Info: Reference section=0 on input line 107.
 Package biblatex Info: Reference segment=0 on input line 107.
 \@logowidth=\skip105
 \@logoheight=\skip106
-<fithesis/logo/mu/fithesis-base-english.pdf, id=157, 202.7575pt x 52.195pt>
+<fithesis/logo/mu/fithesis-base-english.pdf, id=153, 202.7575pt x 52.195pt>
 File: fithesis/logo/mu/fithesis-base-english.pdf Graphic file (type pdf)
 <use fithesis/logo/mu/fithesis-base-english.pdf>
 Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english.pdf  used on input line 107.
@@ -1565,7 +1565,7 @@ LaTeX Font Info:    Font shape `T1/qhv/m/n' will be
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec.enc} <./fithesis/logo/mu/fithesis-base-english.pdf>]
 \@logowidth=\skip107
 \@logoheight=\skip108
-<fithesis/logo/mu/fithesis-base-english-color.pdf, id=166, 202.7575pt x 52.195pt>
+<fithesis/logo/mu/fithesis-base-english-color.pdf, id=162, 202.7575pt x 52.195pt>
 File: fithesis/logo/mu/fithesis-base-english-color.pdf Graphic file (type pdf)
 <use fithesis/logo/mu/fithesis-base-english-color.pdf>
 Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english-color.pdf  used on input line 107.
@@ -1583,7 +1583,7 @@ Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english-color.pdf  used 
 [1 <./fithesis/logo/mu/fithesis-base-english-color.pdf>]
 \@logowidth=\skip109
 \@logoheight=\skip110
-<fithesis/logo/mu/fithesis-fi-color.pdf, id=172, 291.0875pt x 291.0875pt>
+<fithesis/logo/mu/fithesis-fi-color.pdf, id=168, 291.0875pt x 291.0875pt>
 File: fithesis/logo/mu/fithesis-fi-color.pdf Graphic file (type pdf)
 <use fithesis/logo/mu/fithesis-fi-color.pdf>
 Package pdftex.def Info: fithesis/logo/mu/fithesis-fi-color.pdf  used on input line 107.
@@ -1736,41 +1736,44 @@ Chapter 4.
 
 
 [13]
-Chapter 5.
-
 
 [14]
 
 [15]
-
-[16]
 Appendix A.
 
 
-[17] (./diplomka.aux)
+[16] (./diplomka.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2020/03/25>
  ***********
-Package rerunfilecheck Info: File `diplomka.out' has not changed.
-(rerunfilecheck)             Checksum: C4AF62FBC347EBD80A7ACE51EB843D92;2542.
+
+
+Package rerunfilecheck Warning: File `diplomka.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `diplomka.out':
+(rerunfilecheck)             Before: 5554DC15EB12E37DA7CA0BDA528F2745;2511
+(rerunfilecheck)             After:  EA34D96AABDE4E30DD0DE85521D34BB6;2511.
 Package logreq Info: Writing requests to 'diplomka.run.xml'.
 \openout1 = `diplomka.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42262 strings out of 474529
- 803389 string characters out of 5755266
- 1706029 words of memory out of 5000000
- 64286 multiletter control sequences out of 15000+600000
+ 42259 strings out of 474529
+ 803362 string characters out of 5755266
+ 1706028 words of memory out of 5000000
+ 64285 multiletter control sequences out of 15000+600000
  625174 words of font info for 156 fonts, out of 8000000 for 9000
  464 hyphenation exceptions out of 8191
  100i,8n,123p,1239b,3032s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplr.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on diplomka.pdf (27 pages, 290162 bytes).
+Output written on diplomka.pdf (26 pages, 289847 bytes).
 PDF statistics:
- 446 PDF objects out of 1000 (max. 8388607)
- 389 compressed objects within 4 object streams
- 102 named destinations out of 1000 (max. 500000)
- 34652 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 437 PDF objects out of 1000 (max. 8388607)
+ 381 compressed objects within 4 object streams
+ 100 named destinations out of 1000 (max. 500000)
+ 34644 words of extra memory for PDF output out of 35830 (max. 10000000)
 
