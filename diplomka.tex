@@ -150,9 +150,9 @@ As an example, let's imagine a remote-synchronized enterprise calendar applicati
 \subsection{Partial changes management}
 A related topic to the previous section is partial changes management --- a concept of recording changes of data, not entire snapshots. 
 
-The use-case here is updating the local data to match the server state --- the longer the application has been in offline mode, the higher the probability of the data being out of date. Specifically, the probability of the data being out of date after a certain period of time follows the Poisson's distribution\cite{poissonArticle}: \begin{equation}P(X = k) = \frac{ \lambda^k }{k!} e^{-\lambda} \end{equation} where $\lambda$ is expected rate of occurence and $k$ is the number of occurences. Let's assume that on average during working hours, each instance receives an update every two hours. That is 4 requests during a whole working day. Therefore $\lambda = 4$. The probability that the instance is still up to date the next day (after 8 working hours), in other words, $k = 0$, is approximately 1.83\%.
+The use-case here is updating the local data to match the server state --- the longer the application has been in offline mode, the higher the probability of the data being out of date. Specifically, the probability of the data being out of date after a certain period of time follows the Poisson's distribution\cite{poissonArticle}: \begin{equation}P(X = k) = \frac{ \lambda^k }{k!} e^{-\lambda} \end{equation} where $\lambda$ is expected rate of occurrence and $k$ is the number of occurrences. Let's assume that on average during working hours, each instance receives an update every two hours. That is 4 requests during a whole working day. Therefore $\lambda = 4$. The probability that the instance is still up to date the next day (after 8 working hours), in other words, $k = 0$, is approximately 1.83\%.
 
-Therefore, the local data should be periodically or manually updated to minimize the occurence of synchronization conflicts. The reason why the system should support partial changes mangement is that if there is none, the only option of a local data update is to bulk-download all data, as if there were none stored, and overwrite them. 
+Therefore, the local data should be periodically or manually updated to minimize the occurrence of synchronization conflicts. The reason why the system should support partial changes management is that if there is none, the only option of a local data update is to bulk-download all data, as if there were none stored, and overwrite them. 
 
 There are two layers of this principle that a system can implement:
 
@@ -256,7 +256,7 @@ fake server
 \section{Local data management}
 \section{Synchronization}
 
-\chapter{Testing, issues and future work}
+\chapter{Testing, issues, and future work}
 
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
