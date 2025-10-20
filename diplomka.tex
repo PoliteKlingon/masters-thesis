@@ -113,9 +113,9 @@
 \markright{\textsc{Introduction}}
 \addcontentsline{toc}{chapter}{Introduction}
 
-The primary objective of this thesis is to design and implemtent an offline-ready enterprise mobile client application. The secondary objective is to províde a comprehensive guide through designing such an applictation while considering different requirements. This guide will feature a list of available technological solutions with their advantages and setbacks while addressing the specific issues that arise in this architecture. The guide will be evaluated against a set of real-world functional and non-functional requirements and a real application that adheres to the result of that evaluation will be designed and implemented to be used by a customer as an enterprise solution.
+The primary objective of this thesis is to design and implemtent an offline-ready enterprise mobile client application. The secondary objective is to provide a comprehensive guide through designing such an applictation while considering different requirements. This guide features a list of available technological solutions with their advantages and setbacks while addressing the specific issues that arise in this architecture. The guide will be evaluated against a set of real-world functional and non-functional requirements and a real application that adheres to the result of that evaluation will be designed and implemented to be used by a customer as an enterprise solution.
 
-The paper consists of 4 chapters; the first chapter investigates the concept of offline-enabled mobile applications, their advantages, disadvantages, and specific challenges and architectural demands. The second chapter explores the approaches to be taken when designing an architecture and technology stack of such app - each approach is further documented, stating its strengths and weaknesses and practical scenarios in which each of them play their prime. Here the thesis not only focuses on different frameworks or languages, but also, the challenges introduced in the first chapter are confronted with different technical solutions and evaluated.
+The thesis consists of 4 chapters; the first chapter investigates the concept of offline-enabled mobile applications, their advantages, disadvantages, and specific challenges and architectural demands. The second chapter explores the approaches to be taken when designing an architecture and technology stack of such app - each approach is further documented, stating its strengths and weaknesses and practical scenarios in which each of them play their prime. Here the thesis not only focuses on different frameworks or languages, but also, the challenges introduced in the first chapter are confronted with different technical solutions and evaluated.
 
 The third and fourth chapters focus on selecting the right approaches in different areas based on the functional and non-functional requirements, implementation of a mobile frontend client, testing, and other aspects of the practical execution of the project in the context of a real solution for a real customer.
 
@@ -127,15 +127,15 @@ Decribe motivation and purpose, business context ... TODO Tibi + nejaky clanek i
 Why does the app solve the problem? What value does it bring?
 
 \chapter{Offline-enabled mobile applications}
-First, we need to take a look at offline-enabled enterprise mobile applications as a whole and identify the challenges they have to solve in addition to conventional mobile applications. By offline-enabled I mean an application that provides a significant part of its functionality without access to the server, while the extent of said functionality may vary based on a particular project and customer's needs. 
+First, it is needed to take a look at offline-enabled enterprise mobile applications as a whole and identify the challenges they have to solve in addition to conventional mobile applications. By offline-enabled is meant an application that provides a significant part of its functionality without access to a server, while the extent of said functionality may vary based on a particular project and customer's needs. 
 
-What also tends to vary, and has a great influence on the project complexity, is the "extent" of offline capabilities. There may be applications that only need to display some data offline without modifying anything, or applications that need to survive only a couple of hours without synchronizing data with the server, but there may be applications that need to be backend-independent for days and then be able to synchronize the data with the server while running into as few conflicts as possible.
+What also tends to vary, and has a great influence on the project complexity, is the ``extent'' of offline capabilities. There may be applications that only need to display some data offline without modifying anything, or applications that need to survive only a couple of hours without synchronizing data with the server, but there may be applications that need to be backend-independent for days and then be able to synchronize the data with the server while running into as few conflicts as possible.
 \section{Concept}
 Mobile applications in the context of enterprise solutions always conform with the server-client schema --- this thesis does not consider local-only applications as those have little to no use on the relevant market. In this server-client schema, there are two basic ideologies to pursue --- server-heavy or client-heavy solution. 
 
 A server-heavy solution will rely largely on the backend capabilities. Any list filtering or sorting will be done through an endpoint, for example using a data search engine such as Elasticsearch\footnote{https://www.elastic.co/elasticsearch}. The app will store as little state as possible on the client and will depend on server-managed state, settings, or data. 
 
-If this concept is deepened further in the context of web applications, whole pages can be rendered on the server and sent already partially prepared (pre-rendered, waiting to be hydrated --- enriched by client-rendered functionality --- on the client) to the client's browser. Such approach is called SSR (Server Side Rendering) and is currently on the rise with frameworks such as Next.js\footnote{https://nextjs.org/} --- a framework which has gained a lot of popularity in the recent years, according to \citefullauthor{nextJsArticle}.
+If this concept is deepened further in the context of web applications, whole pages can be rendered on the server and sent already partially prepared (pre-rendered, waiting to be hydrated --- enriched by client-rendered functionality --- on the client) to the client's browser. Such approach is called SSR (Server Side Rendering) and is currently on the rise with frameworks such as Next.js\footnote{https://nextjs.org/} --- a framework which has gained a lot of popularity in the recent years, according to \citefullauthor{nextJsArticle}\cite{nextJsArticle}.
 
 A client-heavy application, on the other hand, will rather utilize the client's resources to process or transform data instead of asking the server to do it. It will prefer sorting or filtering data in the browser or managing state locally --- for example, by using a state-management library like Redux\footnote{https://redux.js.org/} or Zustand\footnote{https://github.com/pmndrs/zustand}.
 
@@ -150,7 +150,7 @@ As an example, let's imagine a remote-synchronized enterprise calendar applicati
 \subsection{Partial changes management}
 A related topic to the previous section is partial changes management --- a concept of recording changes of data, not entire snapshots. 
 
-The use-case here is updating the local data to match the server state --- the longer the application has been in offline mode, the higher the probability of the data being out of date. Specifically, the probability of the data being out of date after a certain period of time follows the Poisson's distribution\cite{poissonArticle}: \begin{equation}P(X = k) = \frac{ \lambda^k }{k!} e^{-\lambda} \end{equation} where $\lambda$ is expected rate of occurrence and $k$ is the number of occurrences. Let's assume that on average during working hours, each instance receives an update every two hours. That is 4 requests during a whole working day. Therefore $\lambda = 4$. The probability that the instance is still up to date the next day (after 8 working hours), in other words, $k = 0$, is approximately 1.83\%.
+The use-case here is updating the local data to match the server state --- the longer the application has been in offline mode, the higher the probability of the data being out of date. Specifically, the probability of the data being out of date after a certain period of time follows the Poisson's distribution\cite{poissonArticle}: \begin{equation}P(X = k) = \frac{ \lambda^k }{k!} e^{-\lambda} \end{equation} where $\lambda$ is expected rate of occurrence and $k$ is the number of occurrences. Let's assume that on average an instance of an entity is changed once every 2 hours during working hours by some user. That is 4 changes during a whole working day. Therefore $\lambda = 4$. The probability that the instance is still up to date the next day (after 8 working hours), in other words, $k = 0$, is approximately 1.83\%.
 
 Therefore, the local data should be periodically or manually updated to minimize the occurrence of synchronization conflicts. The reason why the system should support partial changes management is that if there is none, the only option of a local data update is to bulk-download all data, as if there were none stored, and overwrite them. 
 
@@ -190,7 +190,7 @@ Going even deeper in granularity, each attribute can have its timestamp and thus
 Extending the simple request-response schema from the previous section, the only change would be that \texttt{updated} would be of type \texttt{MeetingPartial} - containing only meeting ID and attributes that have been changed.
 
 \subsection{Local data management}
-In a traditional client-server based application, the client should not persist any data that might be volatile. The aim is to fetch a fresh copy of data each time the user displays a certain page for them to work with the latest version of data\footnote{Here I am ommiting the realm of real-time applications as those are rather specific.}. That is especially important for data updates --- in case there is any form of version control (even a simple one --- every instance has a current version $v$ and every PUT request must have version $v + 1$, otherwise the server refuses to process the request due to version inconsistency), the data freshness might be the differentiator between having the request processed or not. 
+In a traditional client-server based application, the client should not persist any data that might be volatile. The aim is to fetch a fresh copy of data each time the user displays a certain page for them to work with the latest version of data\footnote{Here the realm of real-time applications are ommited as those are rather specific.}. That is especially important for data updates --- in case there is any form of version control (even a simple one --- every instance has a current version $v$ and every PUT request must have version $v + 1$, otherwise the server refuses to process the request due to version inconsistency), the data freshness might be the differentiator between having the request processed or not. 
 
 After working with the data and possibly mutating them, they are sent to the server to process them and after receiving a positive response, the data is refreshed. Hence, the local copy of data is fresh once again and the old copy is thrown away - as an example, let's imagine a \texttt{updated} attribute --- one that stores the date and time of the last change that has been done to the instance. Updating the value of this attribute will only be done on the server, but the client definitely wants to see this attribute updated after submitting a mutation to the entity.
 
@@ -224,15 +224,39 @@ But, remaining signed into the application while offline may cause a security is
 Yet there is still an additional issue. Even when the user is signed out from the application, the local data is still present in the storage of the device. In case this poses a considerable security issue in the customer's context, the data must be encrypted by the application.
 
 \chapter{Technical approaches}
-
+This chapter explores different technical approaches to employ when designing an enterprise solution in the context outlined in the previous chapter.
 \section{Frameworks}
-list of FE approaches to take with their (dis)advantages
-\subsection{React-Native}
-\subsection{React PWA}
+First, there is the crucial decision over the base architecture of the application, that is, the language and framework to be used. This choice has a lot of implications for later design choices --- for example, lack of certain features in certain frameworks may mean resctricted choice of solutions for a particular challenge.
+
+Since the topic at hand is mobile applications, naturally the first thing that comes to mind are mobile-specific (mobile-only) languages and frameworks. These can be split into native approaches such as Kotlin or Swift, and cross-platform ones such as React Native or Flutter. 
+
+But there has been a strong tendency to favor browser-based solutions over native ones in recent history, as \citefullauthor{WebAppsReplacingNative}\cite{WebAppsReplacingNative} comments. He argues that Google has been one of the biggest driving forces on the market and that the sheer market share of their browser, Google Chrome, can in part be attributed to this transformation. The architecture in question is SPA (single page application), specifically in form of PWAs (progressive web applications). 
+
+Tools that \citeauthor{WebAppsReplacingNative} mentions, like Google Meet, YouTube or Canva, are only a fraction of the sheer quantity of applications that use this web-based architecture. Spotify, Netflix, or applications like BandLab\footnote{https://www.bandlab.com/} --- a fully-featured in-browser music creation platform. After all, even Microsoft's office suite has been migrated to the browser with the Office 365 and as \citefullauthor{OfficeForWeb}\cite{OfficeForWeb} explains, Microsoft has been heavily investing to make their office suite web-first for quite a few years now, even prioritising the web variant over the native one for new feature releases.
 \subsection{Native approaches}
+The main argument to use native solutions is the closeness to the operating system. That means, the fewer layers means better performance, smoother UX (user experience) and better system integration. 
+
+Performance is among the most prominent reasons to go native. \citefullauthor{NativeVsWeb}\cite{NativeVsWeb} performed a qualitative study that compared Native Applications with their web-based counterparts, finding that there is a statistically significant advantage of native apps in not only performance (startup time, responsiveness), but also power consumption, resource consumption (such as CPU\footnote{Cetral Processing Unit} or memory) and network traffic. Therefore, when the application is performance-demanding, the native approach should not be overlooked. 
+
+There is a related advantage of native applications that enhances the user's perception of performance --- the UI (user interface) / UX integration into the system. Since the applications are native, they respect the animations, navigation, and overall user experience. It will be very well optimized for the device and may even be coupled with haptic feedback, system shortcuts or widgets.
+
+The last notable strength of this architecture that should be discussed is operating-system-level integration. Native apps can communicate with the device's hardware and core features immesurably better than a browser application will. That includes all the sensors that a mobile device has --- camera, Bluetooth, NFC (Near Field Communication), Accelerometer/Gyroscope, ambient light, temperature sensors, and a lot more. All of these can be directly integrated into a native app.
+
+This area is not only limited to hardware itself, there is the OS (Operating System) layer as well --- managing foreground and background jobs, having full control over OS notification channels, battery optimizations, or native sharing options and integration with other native applications. To conclude, when the application needs to have a deep hardware or operating level integration, the native approach plays its prime.
+
+CONS
+- only a single platform -> more platforms mean two codebases, higher cost
+- OS or even OS version specific stuff
+- needs to be updated by app store
+- deployment can be shit
+
 \subsubsection{Kotlin}
+\subsubsection{Swift}
+\subsection{Cross-platform approaches}
 \subsubsection{Flutter}
-\subsection{Others}
+\subsubsection{React-Native}
+\subsection{React PWA}
+\subsection{Others??}
 \section{Local data management}
 approaches to tackle the local data management
 \subsection{Local database}

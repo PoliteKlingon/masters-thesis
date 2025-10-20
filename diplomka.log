@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.9.21)  13 OCT 2025 08:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.9.21)  20 OCT 2025 23:45
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1708,9 +1708,6 @@ Overfull \vbox (6.51537pt too high) has occurred while \output is active []
 
 
 [5{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}]
-Overfull \vbox (7.71469pt too high) has occurred while \output is active []
-
-
 
 [6]
 
@@ -1721,52 +1718,62 @@ Overfull \vbox (7.71469pt too high) has occurred while \output is active []
 [9]
 Chapter 2.
 
-Underfull \vbox (badness 2426) has occurred while \output is active []
+Overfull \vbox (3.80751pt too high) has occurred while \output is active []
 
 
 
 [10]
+Underfull \vbox (badness 3058) has occurred while \output is active []
+
+
 
 [11]
-Chapter 3.
+Underfull \vbox (badness 1389) has occurred while \output is active []
+
 
 
 [12]
+
+[13]
+Chapter 3.
+
+
+[14]
 Chapter 4.
 
 
-[13]
-
-[14]
-
 [15]
+
+[16]
+
+[17]
 Appendix A.
 
 
-[16] (./diplomka.aux)
+[18] (./diplomka.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `diplomka.out' has not changed.
-(rerunfilecheck)             Checksum: A29770892F20D8A7053EC85C54025A26;2512.
+(rerunfilecheck)             Checksum: A908A4ACF6C15CB49177BEB62DCBFCCA;2530.
 Package logreq Info: Writing requests to 'diplomka.run.xml'.
 \openout1 = `diplomka.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42257 strings out of 474529
- 803342 string characters out of 5755266
- 1706029 words of memory out of 5000000
- 64285 multiletter control sequences out of 15000+600000
- 625034 words of font info for 155 fonts, out of 8000000 for 9000
+ 42292 strings out of 474529
+ 804140 string characters out of 5755266
+ 1706230 words of memory out of 5000000
+ 64299 multiletter control sequences out of 15000+600000
+ 628658 words of font info for 161 fonts, out of 8000000 for 9000
  464 hyphenation exceptions out of 8191
  100i,8n,123p,1239b,3032s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplr.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on diplomka.pdf (26 pages, 289846 bytes).
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplri.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on diplomka.pdf (28 pages, 344568 bytes).
 PDF statistics:
- 437 PDF objects out of 1000 (max. 8388607)
- 381 compressed objects within 4 object streams
- 100 named destinations out of 1000 (max. 500000)
- 34644 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 473 PDF objects out of 1000 (max. 8388607)
+ 413 compressed objects within 5 object streams
+ 109 named destinations out of 1000 (max. 500000)
+ 36692 words of extra memory for PDF output out of 42996 (max. 10000000)
 

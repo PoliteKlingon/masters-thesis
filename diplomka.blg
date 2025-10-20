@@ -1,15 +1,15 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
 [0] Config.pm:331> INFO - Logfile is 'diplomka.blg'
-[40] biber:342> INFO - === ne zář 28, 2025, 21:24:21
-[49] Biber.pm:421> INFO - Reading 'diplomka.bcf'
-[88] Biber.pm:1002> INFO - Found 2 citekeys in bib section 0
-[98] Biber.pm:4487> INFO - Processing section 0
-[104] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
-[104] bibtex.pm:1713> INFO - LaTeX decoding ...
-[106] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
-[133] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[134] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[134] Biber.pm:4307> INFO - Sorting list 'none/global//global/global/global' of type 'entry' with template 'none' and locale 'en-US'
-[134] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
-[138] bbl.pm:676> INFO - Writing 'diplomka.bbl' with encoding 'UTF-8'
-[139] bbl.pm:779> INFO - Output to diplomka.bbl
+[40] biber:342> INFO - === po říj 20, 2025, 23:14:26
+[50] Biber.pm:421> INFO - Reading 'diplomka.bcf'
+[97] Biber.pm:1002> INFO - Found 5 citekeys in bib section 0
+[107] Biber.pm:4487> INFO - Processing section 0
+[113] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
+[114] bibtex.pm:1713> INFO - LaTeX decoding ...
+[117] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[157] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[157] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[157] Biber.pm:4307> INFO - Sorting list 'none/global//global/global/global' of type 'entry' with template 'none' and locale 'en-US'
+[157] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
+[161] bbl.pm:676> INFO - Writing 'diplomka.bbl' with encoding 'UTF-8'
+[163] bbl.pm:779> INFO - Output to diplomka.bbl

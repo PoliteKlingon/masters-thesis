@@ -99,8 +99,8 @@
       \strng{authornamehash}{a04750013a16e9840786571ebfd1ba02}
       \strng{authorfullhash}{a04750013a16e9840786571ebfd1ba02}
       \strng{authorfullhashraw}{a04750013a16e9840786571ebfd1ba02}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Journal of Physics: Conference Series}
@@ -112,6 +112,113 @@
       \range{pages}{1}
       \verb{doi}
       \verb 10.1088/1742-6596/1550/3/032109
+      \endverb
+    \endentry
+    \entry{WebAppsReplacingNative}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=332241a3ea41ce37df7a26a84b751a0f}{%
+           family={Henshaw},
+           familyi={H\bibinitperiod},
+           given={Jon},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Coywolf News}%
+      }
+      \strng{namehash}{332241a3ea41ce37df7a26a84b751a0f}
+      \strng{fullhash}{332241a3ea41ce37df7a26a84b751a0f}
+      \strng{fullhashraw}{332241a3ea41ce37df7a26a84b751a0f}
+      \strng{bibnamehash}{332241a3ea41ce37df7a26a84b751a0f}
+      \strng{authorbibnamehash}{332241a3ea41ce37df7a26a84b751a0f}
+      \strng{authornamehash}{332241a3ea41ce37df7a26a84b751a0f}
+      \strng{authorfullhash}{332241a3ea41ce37df7a26a84b751a0f}
+      \strng{authorfullhashraw}{332241a3ea41ce37df7a26a84b751a0f}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Accessed: 2025-10-20}
+      \field{title}{Why Web Apps Are Quietly Replacing Native Apps on Phones and Computers}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://coywolf.com/news/productivity/why-web-apps-are-quietly-replacing-native-apps-on-phones-and-computers/
+      \endverb
+      \verb{url}
+      \verb https://coywolf.com/news/productivity/why-web-apps-are-quietly-replacing-native-apps-on-phones-and-computers/
+      \endverb
+    \endentry
+    \entry{OfficeForWeb}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=6eca695546d0e8f26415e680910506a1}{%
+           family={Doll},
+           familyi={D\bibinitperiod},
+           given={Bill},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Microsoft 365 Blog}%
+      }
+      \strng{namehash}{6eca695546d0e8f26415e680910506a1}
+      \strng{fullhash}{6eca695546d0e8f26415e680910506a1}
+      \strng{fullhashraw}{6eca695546d0e8f26415e680910506a1}
+      \strng{bibnamehash}{6eca695546d0e8f26415e680910506a1}
+      \strng{authorbibnamehash}{6eca695546d0e8f26415e680910506a1}
+      \strng{authornamehash}{6eca695546d0e8f26415e680910506a1}
+      \strng{authorfullhash}{6eca695546d0e8f26415e680910506a1}
+      \strng{authorfullhashraw}{6eca695546d0e8f26415e680910506a1}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Accessed: 2025-10-20}
+      \field{title}{Why You Should Use Office for the Web}
+      \field{year}{2019}
+      \verb{urlraw}
+      \verb https://techcommunity.microsoft.com/blog/microsoft_365blog/why-you-should-use-office-for-the-web/567060
+      \endverb
+      \verb{url}
+      \verb https://techcommunity.microsoft.com/blog/microsoft_365blog/why-you-should-use-office-for-the-web/567060
+      \endverb
+    \endentry
+    \entry{NativeVsWeb}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=b62403d6db99214582347c110827d324}{%
+           family={Horn},
+           familyi={H\bibinitperiod},
+           given={Philipp},
+           giveni={P\bibinitperiod}}}%
+        {{hash=c52a6ec1805d0d1818ae4e8c26b9ccde}{%
+           family={Bose},
+           familyi={B\bibinitperiod},
+           given={Rituparna},
+           giveni={R\bibinitperiod}}}%
+        {{hash=e64d357dccbf270f516a9a4a2b193599}{%
+           family={Becker},
+           familyi={B\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{ab8d126679a3cb1e52589e95b674ae3e}
+      \strng{fullhash}{ab8d126679a3cb1e52589e95b674ae3e}
+      \strng{fullhashraw}{ab8d126679a3cb1e52589e95b674ae3e}
+      \strng{bibnamehash}{ab8d126679a3cb1e52589e95b674ae3e}
+      \strng{authorbibnamehash}{ab8d126679a3cb1e52589e95b674ae3e}
+      \strng{authornamehash}{ab8d126679a3cb1e52589e95b674ae3e}
+      \strng{authorfullhash}{ab8d126679a3cb1e52589e95b674ae3e}
+      \strng{authorfullhashraw}{ab8d126679a3cb1e52589e95b674ae3e}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv preprint arXiv:2308.16734}
+      \field{note}{Accessed: 2025-10-20}
+      \field{title}{Native vs Web Apps: Comparing the Energy Consumption and Performance of Android Apps and their Web Counterparts}
+      \field{year}{2023}
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2308.16734
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2308.16734
       \endverb
     \endentry
   \enddatalist

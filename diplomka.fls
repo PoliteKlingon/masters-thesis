@@ -658,6 +658,7 @@ INPUT /usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmtt12.tfm
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
+INPUT /usr/share/texmf-dist/fonts/tfm/public/tex-gyre/ec-qplri.tfm
 INPUT diplomka.aux
 INPUT ./diplomka.out
 INPUT ./diplomka.out
@@ -671,5 +672,6 @@ INPUT /usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplb.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplr.pfb
+INPUT /usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplri.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb
