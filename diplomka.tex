@@ -234,8 +234,9 @@ But there has been a strong tendency to favor browser-based solutions over nativ
 
 Tools that \citeauthor{WebAppsReplacingNative} mentions, like Google Meet, YouTube or Canva, are only a fraction of the sheer quantity of applications that use this web-based architecture. Spotify, Netflix, or applications like BandLab\footnote{https://www.bandlab.com/} --- a fully-featured in-browser music creation platform. After all, even Microsoft's office suite has been migrated to the browser with the Office 365 and as \citefullauthor{OfficeForWeb}\cite{OfficeForWeb} explains, Microsoft has been heavily investing to make their office suite web-first for quite a few years now, even prioritising the web variant over the native one for new feature releases.
 \subsection{Native approaches}
-The main argument to use native solutions is the closeness to the operating system. That means, the fewer layers means better performance, smoother UX (user experience) and better system integration. 
+The main argument to use native solutions is the closeness to the operating system. That means, the fewer layers the better performance, smoother UX (user experience) and better system integration. But it may also bring greater complexity and management.
 
+\subsubsection{Advantages}
 Performance is among the most prominent reasons to go native. \citefullauthor{NativeVsWeb}\cite{NativeVsWeb} performed a qualitative study that compared Native Applications with their web-based counterparts, finding that there is a statistically significant advantage of native apps in not only performance (startup time, responsiveness), but also power consumption, resource consumption (such as CPU\footnote{Cetral Processing Unit} or memory) and network traffic. Therefore, when the application is performance-demanding, the native approach should not be overlooked. 
 
 There is a related advantage of native applications that enhances the user's perception of performance --- the UI (user interface) / UX integration into the system. Since the applications are native, they respect the animations, navigation, and overall user experience. It will be very well optimized for the device and may even be coupled with haptic feedback, system shortcuts or widgets.
@@ -244,11 +245,14 @@ The last notable strength of this architecture that should be discussed is opera
 
 This area is not only limited to hardware itself, there is the OS (Operating System) layer as well --- managing foreground and background jobs, having full control over OS notification channels, battery optimizations, or native sharing options and integration with other native applications. To conclude, when the application needs to have a deep hardware or operating level integration, the native approach plays its prime.
 
-CONS
-- only a single platform -> more platforms mean two codebases, higher cost
-- OS or even OS version specific stuff
-- needs to be updated by app store
-- deployment can be shit
+\subsubsection{Disadvantages}
+On the other hand, there certainly are disadvantages to this approach. The greatest one being the fact that when multiple operating systems need to be supported, there have to be multiple codebases in use --- each for one platform. 
+
+Typically, that would mean Kotlin for Android support and Swift for iOS support. There is quite a limited extent to which certain logic can be shared between different languages and frameworks. That means a lot more cost to develop and maintain two application versions instead of one. The applications also need to be published and then updated by respective app stores, so the deployment process can be a little more difficult.
+
+The other disadvantage that should be talked about comes from the very same reason that is mentioned earlier as an advantage --- the closeness to the OS and the level of control over it, or in other words, the absence of abstracting layers between the application and the OS. Less abstraction leads to heavier reliance on specific OS versions and flavors. 
+
+For example, every Android version on every phone brand differs slightly and to ensure the app compliance with a wide variety of supported devices, the testing needs to be extensive and the development might have to include a lot more specific case handling.
 
 \subsubsection{Kotlin}
 \subsubsection{Swift}

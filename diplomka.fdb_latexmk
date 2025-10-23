@@ -1,20 +1,20 @@
 # Fdb version 4
-["biber diplomka"] 1760994866.12486 "diplomka.bcf" "diplomka.bbl" "diplomka" 1760996704.78311 0
-  "diplomka.bcf" 1760996704.66266 109090 9472a8ec41161e9e11914561e6b87869 "pdflatex"
+["biber diplomka"] 1760994866.12486 "diplomka.bcf" "diplomka.bbl" "diplomka" 1761169723.03996 0
+  "diplomka.bcf" 1761169722.92869 109090 9472a8ec41161e9e11914561e6b87869 "pdflatex"
   "references.bib" 1760994770.86766 1917 124564f6c40f380d62e0214a09bda41c ""
   (generated)
   "diplomka.bbl"
   "diplomka.blg"
   (rewritten before read)
-["makeindex diplomka.idx"] 1760465258.70415 "diplomka.idx" "diplomka.ind" "diplomka" 1760996704.78299 0
-  "diplomka.idx" 1760996702.82559 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex diplomka.idx"] 1760465258.70415 "diplomka.idx" "diplomka.ind" "diplomka" 1761169723.03979 0
+  "diplomka.idx" 1761169721.21617 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "diplomka.ilg"
   "diplomka.ind"
   (rewritten before read)
-["pdflatex"] 1760996702.6606 "/home/jorge/Documents/school/diplomka/diplomka.tex" "diplomka.pdf" "diplomka" 1760996704.78332 0
+["pdflatex"] 1761169721.06374 "/home/jorge/Documents/school/diplomka/diplomka.tex" "diplomka.pdf" "diplomka" 1761169723.04017 0
   "/home/jorge/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/larm1000.tfm" 1758410796.96162 3220 0e417eaf233b160335902e97259a6c77 ""
-  "/home/jorge/Documents/school/diplomka/diplomka.tex" 1760996702.11686 28006 473e19e7760e212bc17c805d90599721 ""
+  "/home/jorge/Documents/school/diplomka/diplomka.tex" 1761169718.95623 29220 6c59e7b0729bfdce8626fc2be0bb3df3 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1755987285 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1755987285 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec-sc.enc" 1755987285 2881 8e2aef9e38084b946e7656b60672fedb ""
@@ -292,15 +292,15 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1755987285 42087 b0f9697c952c8f5a8eede4134282cb0d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1758411570 5310286 fa38360261c02655808062be3caba565 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1758411542 2646330 834fadc10f1377c5ea08656820d12445 ""
-  "diplomka.aux" 1760996704.64555 7893 8e6ed880112bee9d5e917d15b7b60035 "pdflatex"
+  "diplomka.aux" 1761169722.91269 8098 ee11b301312fe5a42d7e9cb25715ba5b "pdflatex"
   "diplomka.bbl" 1760994866.66957 8898 a754780f5e85ea794f02a0c4ac2317fd "biber diplomka"
   "diplomka.ind" 1760465258.93823 162 2d244ade463e5092777039032a729748 "makeindex diplomka.idx"
-  "diplomka.lof" 1760996704.665 605 c5c61c2b561a07b3bf805766bf238536 "pdflatex"
-  "diplomka.lot" 1760996704.665 605 c5c61c2b561a07b3bf805766bf238536 "pdflatex"
-  "diplomka.out" 1760996704.66155 2530 a908a4acf6c15cb49177beb62dcbfcca "pdflatex"
-  "diplomka.run.xml" 1760996704.665 2694 1430dfbed46fbdb08fbd1a29b093906d "pdflatex"
-  "diplomka.tex" 1760996702.11686 28006 473e19e7760e212bc17c805d90599721 ""
-  "diplomka.toc" 1760996704.665 4056 d3af67f7c6517ee3ee9f2dfb06662525 "pdflatex"
+  "diplomka.lof" 1761169722.93014 605 c5c61c2b561a07b3bf805766bf238536 "pdflatex"
+  "diplomka.lot" 1761169722.93014 605 c5c61c2b561a07b3bf805766bf238536 "pdflatex"
+  "diplomka.out" 1761169722.92669 2530 d9cb849bc84523944a66511bc261a53f "pdflatex"
+  "diplomka.run.xml" 1761169722.93014 2694 1430dfbed46fbdb08fbd1a29b093906d "pdflatex"
+  "diplomka.tex" 1761169718.95623 29220 6c59e7b0729bfdce8626fc2be0bb3df3 ""
+  "diplomka.toc" 1761169722.93014 4179 7bb372a7f4011fc117a0485b92f0eab7 "pdflatex"
   "fithesis/locale/fithesis-english.def" 1758401322 4704 f87b34fd2071a884cf78d1fae42de0fa ""
   "fithesis/locale/mu/fi/fithesis-english.def" 1758401322 2756 23d5760d449bf5a995f77eddc92833a8 ""
   "fithesis/locale/mu/fithesis-english.def" 1758401322 3573 56dcc692e5b83b791cd7c4f923e6258f ""
