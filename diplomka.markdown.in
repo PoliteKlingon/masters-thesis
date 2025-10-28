@@ -1,0 +1,22 @@
+~~~~~ swift
+class Pet {
+    var name: String
+    var age: Int
+    var sound: String?
+
+    init(name: String, age: Int, sound: String? = nil) {
+        self.name = name
+        self.age = age
+        self.sound = sound
+    }
+
+    func getSoundMessage() -> String {
+        return (sound != nil) ? "\(sound!)!" : "I do not make any sound..."
+    }
+
+    func printGreeting() {
+        let soundMessage = getSoundMessage()
+        print("Hello, my name is \(name) and I am \(age) years old. \(soundMessage)")
+    }
+}
+~~~~~

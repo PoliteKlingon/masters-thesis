@@ -255,12 +255,143 @@ The other disadvantage that should be talked about comes from the very same reas
 For example, every Android version on every phone brand differs slightly and to ensure the app compliance with a wide variety of supported devices, the testing needs to be extensive and the development might have to include a lot more specific case handling.
 
 \subsubsection{Kotlin}
+What is often referenced as Kotlin is in fact Kotlin + Android SDK (software development kit) + Jetpack Compose. Kotlin\footnote{https://kotlinlang.org/} is the programming language developed by JetBrains. It was designed to be a modern yet mature programming language that takes a lot of inspiration from languages like Java, C\# or Scala\cite{kotlinOverview}. One of its strong points is that it is fully interoperable with Java, which makes migration as painless as possible. 
+
+Google states that Kotlin provides better expressiveness, conciseness and safety over Java, which are the main reasons of why in 2019, Google annouced that Android development will be Kotlin-first\cite{KotlinFirst}. According to the Stack Overflow Developer Survey from 2024\cite{StackOverflow2024}, developers enjoy working with Kotlin more than with Java, which is shown by the admiration index where Kotlin surpasses Java by almost 15\% (47.6\% for Java, 60.9\% for Kotlin).
+
+Calling the whole stack just `Kotlin' is the norm in the developer community not only because of it being the official language chosen by Google, but also because the main usage of the Kotlin language is Android development, as can be seen in the JetBrains 2021 Developer Ecosystem Report\cite{jetbrainsSurvey}.
+
+To comment on the other parts of the Android development stack, the Android SDK is a layer between the Android OS and the Kotlin code that enables developers to communicate with system resources in a form of an API (application programming interface) together with build tools or an emulator for testing. Jetpack Compose is a UI toolkit for Android applications. It is the recommended way to design and build the UI by Google\cite{JetpackCompose}.
+
 \subsubsection{Swift}
+Swift\footnote{https://www.swift.org/} is for iOS what Kotlin is for Android. Developed by Apple, designed to replace Objective-C, much like Kotlin was designed to replace Java, it is the official language for its respective OS. Its main focus is on speed, expressiveness and safety while providing interoperability with C and C++.
+According to the aforementioned Stack Overflow Developer Survey\cite{StackOverflow2024}, Swift is even more admired amongst developers with 63.3\% admiration index, while virtually obliterating Objective-C with its 26.3\%.
+
+In the technology stack, similarly to the Android ecosystem, Apple SDK provides the above-OS layer, and SwiftUI is the counterpart to Jetpack Compose. 
+
+Talking about comparisons between Kotlin and Swift, performance is the first that might come to mind. according to a set of benchmarks\footnote{https://programming-language-benchmarks.vercel.app/swift-vs-kotlin}, Kotlin seems to generally complete tasks faster when coupled with JVM (Java Virtual Machine). There are other technical differences such as Kotlin's JVM-powered Garbage Collection Approach (GCA) versus Swift's Automatic References Counting (ARC) for memory management\cite{KotlinSwift} and other caveats, yet there is not much sense in such comparisons as the languages are designed for completely different environments. 
+
+There is one direct comparison, however, that is to be made - the syntax of the languages, revealing their expressiveness. Two code snippets of a simple class follow, the former in Swift and the latter in Kotlin. As expressiveness is subjective, it is up to the reader to decide the winner.
+
+\begin{lstlisting}[language=Swift, caption={Swift example}]
+class Pet {
+    var name: String
+    var age: Int
+    var sound: String?
+
+    init(name: String, age: Int, sound: String? = nil) {
+        self.name = name
+        self.age = age
+        self.sound = sound
+    }
+
+    func getSoundMessage() -> String {
+        return (sound != nil) ? "\(sound!)!" : "I do not make any sound..."
+    }
+
+    func printGreeting() {
+        let soundMessage = getSoundMessage()
+        print("Hello, my name is \(name) and I am \(age) years old. \(soundMessage)")
+    }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java, caption={Kotlin example}]
+class Pet(
+    var name: String,
+    var age: Int,
+    var sound: String? = null
+) {
+
+    fun getSoundMessage(): String = sound?.plus("!") ?: "I do not make any sound..."
+
+
+    fun printGreeting() {
+        val soundMessage = getSoundMessage()
+        println("Hello, my name is $name and I am $age years old. $soundMessage")
+    }
+}
+\end{lstlisting}
+
 \subsection{Cross-platform approaches}
+As has been highlighted in the last section, one of the main drawbacks of the native approaches is that when multiple operating systems must be supported, the same functionality has to be implemented in multiple codebases. That is a major reason not to elect them as the ideal solution --- and that is where multiplatform approaches come into play. There are two main options to choose --- Flutter or React Native.
+
+A layer of isolation between the application and the OS is introduced that abstracts the OS-specific differences such as system APIs or other SDK functionality --- which carries with it its pros and cons.
+\subsubsection{Advantages}
+The most significant advantage is having a single codebase, which reduces costs dramatically. The layer of abstraction over the OS ensures that no matter the specificity of the OS, there will be common functionality that is expected to work on all of them. This layer communicates directly with the OS itself, so harware availability, like access to camera, filesystem, or sensors, is still supported.
+\subsubsection{Disadvantages}
+Despite this approach solving the biggest problems with native solutions, it is far from perfect. According to research done by \citefullauthor{NativeVsMultiplatform}\cite{NativeVsMultiplatform}, Flutter and especially React Native have poorer performance when compared to their native counterparts. 
+
+The abstraction over more operating systems also means the control over specific functionality may not be so precise. For example, there might be some camera controls or sensors available only on one OS that may get dropped during the abstraction or must be handled with platform-specific code. New features may also come with a delay as they have to be layered over first instead of just implementing the system API in Kotlin or Swift. 
 \subsubsection{Flutter}
-\subsubsection{React-Native}
+Flutter\footnote{https://flutter.dev/} is a framework developed by Google that can be compiled to native code and be used on Android, iOS, desktop or web\cite{FlutterFAQ}. It uses its own rendering engine developed with Skia (a 2D rendering engine) and Impeller (iOS rendering engine), which means that the UI will be uniform on all platforms regardless of the platform-specific UI or animations. While that may improve brand consistency, it may suffer from OS inconsistencies. 
+
+Flutter uses Dart\footnote{https://dart.dev/} as its programming language. Developed by Google, Dart is not a broadly used language --- in the 2024 Stack Overflow Developer Survey\cite{StackOverflow2024}, it reached only 6\% in popularity and 6.2\% in desirability. Its admirability index is not anything special either with the score of 55\%. It is a strongly typed, object oriented language that can be compiled to machine code, JavaScript, or WebAssembly.
+
+In the aforementioned benchmark, Flutter achieves significantly higher performance in intensive tests. If performance is an important factor, but native approach is not to be considered, Flutter is the better option.
+
+Flutter uses a tree-like widget structure for its UI --- a widget is a single building block for any UI element. It resembles native-like syntax, meaning Kotlin or Swift developers should find it approachable. A short code snippet follows that illustrates the widget declaration --- a simple clickable User Card that displays the user's name and profile picture; clicking it navigates the user to the user screen.
+
+\begin{lstlisting}[language=java, caption={Flutter example --- User Card}]
+class UserCard extends StatelessWidget {
+  final User user;
+
+  const UserCard({Key? key, required this.user}): super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, '/user'),
+      child: Card(
+        child: ListTile(
+          title: Text(user.name),
+          trailing: CircleAvatar(
+            backgroundImage: NetworkImage(user.profilePictureUrl),
+            radius: 16,
+          ),
+        )
+      ),
+    );
+  }
+}  
+\end{lstlisting}
+
+\subsubsection{React Native}
+React Native\footnote{https://reactnative.dev/} is a cross-platform framework developed by Meta that can be used to develop mobile applications for both iOS and Android. It uses JavaScript (JS) or TypeScript (TS) as its programming language. This is one of the biggest advantages over Flutter as those languages are very popular, meaning there is a huge developer base and an abundance of tutorials, guides and forum pages to help the developer when encountering an issue. 
+
+Specifically, according to the Stack Overflow 2024 Developer Survey\cite{StackOverflow2024}, Javascript is the most popular language with 62.3\% popularity while TypeScript is fifth overall with 38.5\% populartiy. They are also desired (39.8\% --- second place overall --- for JS and 33.8\% --- fifth place overall --- for TS) and TypeScript is also admired with 69.5\% of admirability (JavaScript falls short at 58.3\%).
+
+The JavaScript/TypeScript popularity also means there is a vast universe of third party libraries developed for them, meaning that when in need of a specific library, e.g. a barcode scanner, there is a good chance someone has built that library and it can be used in the project as a plug-and-play component.
+
+React Native does not have a custom rendering engine like Flutter does, its code is rendered as native UI elements. This connection between the JavaScript and the Native world is possible thanks to a ``bridge''\cite{ReactNative}. This bridge can also be used to write platform-specific native code, for example in Kotlin. This unique feature allows React Native applications to overcome the abstraction layer when needed, which may be very powerful.
+
+React Native uses components as building blocks, much like Flutter uses widgets. They, much like React, are JSX/TSX functions, therefore written in markup style. To illustrate the syntax difference compared to Flutter, a JSX component of a User Card follows:
+
+\begin{lstlisting}[language=java, caption={React Native example --- User Card}]
+export default function UserCard({ user }) {
+  const navigation = useNavigation();
+
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate("User")}>
+      <Card>
+        <Card.Title
+          title={user.name}
+          right={() => (
+            <Image
+              source={{ uri: user.profilePictureUrl }}
+              style={{ borderRadius: 16 }}
+            />
+          )}
+        />
+      </Card>
+    </TouchableOpacity>
+  );
+}
+\end{lstlisting}
+
 \subsection{React PWA}
-\subsection{Others??}
+A React PWA (Progressive Web Application)\footnote{TODO} 
+\subsection{nejakej vytazek lol, proste conclusion frameworku nebo tak}
 \section{Local data management}
 approaches to tackle the local data management
 \subsection{Local database}

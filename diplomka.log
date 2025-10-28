@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.9.21)  22 OCT 2025 23:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.9.21)  28 OCT 2025 17:57
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1730,57 +1730,92 @@ Overfull \hbox (0.82623pt too wide) in paragraph at lines 240--241
 
 
 [11]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Overfull \vbox (6.06474pt too high) has occurred while \output is active []
 
 
 
 [12]
+
+[13] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/09/23 1.10c listings language file
+) (/usr/share/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2024/09/23 1.10c listings language file
+) (/usr/share/texmf-dist/tex/latex/listings/lstlang3.sty
+File: lstlang3.sty 2024/09/23 1.10c listings language file
+) (/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+)
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 276.
+
+
+[14] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/09/23 1.10c listings language file
+)
+
+[15]
+Overfull \vbox (7.58017pt too high) has occurred while \output is active []
+
+
+
+[16]
+Overfull \vbox (0.99994pt too high) has occurred while \output is active []
+
+
+
+[17]
+Overfull \vbox (1.14526pt too high) has occurred while \output is active []
+
+
+
+[18]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[13]
+[19]
 
-[14]
+[20]
 Chapter 3.
 
 
-[15]
+[21]
 Chapter 4.
 
 
-[16]
+[22]
 
-[17]
+[23]
 
-[18]
+[24]
+
+[25]
 Appendix A.
 
 
-[19] (./diplomka.aux)
+[26] (./diplomka.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `diplomka.out' has not changed.
-(rerunfilecheck)             Checksum: D9CB849BC84523944A66511BC261A53F;2530.
+(rerunfilecheck)             Checksum: A8D373B0A3C932726A6AD703B35500F6;2601.
 Package logreq Info: Writing requests to 'diplomka.run.xml'.
 \openout1 = `diplomka.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42295 strings out of 474529
- 804169 string characters out of 5755266
- 1706230 words of memory out of 5000000
- 64299 multiletter control sequences out of 15000+600000
- 628658 words of font info for 161 fonts, out of 8000000 for 9000
+ 42758 strings out of 474529
+ 811499 string characters out of 5755266
+ 1791811 words of memory out of 5000000
+ 64632 multiletter control sequences out of 15000+600000
+ 629674 words of font info for 168 fonts, out of 8000000 for 9000
  464 hyphenation exceptions out of 8191
  100i,8n,123p,1239b,3032s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplri.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on diplomka.pdf (29 pages, 345601 bytes).
+Output written on diplomka.pdf (36 pages, 376220 bytes).
 PDF statistics:
- 479 PDF objects out of 1000 (max. 8388607)
- 418 compressed objects within 5 object streams
- 112 named destinations out of 1000 (max. 500000)
+ 662 PDF objects out of 1000 (max. 8388607)
+ 593 compressed objects within 6 object streams
+ 215 named destinations out of 1000 (max. 500000)
  36692 words of extra memory for PDF output out of 42996 (max. 10000000)
 
