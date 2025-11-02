@@ -232,30 +232,32 @@ Since the topic at hand is mobile applications, naturally the first thing that c
 
 But there has been a strong tendency to favor browser-based solutions over native ones in recent history, as \citefullauthor{WebAppsReplacingNative}\cite{WebAppsReplacingNative} comments. He argues that Google has been one of the biggest driving forces on the market and that the sheer market share of their browser, Google Chrome, can in part be attributed to this transformation. The architecture in question is SPA (single page application), specifically in form of PWAs (progressive web applications). 
 
-Tools that \citeauthor{WebAppsReplacingNative} mentions, like Google Meet, YouTube or Canva, are only a fraction of the sheer quantity of applications that use this web-based architecture. Spotify, Netflix, or applications like BandLab\footnote{https://www.bandlab.com/} --- a fully-featured in-browser music creation platform. After all, even Microsoft's office suite has been migrated to the browser with the Office 365 and as \citefullauthor{OfficeForWeb}\cite{OfficeForWeb} explains, Microsoft has been heavily investing to make their office suite web-first for quite a few years now, even prioritising the web variant over the native one for new feature releases.
+Tools that \citeauthor{WebAppsReplacingNative} mentions, like Google Meet, YouTube or Canva, are only a fraction of the sheer quantity of applications that use this web-based architecture. Spotify, Netflix, or applications like BandLab\footnote{https://www.bandlab.com/} --- a fully-featured in-browser music creation platform --- after all, even Microsoft's office suite has been migrated to the browser with the Office 365 package and as \citefullauthor{OfficeForWeb}\cite{OfficeForWeb} explains, Microsoft has been heavily investing to make their office suite web-first for quite a few years now, even prioritising the web variant over the native one for new feature releases.
 \subsection{Native approaches}
 The main argument to use native solutions is the closeness to the operating system. That means, the fewer layers the better performance, smoother UX (user experience) and better system integration. But it may also bring greater complexity and management.
 
 \subsubsection{Advantages}
 Performance is among the most prominent reasons to go native. \citefullauthor{NativeVsWeb}\cite{NativeVsWeb} performed a qualitative study that compared Native Applications with their web-based counterparts, finding that there is a statistically significant advantage of native apps in not only performance (startup time, responsiveness), but also power consumption, resource consumption (such as CPU\footnote{Cetral Processing Unit} or memory) and network traffic. Therefore, when the application is performance-demanding, the native approach should not be overlooked. 
 
-There is a related advantage of native applications that enhances the user's perception of performance --- the UI (user interface) / UX integration into the system. Since the applications are native, they respect the animations, navigation, and overall user experience. It will be very well optimized for the device and may even be coupled with haptic feedback, system shortcuts or widgets.
+There is a related advantage of native applications that enhances the user's perception of performance --- the UI (user interface) / UX integration into the system. Since the applications are native, they respect the animations, navigation, and overall user experience of the system they are running on. They will be very well optimized for the device and may even be coupled with haptic feedback, system shortcuts or widgets.
 
-The last notable strength of this architecture that should be discussed is operating-system-level integration. Native apps can communicate with the device's hardware and core features immesurably better than a browser application will. That includes all the sensors that a mobile device has --- camera, Bluetooth, NFC (Near Field Communication), Accelerometer/Gyroscope, ambient light, temperature sensors, and a lot more. All of these can be directly integrated into a native app.
+The last notable strength of this architecture that should be discussed is operating-system-level integration. Native apps can communicate with the device's hardware and core features significantly better than a browser application ever will. That includes all the sensors that a mobile device has --- camera, Bluetooth, NFC (Near Field Communication), Accelerometer/Gyroscope, ambient light, temperature sensors, and a lot more. All of these can be directly integrated into a native app. Their data are presented through respective system APIs in (more or less) raw form. There is little abstraction and maximum control.
 
 This area is not only limited to hardware itself, there is the OS (Operating System) layer as well --- managing foreground and background jobs, having full control over OS notification channels, battery optimizations, or native sharing options and integration with other native applications. To conclude, when the application needs to have a deep hardware or operating level integration, the native approach plays its prime.
 
 \subsubsection{Disadvantages}
 On the other hand, there certainly are disadvantages to this approach. The greatest one being the fact that when multiple operating systems need to be supported, there have to be multiple codebases in use --- each for one platform. 
 
-Typically, that would mean Kotlin for Android support and Swift for iOS support. There is quite a limited extent to which certain logic can be shared between different languages and frameworks. That means a lot more cost to develop and maintain two application versions instead of one. The applications also need to be published and then updated by respective app stores, so the deployment process can be a little more difficult.
+Typically, that would mean Kotlin for Android support and Swift for iOS support. There is quite a limited extent to which certain logic can be shared between different languages and frameworks. That means a lot more cost to develop and maintain two application versions instead of one. The applications also need to be published and then updated by respective app stores, so the deployment process can be a little more difficult. 
+
+Additionaly, there may also be a need to support Windows mobile devices as well, not even mentioning Ubuntu mobile and other alternatives. 
 
 The other disadvantage that should be talked about comes from the very same reason that is mentioned earlier as an advantage --- the closeness to the OS and the level of control over it, or in other words, the absence of abstracting layers between the application and the OS. Less abstraction leads to heavier reliance on specific OS versions and flavors. 
 
 For example, every Android version on every phone brand differs slightly and to ensure the app compliance with a wide variety of supported devices, the testing needs to be extensive and the development might have to include a lot more specific case handling.
 
 \subsubsection{Kotlin}
-What is often referenced as Kotlin is in fact Kotlin + Android SDK (software development kit) + Jetpack Compose. Kotlin\footnote{https://kotlinlang.org/} is the programming language developed by JetBrains. It was designed to be a modern yet mature programming language that takes a lot of inspiration from languages like Java, C\# or Scala\cite{kotlinOverview}. One of its strong points is that it is fully interoperable with Java, which makes migration as painless as possible. 
+What is often referenced as Kotlin is in fact Kotlin + Android SDK (software development kit) + Jetpack Compose. Kotlin\footnote{https://kotlinlang.org/} is a programming language developed by JetBrains. It was designed to be a modern yet mature programming language that takes a lot of inspiration from languages like Java, C\# or Scala\cite{kotlinOverview}. One of its strong points is that it is fully interoperable with Java, which makes migration as painless as possible. 
 
 Google states that Kotlin provides better expressiveness, conciseness and safety over Java, which are the main reasons of why in 2019, Google annouced that Android development will be Kotlin-first\cite{KotlinFirst}. According to the Stack Overflow Developer Survey from 2024\cite{StackOverflow2024}, developers enjoy working with Kotlin more than with Java, which is shown by the admiration index where Kotlin surpasses Java by almost 15\% (47.6\% for Java, 60.9\% for Kotlin).
 
@@ -264,14 +266,14 @@ Calling the whole stack just `Kotlin' is the norm in the developer community not
 To comment on the other parts of the Android development stack, the Android SDK is a layer between the Android OS and the Kotlin code that enables developers to communicate with system resources in a form of an API (application programming interface) together with build tools or an emulator for testing. Jetpack Compose is a UI toolkit for Android applications. It is the recommended way to design and build the UI by Google\cite{JetpackCompose}.
 
 \subsubsection{Swift}
-Swift\footnote{https://www.swift.org/} is for iOS what Kotlin is for Android. Developed by Apple, designed to replace Objective-C, much like Kotlin was designed to replace Java, it is the official language for its respective OS. Its main focus is on speed, expressiveness and safety while providing interoperability with C and C++.
+Swift\footnote{https://www.swift.org/} for iOS is what Kotlin is for Android. Developed by Apple, designed to replace Objective-C, much like Kotlin was designed to replace Java, it is the official language for its respective OS. Its main focus is on speed, expressiveness and safety while providing interoperability with C and C++.
 According to the aforementioned Stack Overflow Developer Survey\cite{StackOverflow2024}, Swift is even more admired amongst developers with 63.3\% admiration index, while virtually obliterating Objective-C with its 26.3\%.
 
 In the technology stack, similarly to the Android ecosystem, Apple SDK provides the above-OS layer, and SwiftUI is the counterpart to Jetpack Compose. 
 
-Talking about comparisons between Kotlin and Swift, performance is the first that might come to mind. according to a set of benchmarks\footnote{https://programming-language-benchmarks.vercel.app/swift-vs-kotlin}, Kotlin seems to generally complete tasks faster when coupled with JVM (Java Virtual Machine). There are other technical differences such as Kotlin's JVM-powered Garbage Collection Approach (GCA) versus Swift's Automatic References Counting (ARC) for memory management\cite{KotlinSwift} and other caveats, yet there is not much sense in such comparisons as the languages are designed for completely different environments. 
+Talking about comparisons between Kotlin and Swift, performance is the first that might come to mind. According to a set of benchmarks\footnote{https://programming-language-benchmarks.vercel.app/swift-vs-kotlin}, Kotlin seems to generally complete tasks faster when coupled with JVM (Java Virtual Machine). There are other technical differences such as Kotlin's JVM-powered Garbage Collection Approach (GCA) versus Swift's Automatic References Counting (ARC) for memory management\cite{KotlinSwift} and other caveats, yet there is not much sense in such comparisons as the languages are designed for completely different environments. 
 
-There is one direct comparison, however, that is to be made - the syntax of the languages, revealing their expressiveness. Two code snippets of a simple class follow, the former in Swift and the latter in Kotlin. As expressiveness is subjective, it is up to the reader to decide the winner.
+There is one direct comparison, however, that is to be made - the syntax of the languages, revealing their expressiveness. Two code snippets of a simple class follow, the former in Swift and the latter in Kotlin. As expressiveness is subjective, it is up to the reader to decide the superior one.
 
 \begin{lstlisting}[language=Swift, caption={Swift example}]
 class Pet {
@@ -314,7 +316,7 @@ class Pet(
 \end{lstlisting}
 
 \subsection{Cross-platform approaches}
-As has been highlighted in the last section, one of the main drawbacks of the native approaches is that when multiple operating systems must be supported, the same functionality has to be implemented in multiple codebases. That is a major reason not to elect them as the ideal solution --- and that is where multiplatform approaches come into play. There are two main options to choose --- Flutter or React Native.
+As has been highlighted in the last section, one of the main drawbacks of the native approaches is that when multiple operating systems must be supported, the same functionality has to be implemented in multiple codebases. That is a major reason not to elect them as the ideal solution --- and that is where multiplatform approaches come into play. There are two main options on the market to choose --- Flutter or React Native.
 
 A layer of isolation between the application and the OS is introduced that abstracts the OS-specific differences such as system APIs or other SDK functionality --- which carries with it its pros and cons.
 \subsubsection{Advantages}
@@ -323,12 +325,14 @@ The most significant advantage is having a single codebase, which reduces costs 
 Despite this approach solving the biggest problems with native solutions, it is far from perfect. According to research done by \citefullauthor{NativeVsMultiplatform}\cite{NativeVsMultiplatform}, Flutter and especially React Native have poorer performance when compared to their native counterparts. 
 
 The abstraction over more operating systems also means the control over specific functionality may not be so precise. For example, there might be some camera controls or sensors available only on one OS that may get dropped during the abstraction or must be handled with platform-specific code. New features may also come with a delay as they have to be layered over first instead of just implementing the system API in Kotlin or Swift. 
+
+Also, the app still needs to be distributed over multiple system app stores, which may cause delay in delivering new versions of the software.
 \subsubsection{Flutter}
 Flutter\footnote{https://flutter.dev/} is a framework developed by Google that can be compiled to native code and be used on Android, iOS, desktop or web\cite{FlutterFAQ}. It uses its own rendering engine developed with Skia (a 2D rendering engine) and Impeller (iOS rendering engine), which means that the UI will be uniform on all platforms regardless of the platform-specific UI or animations. While that may improve brand consistency, it may suffer from OS inconsistencies. 
 
 Flutter uses Dart\footnote{https://dart.dev/} as its programming language. Developed by Google, Dart is not a broadly used language --- in the 2024 Stack Overflow Developer Survey\cite{StackOverflow2024}, it reached only 6\% in popularity and 6.2\% in desirability. Its admirability index is not anything special either with the score of 55\%. It is a strongly typed, object oriented language that can be compiled to machine code, JavaScript, or WebAssembly.
 
-In the aforementioned benchmark, Flutter achieves significantly higher performance in intensive tests. If performance is an important factor, but native approach is not to be considered, Flutter is the better option.
+In the aforementioned performance benchmark, Flutter achieves significantly higher performance in intensive tests. If performance is an important factor, but native approach is not to be considered, Flutter is the better option.
 
 Flutter uses a tree-like widget structure for its UI --- a widget is a single building block for any UI element. It resembles native-like syntax, meaning Kotlin or Swift developers should find it approachable. A short code snippet follows that illustrates the widget declaration --- a simple clickable User Card that displays the user's name and profile picture; clicking it navigates the user to the user screen.
 
@@ -363,9 +367,9 @@ Specifically, according to the Stack Overflow 2024 Developer Survey\cite{StackOv
 
 The JavaScript/TypeScript popularity also means there is a vast universe of third party libraries developed for them, meaning that when in need of a specific library, e.g. a barcode scanner, there is a good chance someone has built that library and it can be used in the project as a plug-and-play component.
 
-React Native does not have a custom rendering engine like Flutter does, its code is rendered as native UI elements. This connection between the JavaScript and the Native world is possible thanks to a ``bridge''\cite{ReactNative}. This bridge can also be used to write platform-specific native code, for example in Kotlin. This unique feature allows React Native applications to overcome the abstraction layer when needed, which may be very powerful.
+React Native does not have a custom rendering engine like Flutter does, its code is rendered as native UI elements. This connection between the JavaScript and the native world is possible thanks to a ``bridge''\cite{ReactNative}. This bridge can also be used to write platform-specific native code, for example in Kotlin. This unique feature allows React Native applications to overcome the abstraction layer when needed, which may be very powerful.
 
-React Native uses components as building blocks, much like Flutter uses widgets. They, much like React, are JSX/TSX functions, therefore written in markup style. To illustrate the syntax difference compared to Flutter, a JSX component of a User Card follows:
+React Native uses \textit{components} as building blocks, much like Flutter uses widgets. They, much like in React, are JSX/TSX functions, therefore written in markup style. To illustrate the syntax difference compared to Flutter, a JSX component of a User Card follows:
 
 \begin{lstlisting}[language=java, caption={React Native example --- User Card}]
 export default function UserCard({ user }) {
@@ -394,7 +398,7 @@ React.js\footnote{https://react.dev/} is a powerful JavaScript frontend library/
 
 From these numbers, it is safe to say that React is the single most used and important frontend framework on the current market. That means there is a massive amount of packages to be used for development in React and a multitude of guides, forums and other content about the framework which serves as an invaluable source of assistance during development. There is also a remarkable number of React developers on the market.
 
-React uses JavaScript or TypeScript as the programming language, conceptually splitting the UI into singular components written in JSX (or TSX for TypeScript projects) syntax that serves as a JavaScript extension to write markup code --- similar to HTML (Hypertext Markup Language), but enriched with JS elements --- inside of JS functions\cite{jsx}. For styling purposes, pure CSS (Cascading Style Sheets\footnote{https://developer.mozilla.org/en-US/docs/Web/CSS}) or any of its frameworks like Tailwind\footnote{https://tailwindcss.com/} may be used.
+React uses JavaScript or TypeScript as the programming language (pros and cons of this choice are mentioned in the previous section about React Native), conceptually splitting the UI into singular components written in JSX (or TSX for TypeScript projects) syntax that serves as a JavaScript extension to write markup code --- similar to HTML (Hypertext Markup Language), but enriched with JS elements --- inside of JS functions\cite{jsx}. For styling purposes, pure CSS (Cascading Style Sheets\footnote{https://developer.mozilla.org/en-US/docs/Web/CSS}) or any of its frameworks like Tailwind\footnote{https://tailwindcss.com/} may be used.
 
 An example of the (by now well-known) User Card follows:
 
@@ -424,7 +428,7 @@ An installed PWA can be pinned to a mobile home screen, PC desktop, or a taskbar
 
 A PWA also makes web applications offline-ready. It has become a user-expected standard in the last couple of years for applications to provide some form of content even when offline. In the traditional Web Application context, that is not possible --- the web application frontend itself is provided to the browser from the server, and when the request to load a page fails (because of network issues or server unavailability), the browser just displays an error page. A PWA enables caching strategies handled by service workers.
 
-A Service Worker is a middleware residing in the browser that acts as a network proxy between the client itself the server\cite{serviceWorkers}. The service worker has a scope of network request range that it handles. Depending on the strategy chosen for each section of endpoints, it can handle them accordingly --- serving fresh or cached, serving a custom-made data, or, for example, serving from cahe and fetching a fresh version of data in the background and updating the cache. 
+A Service Worker is a middleware residing in the browser that acts as a network proxy between the client and the server\cite{serviceWorkers}. The service worker has a developer-specified scope of network requests that it handles. Depending on the strategy chosen for each section of endpoints, it can handle them accordingly --- serving fresh or cached, serving a custom-made data, or, for example, serving from cahe and fetching a fresh version of data in the background and updating the cache. 
 
 \subsubsection{Advantages and Disadvantages}
 When weighing pros and cons of progressive web applications, one can view it is the polar opposite of the native approach --- while the native solution is as close to the hardware and OS, this approach is as abstracted as possible, layering over the OS with not only a cross-platform layer over the system APIs like Flutter does, but a whole browser layer over it as well. 
@@ -444,7 +448,7 @@ There are a few clear takeaways from the selected approaches to be taken when ch
   \item When the application's focus is on utilizing the device's hardware capabilities like NFC or heart-rate sensor, the correct choice is also to go native.
   \item If possible and in accordance with the functional requirements, when needing to support more operation systems, going cross-platform may save a lot of resources thanks to only maintaining a single codebase.
   \item When there is an option to go the PWA route, it should always be considered as it may be the cheapest and smoothest one thanks to a large developer base and a plethora of libraries to be used to enhance the application.
-  \item Toto je hrozne ha nouby conclusion. ty body jsou fajn, ale jejich obsah je meh. Precist si znova celou kapitolu a udelat to lepsi pls.
+  \item PWA is the easiest to distribute, fastest to install and most consistent over multiple platforms. But being the most abstracted one, precise access to various system resources is restricted.
 \end{enumerate}
 \section{Local data management}
 approaches to tackle the local data management

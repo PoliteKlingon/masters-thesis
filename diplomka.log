@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.9.21)  2 NOV 2025 01:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.9.21)  2 NOV 2025 12:29
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1718,7 +1718,7 @@ Overfull \vbox (6.51537pt too high) has occurred while \output is active []
 [9]
 Chapter 2.
 
-Overfull \vbox (3.80751pt too high) has occurred while \output is active []
+Overfull \vbox (3.8435pt too high) has occurred while \output is active []
 
 
 
@@ -1728,13 +1728,19 @@ Overfull \hbox (0.82623pt too wide) in paragraph at lines 240--241
  []
 
 
+Overfull \vbox (3.24733pt too high) has occurred while \output is active []
+
+
 
 [11]
-Overfull \vbox (6.06474pt too high) has occurred while \output is active []
+Underfull \vbox (badness 6063) has occurred while \output is active []
 
 
 
 [12]
+Overfull \vbox (10.13135pt too high) has occurred while \output is active []
+
+
 
 [13] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
@@ -1745,7 +1751,10 @@ File: lstlang3.sty 2024/09/23 1.10c listings language file
 ) (/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 276.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 278.
+
+Overfull \vbox (0.99994pt too high) has occurred while \output is active []
+
 
 
 [14] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -1753,68 +1762,58 @@ File: lstlang1.sty 2024/09/23 1.10c listings language file
 )
 
 [15]
-Overfull \vbox (7.58017pt too high) has occurred while \output is active []
+Underfull \vbox (badness 6428) has occurred while \output is active []
 
 
 
 [16]
-Overfull \vbox (0.99994pt too high) has occurred while \output is active []
-
-
 
 [17]
-Overfull \vbox (1.14526pt too high) has occurred while \output is active []
-
-
 
 [18]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 [19]
-Overfull \vbox (7.58203pt too high) has occurred while \output is active []
-
-
 
 [20]
-Overfull \vbox (6.1993pt too high) has occurred while \output is active []
+Overfull \vbox (0.1993pt too high) has occurred while \output is active []
 
 
 
 [21]
-Underfull \vbox (badness 6063) has occurred while \output is active []
-
-
 
 [22]
-Overfull \hbox (1.43848pt too wide) in paragraph at lines 438--439
+Overfull \hbox (1.43848pt too wide) in paragraph at lines 442--443
 \T1/qpl/m/n/12 (-20) will be poorer when com-pared to na-tive so-lu-tions when do-ing resource-
  []
 
 
 
 [23]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 [24]
+
+[25]
 Chapter 3.
 
 
-[25]
+[26]
 Chapter 4.
 
-
-[26]
 
 [27]
 
 [28]
 
 [29]
+
+[30]
 Appendix A.
 
 
-[30] (./diplomka.aux)
+[31] (./diplomka.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2020/03/25>
@@ -1826,18 +1825,18 @@ Package logreq Info: Writing requests to 'diplomka.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42822 strings out of 474529
- 812638 string characters out of 5755266
- 1792032 words of memory out of 5000000
+ 42823 strings out of 474529
+ 812645 string characters out of 5755266
+ 1798033 words of memory out of 5000000
  64660 multiletter control sequences out of 15000+600000
  629826 words of font info for 169 fonts, out of 8000000 for 9000
  464 hyphenation exceptions out of 8191
  100i,8n,123p,1239b,3032s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplri.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on diplomka.pdf (40 pages, 389224 bytes).
+Output written on diplomka.pdf (41 pages, 390209 bytes).
 PDF statistics:
- 738 PDF objects out of 1000 (max. 8388607)
- 664 compressed objects within 7 object streams
- 249 named destinations out of 1000 (max. 500000)
+ 742 PDF objects out of 1000 (max. 8388607)
+ 667 compressed objects within 7 object streams
+ 250 named destinations out of 1000 (max. 500000)
  36692 words of extra memory for PDF output out of 42996 (max. 10000000)
 
