@@ -390,8 +390,62 @@ export default function UserCard({ user }) {
 \end{lstlisting}
 
 \subsection{React PWA}
-A React PWA (Progressive Web Application)\footnote{TODO} 
-\subsection{nejakej vytazek lol, proste conclusion frameworku nebo tak}
+React.js\footnote{https://react.dev/} is a powerful JavaScript frontend library/framework used for building modern user interfaces. Developed by Facebook/Meta and published in 2013\cite{ReactVersions}, it is by far the most popular frontend framework at 39.5\%, followed by Next.js\footnote{https://nextjs.org/} at 17.9\%, which is a web framework built on top of React. It is also the most desired at 33.4\% by a considerable margin and is reasonably admired at 62.2\%, according to the Stack Overflow Developer Survey 2024\cite{StackOverflow2024}. 
+
+From these numbers, it is safe to say that React is the single most used and important frontend framework on the current market. That means there is a massive amount of packages to be used for development in React and a multitude of guides, forums and other content about the framework which serves as an invaluable source of assistance during development. There is also a remarkable number of React developers on the market.
+
+React uses JavaScript or TypeScript as the programming language, conceptually splitting the UI into singular components written in JSX (or TSX for TypeScript projects) syntax that serves as a JavaScript extension to write markup code --- similar to HTML (Hypertext Markup Language), but enriched with JS elements --- inside of JS functions\cite{jsx}. For styling purposes, pure CSS (Cascading Style Sheets\footnote{https://developer.mozilla.org/en-US/docs/Web/CSS}) or any of its frameworks like Tailwind\footnote{https://tailwindcss.com/} may be used.
+
+An example of the (by now well-known) User Card follows:
+
+\begin{lstlisting}[language=java, caption={React + Tailwind example --- User Card}]
+export default function UserCard({ user }: Props) {
+  const navigate = useNavigate();
+  return (
+    <div
+      className="flex flex-row justify-between rounded-xl shadow-lg p-4"
+      onClick={() => navigate("/user")}
+    >
+      <span className="text-lg font-semibold">{user.name}</span>
+      <img src={user.profilePictureUrl} className="rounded-full" />
+    </div>
+  );
+}
+\end{lstlisting}
+
+\subsubsection{PWA}
+A PWA (Progressive Web Application)\footnote{https://web.dev/explore/progressive-web-apps} is a web application built as a capable standalone installable application enhanced with modern browser system APIs and offline capabilities\cite{pwaInfo}. 
+
+A PWA can be installed straight from the browser through a context menu, meaning there is no need to handle app store publication or different builds for different platforms. There is only a singular codebase and a singular deployment --- the ``browser one'' --- that also provides the option to install the application on any platform, transforming it to a natively-feeling one. 
+
+If needed, there is also a packaging option called PWABuilder\footnote{https://pwabuilder.com/} that can produce a application package that can be distributed to several app stores like Google Play Store.
+
+An installed PWA can be pinned to a mobile home screen, PC desktop, or a taskbar. It can be managed inside the OS, set up to use push notifications, registered to accept content from other system applications, set up to override browser keyboard shortcuts, or chosen to be the default application for opening files of certain types.
+
+A PWA also makes web applications offline-ready. It has become a user-expected standard in the last couple of years for applications to provide some form of content even when offline. In the traditional Web Application context, that is not possible --- the web application frontend itself is provided to the browser from the server, and when the request to load a page fails (because of network issues or server unavailability), the browser just displays an error page. A PWA enables caching strategies handled by service workers.
+
+A Service Worker is a middleware residing in the browser that acts as a network proxy between the client itself the server\cite{serviceWorkers}. The service worker has a scope of network request range that it handles. Depending on the strategy chosen for each section of endpoints, it can handle them accordingly --- serving fresh or cached, serving a custom-made data, or, for example, serving from cahe and fetching a fresh version of data in the background and updating the cache. 
+
+\subsubsection{Advantages and Disadvantages}
+When weighing pros and cons of progressive web applications, one can view it is the polar opposite of the native approach --- while the native solution is as close to the hardware and OS, this approach is as abstracted as possible, layering over the OS with not only a cross-platform layer over the system APIs like Flutter does, but a whole browser layer over it as well. 
+
+There is a certain level of advantages coming from this fact --- with the solution practically detached from the OS, the developer only needs to care about the browser capabilities. Features like camera support include the enumeration of front or back facing cameras, abstracting from PC webcams to multiple lenses on smartphones. Another example may be a file picker, handled by the browser, bringing up the correct dialog or window on any system and handling the file upload itself.
+
+The browser abstraction layer also means that the PWA can only do things that the underlying browser can --- opposite to native, the browser cannot influence the battery management, reach sensors like fingerprint sensor, WiFi details or any health-related sensor data. 
+
+The extent to which other system data or functionality is available is also restricted. Bringing up the camera once again, the in-browser camera capabilities are limited by the WebRTC\footnote{https://webrtc.org/} protocol stack --- the camera quality is typically heavily reduced and its raw output is not processed by the OS like it would be in the native camera applictation on the device. That may lead to user frustration --- why is the quality so much worse compared to taking the photo outside of the application when the harware is the same? 
+
+All the abstraction over the OS also means that the performance will be poorer when compared to native solutions when doing resource-intensive tasks. Yet the PWA may try to tackle this using smart caching strategies.
+
+\subsection{Conclusion}
+There are a few clear takeaways from the selected approaches to be taken when choosing the main application framework:
+\begin{enumerate}
+  \item When performance in resource-intensive tasks is crucial, there is no better solution than native. Yet for ``normal'' usage, which is the expected one when talking about the context of enterprise mobile applications, the user may not feel the speed difference.
+  \item When the application's focus is on utilizing the device's hardware capabilities like NFC or heart-rate sensor, the correct choice is also to go native.
+  \item If possible and in accordance with the functional requirements, when needing to support more operation systems, going cross-platform may save a lot of resources thanks to only maintaining a single codebase.
+  \item When there is an option to go the PWA route, it should always be considered as it may be the cheapest and smoothest one thanks to a large developer base and a plethora of libraries to be used to enhance the application.
+  \item Toto je hrozne ha nouby conclusion. ty body jsou fajn, ale jejich obsah je meh. Precist si znova celou kapitolu a udelat to lepsi pls.
+\end{enumerate}
 \section{Local data management}
 approaches to tackle the local data management
 \subsection{Local database}
@@ -411,6 +465,9 @@ fake server
 \section{Functional and non-functional requirements}
 \section{Architecture, technology stack}
 \section{Service Worker}
+popsat ktery strategie realne pouzivam
+
+popsat ruzne strategie a jejich vyuziti/vyhody nevyhody?
 \section{Axios Interceptor}
 \section{Local data management}
 \section{Synchronization}
