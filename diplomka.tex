@@ -190,7 +190,7 @@ Going even deeper in granularity, each attribute can have its timestamp and thus
 Extending the simple request-response schema from the previous section, the only change would be that \texttt{updated} would be of type \texttt{MeetingPartial} - containing only meeting ID and attributes that have been changed.
 
 \subsection{Local data management}
-In a traditional client-server based application, the client should not persist any data that might be volatile. The aim is to fetch a fresh copy of data each time the user displays a certain page for them to work with the latest version of data\footnote{Here the realm of real-time applications are ommited as those are rather specific.}. That is especially important for data updates --- in case there is any form of version control (even a simple one --- every instance has a current version $v$ and every PUT request must have version $v + 1$, otherwise the server refuses to process the request due to version inconsistency), the data freshness might be the differentiator between having the request processed or not. 
+In a traditional client-server based application, the client should not persist any data that might be volatile. The aim is to fetch a fresh copy of data each time the user displays a certain page for them to work with the latest version of data\footnote{Here the realm of real-time applications is ommited as those are rather specific.}. That is especially important for data updates --- in case there is any form of version control (even a simple one --- every instance has a current version $v$ and every PUT request must have version $v + 1$, otherwise the server refuses to process the request due to version inconsistency), the data freshness might be the differentiator between having the request processed or not. 
 
 After working with the data and possibly mutating them, they are sent to the server to process them and after receiving a positive response, the data is refreshed. Hence, the local copy of data is fresh once again and the old copy is thrown away - as an example, let's imagine a \texttt{updated} attribute --- one that stores the date and time of the last change that has been done to the instance. Updating the value of this attribute will only be done on the server, but the client definitely wants to see this attribute updated after submitting a mutation to the entity.
 
@@ -451,14 +451,60 @@ There are a few clear takeaways from the selected approaches to be taken when ch
   \item PWA is the easiest to distribute, fastest to install and most consistent over multiple platforms. But being the most abstracted one, precise access to various system resources is restricted.
 \end{enumerate}
 \section{Local data management}
-approaches to tackle the local data management
+As chapter one explains, keeping track of local data and its changes in offline mode is a crucial issue to tackle. There are two magnitudes to be chosen for resolving this problem --- faking just the server or also faking a database.
+\subsection{Request intercepting and processing}
+The first option is to build a custom proxy-like layer serving as a form of middleware between the client and the server. This layer intercepts all the mutating requests. The data getting (GET) requests are handled separately, for example in the form of cache. The POST, PUT, PATCH, and DELETE requests are stored as pending operations and a success state (200, 201 etc.) is returned to the client as if the request was successfully processed by the server. Later all the pending operations are synchronized one by one, in order, with the server. 
+
+\subsubsection{Client validation}
+This \textit{optimistic} UI update strategy also means that the data validation must always be done on the client and data consistency must be enforced there --- there is no server to handle it, the client needs to ensure that the request have the highest possible probability of succeding once they are actually transmitted throught the network and processed by the server. 
+
+Importance of this principle grows with any inter-endpoint or stateful dependencies. As an example, let's imagine an entity with several states and a lot of attributes. In each state, a certain subset of attributes is displayed to be filled. A change of state of an instance requires the instance (or its related/subordinate entitites) to be filled with a valid values for the currently displayed set of attributes. The state change opens another subset of data to be filled, depending on the values of the previously submitted values. 
+
+That is a \textit{dependency path} --- a sequence of unique steps dependent on each other. If the user fills the first step incorrectly and the client fails to enforce the validity to the same extent that the server eventually will, each subsequent update to this instance must be thrown away during synchronization and the user, because the validity of the first step is compromised, effectively compromising all the following steps --- the state change was not valid and therefore all subsequent dependent actions will not be either.
+
+\subsubsection{Incorporating mutations into local data}
+Assuming the validation is handled correctly, there is still one aspect that needs to be talked about --- displaying the mutated data correctly. Earlier in this section, it was stated that the cached version of data is used for presentation. That fails as soon as there is a need to display mutated (updated) data in the UI --- the pending operations need to be incorporated into the data. 
+
+The solution is to proxy also the GET requests and include any pending changes into the data presented by the client. As each entity is identified by its name (and therefore a specific endpoint subtree) and every instance is identified by its ID, it effectively means fetching the instance data from the cache and searching through the pending mutations to filter those that affect this instance --- in other words, search for match in endpoint name and instance ID. All found mutations are then applied to the fetched (cached) data inside the middleware and presented to the client.
+
+This intercepting approach fails to scale well for request-frequent or data-intensive applications as each GET request must be heavily processed and a structure of pending requests searched through repetitively. The upside is that the client does not have to know about being offline at all as the middleware acts as an optimistic server --- the client then fetches and mutates data as if the device was online and all is handled by the intercepting layer.
+
+\subsubsection{POST - PUT chain}
+In the previous section, an assumption about each instance being uniquely identified by an ID was made. There is one edge case that invalidates this assumption --- creating an instance while offline. Traditionally, the server assigns IDs to new instances in a way that respects the integrity constraints of the database. The client, however, cannot reliably assign IDs on its own and synchronizing the POST request afterwards will lead to the ID being overwritten by the server, rendering all potential subsequent PUT/PATCH/DELETE requests to the same entity invalid as the ID would not match.
+
+The simplest option is to prohibit the POST-PUT chain completely. If it makes sense in the context of a particular application where the vast majority of requests are mutating server data, the few use-cases that are creating and subsequently updating an instance may be transformed to simply remove the initial POST from the pending operations and creating an entirely new one. This approach is the simplest one, but when creation/update timestamping is crucial, it isnot a viable one.
+
+The second option is to generate the ID on POST on the client and later during the synchronization map the client-generated ID to the real server-assigned one and then alter all subsequent calls to this instance to respect the correct ID.
+
 \subsection{Local database}
-fake database
-\subsection{Request intercepting, processing}
-fake server
-\subsection{TBA?}
+The second, more robust, scalable, but also complex and demanding solution is to manage a local database on the client. The support for local databases is present in all frameworks mentioned in this thesis --- from the Room database in Kotlin\footnote{https://developer.android.com/training/data-storage/room} to the browser's IndexedDB for PWAs\footnote{https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB\_API}. 
+
+The local database schema needs to closely mirror the server one and must implement the same integrity constraints, keys, or unique constraints to mitigate synchronization conflicts. The relevant data is fetched and stored to the local database while online and then, when offline, the application only works with the local database to access and mutate data, no requests are attempted. Relevant instances may be retrieved, created, updated or deleted from the database.
+
+During the synchronization, the local tables must be merged with the server ones, writing through the data changes that occured while offline. The changed/created/deleted instances from the offline session would be flagged accordingly and requests created that would reproduce said data changes. 
+
+The obvious downside to this approach is its complexity and the need to adhere closely to the server architecture. Any changes on the backend must be properly mirrored on the frontend and the thickness of the client therefore grows, meaning more expensive development and maintenance. On the other hand, the robustness of such solution is incomparable to the previous one, because there is strong consistency in the data (all relevant data is always updated properly, which may not be true in the first approach if there are complex dependencies across entitites).
+
+\subsection{Hybrid solutions}
+There is also a ``hybrid solution'' --- one that uses the database, that is controlled by the middleware. Effectively, the application is completely unbothered by being offline, but the requests sent to the server are intercepted by the middleware, processed, translated to local database queries, and also stored to a pending operations queue. The GET requests are transformed to retrieve data from the local database, because all changes are reflected in it. 
+
+Upon getting back online, the synchronization is as simple as in the first approach --- sending the requests to the server in the order of interception. Combining the strengths of both approaches, the cost is in the increased complexity. 
+
+Now, effectively, the backend together with the database is completely mocked in the client. This significantly increases costs and maintainability of such a solution and therefore should be used in specific scenarios only, especially when there are complex data dependencies and high independence requirements (the client must remain offline for longer periods of time).
+
 \section{Synchronization}
+Regardless of the choice of the local data handling and therefore synchronization method, there may always arise conflicts. Conflicts arise when the offline and online data are both changed and therefore one change may overwrite the other.
+
+To illustrate the approaches described in this section on a practicle scenario, let's assume this situation: there are two users, Alice and Bob. They both work in the same time with the same system and they interact with the same data, or at least a portion of the data they work with is shared. Alice works online, while Bob is in offline mode. After some time, Bob reconnects to the internet and tries to synchronize his changes, creating conflicts on the shared data.
+
 \subsection{Mitigation}
+The simplest yet most restrictive approach is for Bob to lock preemptively the instances that he intends to interact with while offline, effectively mitigating the risk of any conflict. 
+
+An instance-granular locking mechanism must be implemented, and Bob, before going offline, has to be able to mark the instances that he needs in offline and lock them. Optionally, instances might be locked together with all their ``subinstances'' --- that is, instances that have a $n:1$ relation with said instance.
+
+There are, unfortunately, several problems to this approach --- firstly, Alice is blocked from working with the instances completely. Even though they might not overwrite each other's attributes as the attribute subsets do not overlap, she shall not interact with the instances at all. Secondly, Bob has to know what data he will interact with in advance. 
+
+And thirdly, after he is done working with the data, he must always unlock the instances on the server --- failure to do so will block any other user from interacting with it over potentially a prolonged period of time. Assuming Bob went on holiday for a week and did not bring his work device with him, the only option for his colleagues to work with the data is to have a system administrator that can forcefully unlock the instances, effectively scrapping Bob's unsaved changes. 
 \subsection{Duplication}
 \subsection{Atribute timestamping}
 \subsection{CRDT}
@@ -475,6 +521,7 @@ popsat ruzne strategie a jejich vyuziti/vyhody nevyhody?
 \section{Axios Interceptor}
 \section{Local data management}
 \section{Synchronization}
+zminit ze musim posilat nejaky timestamp kdy se to stalo v offlinu realne, nejen kdy se odeslal ten request na server pri synchronizaci, to neni relevantni.
 
 \chapter{Testing, issues, and future work}
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.9.21)  2 NOV 2025 12:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.9.21)  2 NOV 2025 23:35
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1789,54 +1789,59 @@ Overfull \hbox (1.43848pt too wide) in paragraph at lines 442--443
 
 
 [23]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 [24]
 
 [25]
-Chapter 3.
-
 
 [26]
-Chapter 4.
-
 
 [27]
 
 [28]
 
 [29]
+Chapter 3.
+
 
 [30]
+Chapter 4.
+
+
+[31]
+
+[32]
+
+[33]
+
+[34]
 Appendix A.
 
 
-[31] (./diplomka.aux)
+[35] (./diplomka.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `diplomka.out' has not changed.
-(rerunfilecheck)             Checksum: 71264C238DA4232EF8AA9731C6D63B7E;2532.
+(rerunfilecheck)             Checksum: 47EB56F378053759474A563946B4EA17;2553.
 Package logreq Info: Writing requests to 'diplomka.run.xml'.
 \openout1 = `diplomka.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42823 strings out of 474529
- 812645 string characters out of 5755266
+ 42836 strings out of 474529
+ 812772 string characters out of 5755266
  1798033 words of memory out of 5000000
  64660 multiletter control sequences out of 15000+600000
- 629826 words of font info for 169 fonts, out of 8000000 for 9000
+ 630112 words of font info for 171 fonts, out of 8000000 for 9000
  464 hyphenation exceptions out of 8191
  100i,8n,123p,1239b,3032s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplri.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on diplomka.pdf (41 pages, 390209 bytes).
+Output written on diplomka.pdf (45 pages, 401697 bytes).
 PDF statistics:
- 742 PDF objects out of 1000 (max. 8388607)
- 667 compressed objects within 7 object streams
- 250 named destinations out of 1000 (max. 500000)
+ 769 PDF objects out of 1000 (max. 8388607)
+ 690 compressed objects within 7 object streams
+ 259 named destinations out of 1000 (max. 500000)
  36692 words of extra memory for PDF output out of 42996 (max. 10000000)
 
