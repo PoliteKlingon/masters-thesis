@@ -36,21 +36,24 @@
 \contentsline {subsection}{\numberline {2.2.2}Local database}{26}{subsection.2.2.2}%
 \contentsline {subsection}{\numberline {2.2.3}Hybrid solutions}{27}{subsection.2.2.3}%
 \contentsline {section}{\numberline {2.3}Synchronization}{28}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Mitigation}{28}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Duplication}{29}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Atribute timestamping}{29}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}CRDT}{29}{subsection.2.3.4}%
-\contentsline {subsection}{\numberline {2.3.5}Advanced synchronization management}{29}{subsection.2.3.5}%
-\contentsline {chapter}{\numberline {3}\bfseries Implementation}{30}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Functional and non-functional requirements}{30}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Architecture, technology stack}{30}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Service Worker}{30}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Axios Interceptor}{30}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Local data management}{30}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Synchronization}{30}{section.3.6}%
-\contentsline {chapter}{\numberline {4}\bfseries Testing, issues, and future work}{31}{chapter.4}%
-\contentsline {chapter}{Conclusion}{32}{chapter*.26}%
-\contentsline {chapter}{Bibliography}{33}{chapter*.27}%
+\contentsline {subsection}{\numberline {2.3.1}Acceptance of conflicts}{28}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Avoidance by locking}{29}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Mitigation by partitioning}{30}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Avoidance by instance duplication}{30}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}Mitigation by atribute timestamping}{31}{subsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.3.6}CRDT}{32}{subsection.2.3.6}%
+\contentsline {subsection}{\numberline {2.3.7}Advanced synchronization management}{32}{subsection.2.3.7}%
+\contentsline {subsection}{\numberline {2.3.8}Final synchronization remark}{32}{subsection.2.3.8}%
+\contentsline {chapter}{\numberline {3}\bfseries Implementation}{33}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Functional and non-functional requirements}{33}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Architecture, technology stack}{33}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Service Worker}{33}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Axios Interceptor}{33}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Local data management}{33}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Synchronization}{33}{section.3.6}%
+\contentsline {chapter}{\numberline {4}\bfseries Testing, issues, and future work}{34}{chapter.4}%
+\contentsline {chapter}{Conclusion}{35}{chapter*.26}%
+\contentsline {chapter}{Bibliography}{36}{chapter*.27}%
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
@@ -113,4 +116,4 @@
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{\numberline {A}\bfseries Electronic attachments}{35}{appendix.A}%
+\contentsline {chapter}{\numberline {A}\bfseries Electronic attachments}{38}{appendix.A}%
