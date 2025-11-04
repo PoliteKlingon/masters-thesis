@@ -228,7 +228,7 @@ This chapter explores different technical approaches to employ when designing an
 \section{Frameworks}
 First, there is the crucial decision over the base architecture of the application, that is, the language and framework to be used. This choice has a lot of implications for later design choices --- for example, lack of certain features in certain frameworks may mean resctricted choice of solutions for a particular challenge.
 
-Since the topic at hand is mobile applications, naturally the first thing that comes to mind are mobile-specific (mobile-only) languages and frameworks. These can be split into native approaches such as Kotlin or Swift, and cross-platform ones such as React Native or Flutter. 
+Since the topic at hand is mobile applications, naturally the first thing that comes to mind are mobile-specific languages and frameworks. These can be split into native approaches such as Kotlin or Swift, and cross-platform ones such as React Native or Flutter. 
 
 But there has been a strong tendency to favor browser-based solutions over native ones in recent history, as \citefullauthor{WebAppsReplacingNative}\cite{WebAppsReplacingNative} comments. He argues that Google has been one of the biggest driving forces on the market and that the sheer market share of their browser, Google Chrome, can in part be attributed to this transformation. The architecture in question is SPA (single page application), specifically in form of PWAs (progressive web applications). 
 
@@ -453,19 +453,19 @@ There are a few clear takeaways from the selected approaches to be taken when ch
 \section{Local data management}
 As chapter one explains, keeping track of local data and its changes in offline mode is a crucial issue to tackle. There are two magnitudes to be chosen for resolving this problem --- faking just the server or also faking a database.
 \subsection{Request intercepting and processing}
-The first option is to build a custom proxy-like layer serving as a form of middleware between the client and the server. This layer intercepts all the mutating requests. The data getting (GET) requests are handled separately, for example in the form of cache. The POST, PUT, PATCH, and DELETE requests are stored as pending operations and a success state (200, 201 etc.) is returned to the client as if the request was successfully processed by the server. Later all the pending operations are synchronized one by one, in order, with the server. 
+The first option is to build a custom proxy-like layer serving as a form of middleware between the client and the server. This layer intercepts all the mutating requests. The data getting (GET) requests are handled separately, for example in the form of cache. The POST, PUT, PATCH, and DELETE requests are stored as pending operations and a success state (200, 201, etc.) is returned to the client as if the request was successfully processed by the server. Later all the pending operations are synchronized one by one, in order, with the server. 
 
 \subsubsection{Client validation}
-This \textit{optimistic} UI update strategy also means that the data validation must always be done on the client and data consistency must be enforced there --- there is no server to handle it, the client needs to ensure that the request have the highest possible probability of succeding once they are actually transmitted throught the network and processed by the server. 
+This \textit{optimistic} UI update strategy also means that the data validation must always be done on the client and data consistency must be enforced there --- there is no server to handle it, the client needs to ensure that the requests have the highest possible probability of succeding once they are actually transmitted throught the network and processed by the server. 
 
 Importance of this principle grows with any inter-endpoint or stateful dependencies. As an example, let's imagine an entity with several states and a lot of attributes. In each state, a certain subset of attributes is displayed to be filled. A change of state of an instance requires the instance (or its related/dependent entitites) to be filled with a valid values for the currently displayed set of attributes. The state change opens another subset of data to be filled, depending on the values of the previously submitted values. 
 
-That is a \textit{dependency path} --- a sequence of unique steps dependent on each other. If the user fills the first step incorrectly and the client fails to enforce the validity to the same extent that the server eventually will, each subsequent update to this instance must be thrown away during synchronization and the user, because the validity of the first step is compromised, effectively compromising all the following steps --- the state change was not valid and therefore all subsequent dependent actions will not be either.
+That is a \textit{dependency path} --- a sequence of unique steps dependent on each other. If the user fills the first step incorrectly and the client fails to enforce the validity to the same extent that the server eventually will, each subsequent update to this instance must be thrown away during synchronization. As the validity of the first step is compromised, it is effectively compromising all the following steps --- the first state change was not valid and therefore all subsequent dependent actions will not be either.
 
 \subsubsection{Incorporating mutations into local data}
 Assuming the validation is handled correctly, there is still one aspect that needs to be talked about --- displaying the mutated data correctly. Earlier in this section, it was stated that the cached version of data is used for presentation. That fails as soon as there is a need to display mutated (updated) data in the UI --- the pending operations need to be incorporated into the data. 
 
-The solution is to proxy also the GET requests and include any pending changes into the data presented by the client. As each entity is identified by its name (and therefore a specific endpoint subtree) and every instance is identified by its ID, it effectively means fetching the instance data from the cache and searching through the pending mutations to filter those that affect this instance --- in other words, search for match in endpoint name and instance ID. All found mutations are then applied to the fetched (cached) data inside the middleware and presented to the client.
+The solution is to proxy also the GET requests and include any pending changes into the data presented by the client. As each entity is identified by its name (and therefore a specific endpoint group) and every instance is identified by its ID, it effectively means fetching the instance data from the cache and searching through the pending mutations to filter those that affect this very instance --- in other words, searching for a match in endpoint name and instance ID. All found mutations are then applied to the fetched (cached) data inside the middleware and presented to the client.
 
 This intercepting approach fails to scale well for request-frequent or data-intensive applications as each GET request must be heavily processed and a structure of pending requests searched through repetitively. The upside is that the client does not have to know about being offline at all as the middleware acts as an optimistic server --- the client then fetches and mutates data as if the device was online and all is handled by the intercepting layer.
 
@@ -485,8 +485,8 @@ During the synchronization, the local tables must be merged with the server ones
 
 The obvious downside to this approach is its complexity and the need to adhere closely to the server architecture. Any changes on the backend must be properly mirrored on the frontend and the thickness of the client therefore grows, meaning more expensive development and maintenance. On the other hand, the robustness of such solution is incomparable to the previous one, because there is strong consistency in the data (all relevant data is always updated properly, which may not be true in the first approach if there are complex dependencies across entitites).
 
-\subsection{Hybrid solutions}
-There is also a ``hybrid solution'' --- one that uses the database, that is controlled by the middleware. Effectively, the application is completely unbothered by being offline, but the requests sent to the server are intercepted by the middleware, processed, translated to local database queries, and also stored to a pending operations queue. The GET requests are transformed to retrieve data from the local database, because all changes are reflected in it. 
+\subsection{Hybrid solution}
+There is also a ``hybrid solution'' --- one that uses the database which is controlled by the middleware. Effectively, the application is completely unbothered by being offline, but the requests sent to the server are intercepted by the middleware, processed, translated to local database queries, and also stored to a pending operations queue. The GET requests are transformed to retrieve data from the local database, because all changes are reflected in it. 
 
 Upon getting back online, the synchronization is as simple as in the first approach --- sending the requests to the server in the order of interception. Combining the strengths of both approaches, the cost is in the increased complexity. 
 
@@ -495,17 +495,17 @@ Now, effectively, the backend together with the database is completely mocked in
 \section{Synchronization}
 Regardless of the choice of the local data handling and therefore synchronization method, there may always arise conflicts. Conflicts arise when the offline and online data are both changed and therefore one change may overwrite the other.
 
-To illustrate the approaches described in this section on a practicle scenario, let's assume this situation: there are two users, Alice and Bob. They both work in the same time with the same system and they interact with the same data, or at least a portion of the data they work with is shared. Alice works online, while Bob is in offline mode. After some time, Bob reconnects to the internet and tries to synchronize his changes, creating conflicts on the shared data.
+To illustrate the approaches described in this section on a particular scenario, let's assume this situation: there are two users, Alice and Bob. They both work in the same time with the same system and they interact with the same data, or at least a portion of the data they work with is shared. Alice works online, while Bob is in offline mode. After some time, Bob reconnects to the internet and tries to synchronize his changes, creating conflicts on the shared data.
 
 \subsection{Acceptance of conflicts}
-The simplest way of handling the risk of conflicts is to simply not handle them at all and accept their existence. Therefore, Bob, after succesfully connecting to the internet after his offline session, overwrites any data that Alice had submitted to the same instances that bob worked with. The whole instance will be always overwritten.
+The simplest way of handling conflicts is to simply not handle them at all and accept their existence. Therefore, Bob, after succesfully connecting to the internet after his offline session, overwrites any data that Alice had submitted to the same instances that Bob worked with. The whole instance will be always overwritten. 
 
 In case there is a stateful instance and Alice has changed its state to one that does not accept changes, Bob's request synchronization will fail. If the server stores the history of states of the instance with timestamps and the client sends a timestamped synchronization request (so the request will be processed as if it was received when Bob performed the update and not in the moment of reception), Bob's request may succed --- or it still may not if the timing is unfortunate.
 
 There are also other cases like when Alice deletes the instance and Bob tries to update it --- which fails. When there is a state machine on the instance, it may reject Bob's state updates as they are invalid at the moment of request processing (or even in the moment of Bob's action when timestamping is involved) --- because Alice changed the state as well. In the simple case of $New$ -- $Processing$ -- $Processed$ state machine, if both Alice and Bob change the state to $Processing$, the latter must fail as there is, presumably, no path from the $Processing$ state to itself.
 
 \subsection{Avoidance by locking}
-One of the most robust yet the most restrictive approach is for Bob to lock preemptively the instances that he intends to interact with while offline, effectively completely avoiding the risk of any conflict. 
+One of the most robust yet the most restrictive approach is for Bob to lock preemptively any instances that he intends to interact with while offline, effectively completely avoiding the risk of any conflict. 
 
 An instance-granular locking mechanism must be implemented, and Bob, before going offline, has to be able to mark the instances that he needs in offline and lock them. Optionally, instances might be locked together with all their ``dependent (child) instances'' --- that is, instances that have a $n:1$ relation with said instance. This approach solves all the update-delete and stateful problems.
 
@@ -514,30 +514,49 @@ There are, unfortunately, several problems to this approach --- firstly, Alice i
 And thirdly, after he is done working with the data, he must always unlock the instances on the server --- failure to do so will block any other user from interacting with it over potentially a prolonged period of time. Assuming Bob went on holiday for a week and did not bring his work device with him, the only option for his colleagues to work with the data is to have a system administrator that can forcefully unlock the instances, effectively scrapping Bob's unsaved changes. 
 
 \subsection{Mitigation by partitioning}
-The risk of synchronization conflicts can also be somewhat mitigated by partitioning the data-mutating endpoints to several parts. Let's assume that Alice sits in an office and Bob is operating outside and they cooperate on a shared instance representing a physical object. Bob has physical access to the object. It is probable that some attributes can only be filled in terrain while others should be filled in the office.
+The risk of synchronization conflicts can also be somewhat mitigated by partitioning the data into several parts, each having their own mutating endpoint. Let's assume that Alice sits in an office and Bob is operating outside and they cooperate on a shared instance representing a physical object. Bob has physical access to the object. It is probable that some attributes can only be filled in terrain while others should be filled in the office.
 
 When the instance has this conceptual split of attributes and it makes sense in the particular context, the update endpoint can be split in two --- the office and terrain one, minimizing conflicts.
 
 If the backend endpoint structure supports PATCH requests to update only selected attributes and not overwrite others in the process, it is the same idea but with attribute granularity. While this partially mitigates the risk, it certainly does not handle it completely and also does not solve the update-delete or stateful cases.
 
 \subsection{Avoidance by instance duplication}
-There is an option to duplicate the instance if a conflict during the synchronization would have to occur\footnote{The synchronization requests must be flagged as duplication-enforcing --- normally, when the version does not match during online usage, the server most likely just returns a version error, forcing the client to refetch the current version and performing their changes again. That, however, cannot be done when synchronizing changes from an offline session}. The simplest implementation would be to set up a versioning system where each instance stores its version (as a numerical attribute). When processing an update request, the server checks the incoming version and compares it against the stored one. If they match, the update is performed. If not (e. g., server has version 35 and an update request with version 34 comes), the server duplicates the instance and flags it as a duplicate.
+There is an option to duplicate the instance if a conflict during the synchronization would have to occur\footnote{The synchronization requests must be flagged as duplication-enforcing --- normally, when the version does not match during online usage, the server most likely just returns a version error, forcing the client to refetch the current version and performing their changes again. That, however, cannot be done when synchronizing changes from an offline session.}. The simplest implementation would be to set up a versioning system where each instance stores its version (as a numerical attribute). When processing an update request, the server checks the incoming version and compares it against the stored one. If they match, the update is performed. If not (e. g., server has version 35 and an update request with version 34 is received), the server duplicates the instance and flags it as a duplicate.
 
 The server may also resort to creating a duplicate when a deleted instance is attempted to be updated (of course, provided that soft-deleting is employed and the instance still exists in the database) or when a state machine restrictions would prohibit the request on a stateful instance to be performed.
 
-The responsibility is then on the system admin or whoever might be identified as the instance owner to resolve the duplicity later and merge the changes manually. 
+The responsibility is then on the system administrator or whoever might be identified as the instance owner to resolve the duplicity later and merge the duplicates manually. 
 
-There is then the question about any dependent instances\footnote{Dependent instances is a concept introduced in section 2.3.2 --- instances of entities that have a $n : 1$ relation with the entity at hand and may therefore be perceived as subordinate.} --- should they be duplicated as well, performing a deep duplication, or only a shallow one, duplicating the dependent instances on demand? The answer relies on the data model. If there are only a few dependent entities, it will be easier to perform a deep duplication. But in case of a complex data model, the approach does not scale well and a more complicated on-demand duplication scheme should be applied. That means that the versions of the dependent instances are incremented, ensuring that any further synchronization requests that would reference these dependent instances would produce a version conflict, triggering a duplication.
+There is then the question about any dependent instances\footnote{Dependent instances is a concept introduced in section 2.3.2 --- instances of entities that have a $n : 1$ relation with the entity at hand and may therefore be perceived as subordinate.} --- should they be duplicated as well, performing a deep duplication, or only a shallow one, duplicating the dependent instances on demand? The answer relies on the data model. If there are only a few dependent entities, it will probably be easier to perform a deep duplication. But in case of a complex data model, the approach does not scale well and a more complicated on-demand duplication scheme should be applied. That means that the dependent entities are not duplicated, but their versions are incremented, ensuring that any further synchronization requests that would reference these dependent instances would produce a version conflict, triggering a duplication.
 
-There is one last remark to be made about this approach: the server must notify the client about any duplicates being created and the ID mapping of original and duplicate. The client then must respect this mapping in all following requests to affected instances.
+There is one last remark to be made about this approach: the server must notify the client about any duplicates being created and the ID mapping of originals and duplicates. The client then must respect this mapping in all following requests to affected instances.
 
 \subsection{Mitigation by atribute timestamping}
-In some cases, the best option may be to timestamp the last update of every attribute of an entity. While effectively doubling the attribute count, it is guaranteed that only the latest update of every attribute is persisted. For the backend, it means updating per attribute while always checking, which value is the latest. For the frontend, it usually means managing the local data in a mirrored local database that also reflects this procedure, and also implementing an attribute-precise timestamp control in any forms in the UI.
-\subsection{CRDT}
-\subsection{Advanced synchronization management}
-(approaches based on advanced methods like GIT etc)
+In some cases, the best option may be to timestamp the last update of every attribute of an entity. While effectively doubling the attribute count, it is guaranteed that only the latest update of every attribute is persisted. For the backend, it means updating per attribute while always checking which value is the latest. For the frontend, it usually means managing the local data in a mirrored local database that also reflects this procedure, and also implementing an attribute-precise timestamp control in any forms in the UI.
+
+This method of conflict resolution is often referenced as ``Last Write Wins'' and there are database systems specifically designed to utilize this strategy like Apache Cassandra\cite{cassandra}, a distributed NoSQL database that timestamps every attribute. 
+
+\subsection{Advanced synchronization conflicts resolution concepts}
+There are countless ways to design a custom solution finetuned to specific business requirements. The following concepts can also be employed when creating a more specialized approach:
+
+\subsubsection{CRDT}
+A CRDT (Conflict-free Replicated Data Type) is a data structure that ensures eventual consistency between multiple nodes of a distributed peer-to-peer system without a central node, even when updates occur concurrently.
+
+As Shapiro et al. (2011)\cite{crdt1} explain, each node can independently modify its local copy and propagate the changes through the network, and the CRDT's merge function guarantees that all nodes eventually converge to the same final state once all updates are propagated. It is however essetial to be able to create a merge strategy for each attribute. A merge strategy defines how conflicting updates are resolved in a deterministic way. It strongly depends on the attribute type: sometimes it is taking the latest timestamp, sometimes merging sets, sometimes combining counters, etc.
+
+The context od this thesis is somewhat related --- there is a central node (the server), but each client may have their truth and there needs to be a strategy to determine what is the final shared truth per attribute.
+
+In practical use, this can be represented by a key-value structure where each client (key) sends its own version of a value, optionally tagged with timestamp or version. The server holds all the key-value pairs and figures out a final value for each attribute that is then propagated to all clients. 
+
+In reality, there may be data types that cannot have a simple deterministic strategy to merge multiple versions. In that case, the UI can display all the key-value pairs for an attribute to the instance owner and let them manually merge the conflict and choose a single value that will be stored instead of all the conflicting items.
+
+\subsubsection{GIT}
+Talking about resolving merge conflicts should ring a developer's bell --- there is a versioning system that handles merging data from multiple users and entails resolving merge conflicts: GIT. Its core concepts may be transformed to tackle issues in the context of this thesis. 
+
+An object-oriented \textit{diff} alternative might be implemented to determine potentially diverging attributes together with a custom merge editor for merging those diversions that cannot be merged automatically. In GIT terminology, attributes would mirror lines, sending a PUT request is pushing a commit and the server performs a fast-forwarding or merging when processing the update.
+
 \subsection{Final synchronization remark}
-There is one remark that has yet to be done concerning the aforementioned approaches. Neither of them is globally better or worse than any other. Chosing the right one depends heavily on the functional and non-functional requirements of a particular project and its business logic and context. The first, and the most important step, is always to consult the business aspects of the offline functionality with the customer and depending on the specific requirements choose a adequately robust and complex solution.
+There is one remark that has yet to be made concerning the aforementioned approaches. Neither of them is globally better or worse than any other. Choosing the right one depends heavily on the functional and non-functional requirements of a particular project and its business logic and context. The first, and the most important step, is always to consult the business aspects of the offline functionality with the customer and depending on the specific requirements one can then choose an adequately robust and complex solution.
 
 \chapter{Implementation}
 \section{Functional and non-functional requirements}
@@ -549,9 +568,15 @@ popsat ruzne strategie a jejich vyuziti/vyhody nevyhody?
 \section{Axios Interceptor}
 \section{Local data management}
 \section{Synchronization}
-zminit ze musim posilat nejaky timestamp kdy se to stalo v offlinu realne, nejen kdy se odeslal ten request na server pri synchronizaci, to neni relevantni.
+zminit ze posilam nejaky offline timestamp
 
 \chapter{Testing, issues, and future work}
+internal testing
+external testing
+uat
+penetration testing
+
+jira? dexcribe some new CRs?
 
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}

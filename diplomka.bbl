@@ -630,6 +630,108 @@
       \verb https://web.dev/learn/pwa/service-workers
       \endverb
     \endentry
+    \entry{cassandra}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=25d57669b40e105b84297259a35f07a3}{%
+           family={Yarabarla},
+           familyi={Y\bibinitperiod},
+           given={Sandeep},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Packt Publishing}%
+      }
+      \strng{namehash}{25d57669b40e105b84297259a35f07a3}
+      \strng{fullhash}{25d57669b40e105b84297259a35f07a3}
+      \strng{fullhashraw}{25d57669b40e105b84297259a35f07a3}
+      \strng{bibnamehash}{25d57669b40e105b84297259a35f07a3}
+      \strng{authorbibnamehash}{25d57669b40e105b84297259a35f07a3}
+      \strng{authornamehash}{25d57669b40e105b84297259a35f07a3}
+      \strng{authorfullhash}{25d57669b40e105b84297259a35f07a3}
+      \strng{authorfullhashraw}{25d57669b40e105b84297259a35f07a3}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781787127296}
+      \field{title}{Learning Apache Cassandra – Second Edition}
+      \field{year}{2017}
+      \verb{urlraw}
+      \verb https://www.oreilly.com/library/view/learning-apache-cassandra/9781787127296/
+      \endverb
+      \verb{url}
+      \verb https://www.oreilly.com/library/view/learning-apache-cassandra/9781787127296/
+      \endverb
+    \endentry
+    \entry{crdt1}{inproceedings}{}{}
+      \name{author}{4}{}{%
+        {{hash=f13a03ea8c9e34968f9bc55bb4e93d9f}{%
+           family={Shapiro},
+           familyi={S\bibinitperiod},
+           given={Marc},
+           giveni={M\bibinitperiod}}}%
+        {{hash=01eb907fe4f9429b911ea87887f73363}{%
+           family={Preguiça},
+           familyi={P\bibinitperiod},
+           given={Nuno},
+           giveni={N\bibinitperiod}}}%
+        {{hash=0bb140bbbc1d3ac7ec6a28bd9d506581}{%
+           family={Baquero},
+           familyi={B\bibinitperiod},
+           given={Carlos},
+           giveni={C\bibinitperiod}}}%
+        {{hash=d091ed4cb7e2ab01f03d04bfcd52f83f}{%
+           family={Zawirski},
+           familyi={Z\bibinitperiod},
+           given={Marek},
+           giveni={M\bibinitperiod}}}%
+      }
+      \name{editor}{3}{}{%
+        {{hash=e815d3c85a6566efef0716dbeb6df496}{%
+           family={Défago},
+           familyi={D\bibinitperiod},
+           given={Xavier},
+           giveni={X\bibinitperiod}}}%
+        {{hash=cac3f398e493ef46fe9796f1a3524e9e}{%
+           family={Petit},
+           familyi={P\bibinitperiod},
+           given={Franck},
+           giveni={F\bibinitperiod}}}%
+        {{hash=043d604a66f23a1f2f7c302317fd87a2}{%
+           family={Villain},
+           familyi={V\bibinitperiod},
+           given={Vincent},
+           giveni={V\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{00bf62d46bf695019c2c8f76a176456a}
+      \strng{fullhash}{00bf62d46bf695019c2c8f76a176456a}
+      \strng{fullhashraw}{00bf62d46bf695019c2c8f76a176456a}
+      \strng{bibnamehash}{00bf62d46bf695019c2c8f76a176456a}
+      \strng{authorbibnamehash}{00bf62d46bf695019c2c8f76a176456a}
+      \strng{authornamehash}{00bf62d46bf695019c2c8f76a176456a}
+      \strng{authorfullhash}{00bf62d46bf695019c2c8f76a176456a}
+      \strng{authorfullhashraw}{00bf62d46bf695019c2c8f76a176456a}
+      \strng{editorbibnamehash}{6a150f6c69114b0eaf2bbc447992dbfb}
+      \strng{editornamehash}{6a150f6c69114b0eaf2bbc447992dbfb}
+      \strng{editorfullhash}{6a150f6c69114b0eaf2bbc447992dbfb}
+      \strng{editorfullhashraw}{6a150f6c69114b0eaf2bbc447992dbfb}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Stabilization, Safety, and Security of Distributed Systems}
+      \field{isbn}{978-3-642-24550-3}
+      \field{title}{Conflict-Free Replicated Data Types}
+      \field{year}{2011}
+      \field{pages}{386\bibrangedash 400}
+      \range{pages}{15}
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
