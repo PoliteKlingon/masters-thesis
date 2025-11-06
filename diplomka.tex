@@ -467,7 +467,7 @@ Assuming the validation is handled correctly, there is still one aspect that nee
 
 The solution is to proxy also the GET requests and include any pending changes into the data presented by the client. As each entity is identified by its name (and therefore a specific endpoint group) and every instance is identified by its ID, it effectively means fetching the instance data from the cache and searching through the pending mutations to filter those that affect this very instance --- in other words, searching for a match in endpoint name and instance ID. All found mutations are then applied to the fetched (cached) data inside the middleware and presented to the client.
 
-This intercepting approach fails to scale well for request-frequent or data-intensive applications as each GET request must be heavily processed and a structure of pending requests searched through repetitively. The upside is that the client does not have to know about being offline at all as the middleware acts as an optimistic server --- the client then fetches and mutates data as if the device was online and all is handled by the intercepting layer.
+This intercepting approach fails to scale well for request-frequent or data-intensive applications as each GET request must be heavily processed and a structure of pending requests searched through repetitively. But it excels at dependent chains of requests where time and state is crucial. The upside is also that the client does not have to know about being offline at all as the middleware acts as an optimistic server --- the client then fetches and mutates data as if the device was online and all is handled by the intercepting layer.
 
 \subsubsection{POST - PUT chain}
 In the previous section, an assumption about each instance being uniquely identified by an ID was made. There is one edge case that invalidates this assumption --- creating an instance while offline. Traditionally, the server assigns IDs to new instances in a way that respects the integrity constraints of the database. The client, however, cannot reliably assign IDs on its own and synchronizing the POST request afterwards will lead to the ID being overwritten by the server, rendering all potential subsequent PUT/PATCH/DELETE requests to the same entity invalid as the ID would not match.
@@ -476,10 +476,12 @@ The simplest option is to prohibit the POST-PUT chain completely. If it makes se
 
 The second option is to generate the ID on POST on the client and later during the synchronization map the client-generated ID to the real server-assigned one and then alter all subsequent calls to this instance to respect the correct ID.
 
+Generally, if the vast majority of functionality includes creating new instances and potenitially subsequently mutating them, this approach is not ideal and may not scale well; but when the majority is about stateful and dependent mutations, it has the upper hand.
+
 \subsection{Local database}
 The second, more robust, scalable, but also complex and demanding solution is to manage a local database on the client. The support for local databases is present in all frameworks mentioned in this thesis --- from the Room database in Kotlin\footnote{https://developer.android.com/training/data-storage/room} to the browser's IndexedDB for PWAs\footnote{https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB\_API}. 
 
-The local database schema needs to closely mirror the server one and must implement the same integrity constraints, keys, or unique constraints to mitigate synchronization conflicts. The relevant data is fetched and stored to the local database while online and then, when offline, the application only works with the local database to access and mutate data, no requests are attempted. Relevant instances may be retrieved, created, updated or deleted from the database.
+The local database schema needs to closely mirror the server one and must implement the same integrity constraints, keys, or unique constraints to mitigate synchronization conflicts. The validation needs on the client are also as relevant in this approach as in the last one. The relevant data is fetched and stored to the local database while online and then, when offline, the application only works with the local database to access and mutate data, no requests are attempted. Relevant instances may be retrieved, created, updated or deleted from the database.
 
 During the synchronization, the local tables must be merged with the server ones, writing through the data changes that occured while offline. The changed/created/deleted instances from the offline session would be flagged accordingly and requests created that would reproduce said data changes. 
 
@@ -571,13 +573,7 @@ popsat ruzne strategie a jejich vyuziti/vyhody nevyhody?
 zminit ze posilam nejaky offline timestamp
 
 \chapter{Testing, issues, and future work}
-internal testing
-external testing
-uat
-penetration testing
-
-jira? dexcribe some new CRs?
-
+???
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
 
