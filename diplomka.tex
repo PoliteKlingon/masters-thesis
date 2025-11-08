@@ -420,15 +420,15 @@ export default function UserCard({ user }: Props) {
 \subsubsection{PWA}
 A PWA (Progressive Web Application)\footnote{https://web.dev/explore/progressive-web-apps} is a web application built as a capable standalone installable application enhanced with modern browser system APIs and offline capabilities\cite{pwaInfo}. 
 
-A PWA can be installed straight from the browser through a context menu, meaning there is no need to handle app store publication or different builds for different platforms. There is only a singular codebase and a singular deployment --- the ``browser one'' --- that also provides the option to install the application on any platform, transforming it to a natively-feeling one. 
+A PWA can be installed straight from the browser through a context menu, meaning there is no need to handle app store publication or different builds for different platforms. There is only a singular codebase and a singular deployment --- the ``browser one'' --- that also provides the option to install the application on any platform, transforming it to a natively-feeling one. The updates are also managed fully in the application and are distributed from the server to all clients. That brings the option for the developer to always automatically update the client as soon as an update arrives, eliminating the risk of users using out-of-date applictation versions.
 
-If needed, there is also a packaging option called PWABuilder\footnote{https://pwabuilder.com/} that can produce a application package that can be distributed to several app stores like Google Play Store.
+If needed, there is also a packaging option called PWABuilder\footnote{https://pwabuilder.com/} that can produce a application package that can be distributed to several app stores like Google Play Store, but using that option means losing the updating advantages described in the previous paragraph.
 
 An installed PWA can be pinned to a mobile home screen, PC desktop, or a taskbar. It can be managed inside the OS, set up to use push notifications, registered to accept content from other system applications, set up to override browser keyboard shortcuts, or chosen to be the default application for opening files of certain types.
 
-A PWA also makes web applications offline-ready. It has become a user-expected standard in the last couple of years for applications to provide some form of content even when offline. In the traditional Web Application context, that is not possible --- the web application frontend itself is provided to the browser from the server, and when the request to load a page fails (because of network issues or server unavailability), the browser just displays an error page. A PWA enables caching strategies handled by service workers.
+A PWA also makes web applications offline-ready. It has become a user-expected standard in the last couple of years for applications to provide some form of content even when offline. In the traditional Web Application context, that is not possible --- the web application frontend itself is provided to the browser from the server, and when the request to load a page fails (because of network issues or server unavailability), the browser just displays an error page. A PWA enables advanced caching strategies handled by service workers.
 
-A Service Worker is a middleware residing in the browser that acts as a network proxy between the client and the server\cite{serviceWorkers}. The service worker has a developer-specified scope of network requests that it handles. Depending on the strategy chosen for each section of endpoints, it can handle them accordingly --- serving fresh or cached, serving a custom-made data, or, for example, serving from cahe and fetching a fresh version of data in the background and updating the cache. 
+A Service Worker is a middleware residing in the browser that can act as a network proxy between the client and the server\cite{serviceWorkers}. Being a browser API running in the background, it practically enables offline mode or push notifications. The service worker has a developer-specified scope of network requests that it handles. Depending on the strategy chosen for each section of endpoints, it can handle them accordingly --- serving fresh or cached, serving a custom-made data, or, for example, serving from cahe and fetching a fresh version of data in the background and updating the cache. 
 
 \subsubsection{Advantages and Disadvantages}
 When weighing pros and cons of progressive web applications, one can view it is the polar opposite of the native approach --- while the native solution is as close to the hardware and OS, this approach is as abstracted as possible, layering over the OS with not only a cross-platform layer over the system APIs like Flutter does, but a whole browser layer over it as well. 
@@ -560,17 +560,187 @@ An object-oriented \textit{diff} alternative might be implemented to determine p
 \subsection{Final synchronization remark}
 There is one remark that has yet to be made concerning the aforementioned approaches. Neither of them is globally better or worse than any other. Choosing the right one depends heavily on the functional and non-functional requirements of a particular project and its business logic and context. The first, and the most important step, is always to consult the business aspects of the offline functionality with the customer and depending on the specific requirements one can then choose an adequately robust and complex solution.
 
-\chapter{Implementation}
+\chapter{Case study}
+To illustrate the real designing process of an offline-enabled application and all the architectural decisions based on the guide from chapter two, in this chapter will be documented a case study of a real-world solution.
 \section{Functional and non-functional requirements}
 \section{Architecture, technology stack}
-\section{Service Worker}
-popsat ktery strategie realne pouzivam
+This application needs to be supported both on mobile devices with Android or iOS and on Windows devices. As in the majority of enterprise applications, there is no need for resource-intensive calculations, no performance-critical tasks and there is minimal operating system integration --- the only functional requirement in this area that needs to be fulfilled is camera support.
 
-popsat ruzne strategie a jejich vyuziti/vyhody nevyhody?
-\section{Axios Interceptor}
+Therefore, the only options left are React PWA and Flutter. In this case, the browser-first PWA option won as it is easier to integrate into a web ecosystem, can be consistently used on any device equipped with a browser, does not have to be installed, and quite importantly, the updates are fully managed by the application. That means eliminating any version inconsistencies and therefore potential issues with a user base that tends to be reluctant to update applications unless it is forced to.
+
+As the programming language, TypeScript\footnote{https://www.typescriptlang.org/} was chosen for type safety to help minimize runtime errors. TypeScript alows using static typing, generics or interfaces. Vite\footnote{https://vite.dev/} was chosen as the build tool for its speed and features. On top of the React-TS PWA platform, a reliable and powerful set of libraries was chosen to ensure stability and extensibility. To mention a few of the most prominent: 
+\begin{enumerate}
+  \item Tanstack Query\footnote{https://tanstack.com/query/latest} is a library for request, state, and asynchronous data management --- primarily used for consistent, state-aware handling of fetching and mutating any data.
+  \item Axios HTTP\footnote{https://axios-http.com/} is a promise-based HTTP client with concise syntax and powerful tools like interceptors or proxies.
+  \item React Hook Form\footnote{https://react-hook-form.com/} is a modern, fully featured, UX oriented, and flexible library to be used for form handling in React apps with state management and broad validation support.
+  \item Zod\footnote{https://zod.dev/} is a TypeScript-first validation library that enabled building complex validation schemas with the option to infer types from the schemas to use. It is fully compatible with React Hook Form.
+  \item Tailwind CSS\footnote{https://tailwindcss.com/} is a concise and expressive CSS framework that is utility based. It minimizes CSS bundle size while providing a fast and powerful way to build UIs.
+  \item ShadCN\footnote{https://ui.shadcn.com/} is a highly customizable and extensible component library that is based on Tailwind CSS. 
+\end{enumerate}
+\section{Service Worker}
+What a service worker is has been explained in detail in chapter two. Here the focus is on the actual implementation with emphasis on the different strategies to be employed in different scenarios.
+
+\subsection{Workbox + Vite}
+
+Workbox\footnote{https://developer.chrome.com/docs/workbox} is a high-level Service Worker library developed by Google to simplify working with service workers. It provides a set of modules to abstract over the complex service worker API.
+
+Inside of Vite config, there is a manifest for the PWA to be injected into the build. Inside it, things like application name or icon are specified. There is also the reference to the service worker source code file. This file, \texttt{prompt-sw.ts} includes these logical parts: the setup and the caching strategies
+
+\begin{lstlisting}[language=java,caption={Setup}]
+import {
+  cleanupOutdatedCaches,
+  createHandlerBoundToURL,
+  precacheAndRoute,
+} from "workbox-precaching";
+import { NavigationRoute registerRoute } from "workbox-routing";
+
+declare let self: ServiceWorkerGlobalScope;
+
+// Activate SW immediately upon installation - apply updates instantly
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") self.skipWaiting();
+});
+
+// self.__WB_MANIFEST is default injection point
+precacheAndRoute(self.__WB_MANIFEST);
+
+// Clean old assets
+cleanupOutdatedCaches();
+
+// To allow work and navigation offline
+registerRoute(new NavigationRoute(createHandlerBoundToURL("index.html")));
+\end{lstlisting}
+
+\begin{lstlisting}[language=java,caption={Caching}]
+
+import { Route, registerRoute } from "workbox-routing";
+import {
+  CacheFirst,
+  NetworkFirst,
+  StaleWhileRevalidate,
+} from "workbox-strategies";
+
+// Handle backend requests
+const backendRoute = new Route(
+  // Match API requests
+  ({ url }) => url.pathname.startsWith("/api"),
+  // Use NetworkFirst strategy to fetch data from the network first
+  new NetworkFirst({
+    cacheName: "api",
+  }),
+);
+
+// Handle images:
+const imageRoute = new Route(
+  ({ request }) => {
+    return request.destination === "image";
+  },
+  new StaleWhileRevalidate({
+    cacheName: "images",
+  }),
+);
+
+// Handle scripts:
+const scriptsRoute = new Route(
+  ({ request }) => {
+    return request.destination === "script";
+  },
+  new CacheFirst({
+    cacheName: "scripts",
+  }),
+);
+
+// Handle styles:
+const stylesRoute = new Route(
+  ({ request }) => {
+    return request.destination === "style";
+  },
+  new CacheFirst({
+    cacheName: "styles",
+  }),
+);
+
+registerRoute(backendRoute);
+registerRoute(imageRoute);
+registerRoute(scriptsRoute);
+registerRoute(stylesRoute);
+\end{lstlisting}
+
+\subsection{Workbox strategies}
+As can be seen in the provided example, there are different caches and caching strategies used for different offline assets. For API requests, the Network-First strategy is used. That means, whenever there is access to the network and a request is intercepted by the service worker, fresh data is always fetched and if applicable, stored in the \texttt{api} cache\cite{strategies}. Only when the server is not reachable, cached data is served. This ensures that whenever possible, the latest data is fetched and presented.
+
+Second strategy used, Cache-First, is utilized for styles and scripts --- in other words, parts of the source code of the application itself. The strategy, as the name suggests, fetches the data straight from the cache and requests the server only if the data is not present in the cache\cite{strategies}. This approach is used because on every applictation update and therefore service worker registration, the cache is cleaned by the \texttt{cleanupOutdatedCaches} function. Therefore, the aforementioned resources are cached at the longest until a new application version arrives, which is perfectly fitting for this type of assets --- the cache is, technically, never outdated and loading the data from it is way quicker than fetching it from the server.
+
+The last of the used strategies is called Stale-While-Revalidate. It fetches the data from the cache if possible and returns them to the client, while fetching a fresh version from the server and upon receiving a response, it updates the cache\cite{strategies}. The data might not be fresh everytime, but they are \textit{eventually consistent}, while prioritizing load times. The strategy is used for images, as those may usually take a while to load and their freshness is not critical.
+
+\subsection{Vite PWA}
+
+The Vite PWA plugin\footnote{https://vite-pwa-org.netlify.app/} builds upon the Workbox to provide ready to use React hooks like \texttt{useRegisterSW} that handles registering and updating the application. In this case, as has been foreshadowed earlier, the updates are forced upon the user, as illustrated by the \texttt{useEffect} hook used for updating the service worker as soon as an update is detected. The following snippet is simplified to convey the main point, its full content is attached as an electronic attachment in the file \texttt{reload-prompt.tsx}.
+
+\begin{lstlisting}[language=java,caption={Service worker registration and updates management}]
+import { useRegisterSW } from "virtual:pwa-register/react";
+
+export function ReloadPrompt() {
+  const { offlineReady, needsRefresh, updateServiceWorker } =   useRegisterSW({
+    onRegisteredSW(swUrl, r) {
+      console.log(`Service Worker at: ${swUrl}`);
+      setInterval(
+        () => {
+          console.log("Checking for sw update...");
+          r.update();
+        },
+        5 * 60 * 1000, // 5 min
+      );
+    },
+    onRegisterError(error) {
+      console.error("SW registration error", error);
+    },
+  });
+
+  useEffect(() => {
+    if (needRefresh) {
+      updateServiceWorker(true);
+    }
+  }, [needRefresh]);
+
+
+  return (
+    <>
+      {offlineReady && (
+        <>
+          Offline mode is ready
+          <Button onClick={close}>Close</Button>
+        </>
+      )}
+      {needsRefresh && (
+        <>
+          A new app version available
+          <LoadingSpinner />
+          Updating...
+        <>
+      )}
+    </>
+  );
+}
+
+\end{lstlisting}
+
 \section{Local data management}
+malo creations, hodne mutations, state-dependent data, timing is crucial
+
+-> intercepting requests, storing a queue
+
+-> why not hybrid? huge offline independence not needed, its overkill
+\subsection{Axios Interceptor}
+The actual implementation of the middleware, using axios
+
+request queue
+
+incorporating it into the data - example of combining cache and resuest queue
 \section{Synchronization}
-zminit ze posilam nejaky offline timestamp
+zminit ze posilam nejaky offline timestamp?
+
+acceptance, businessove poresene. low effort kinda
 
 \chapter{Testing, issues, and future work}
 ???

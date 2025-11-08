@@ -732,6 +732,40 @@
       \field{pages}{386\bibrangedash 400}
       \range{pages}{15}
     \endentry
+    \entry{strategies}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=e75d03892c611e6d945c6ac32e599bc5}{%
+           family={{Chrome Developers}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Google LLC}%
+      }
+      \strng{namehash}{e75d03892c611e6d945c6ac32e599bc5}
+      \strng{fullhash}{e75d03892c611e6d945c6ac32e599bc5}
+      \strng{fullhashraw}{e75d03892c611e6d945c6ac32e599bc5}
+      \strng{bibnamehash}{e75d03892c611e6d945c6ac32e599bc5}
+      \strng{authorbibnamehash}{e75d03892c611e6d945c6ac32e599bc5}
+      \strng{authornamehash}{e75d03892c611e6d945c6ac32e599bc5}
+      \strng{authorfullhash}{e75d03892c611e6d945c6ac32e599bc5}
+      \strng{authorfullhashraw}{e75d03892c611e6d945c6ac32e599bc5}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Strategies for service worker caching – Workbox}
+      \field{urlday}{27}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{year}{2021}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://developer.chrome.com/docs/workbox/caching-strategies-overview
+      \endverb
+      \verb{url}
+      \verb https://developer.chrome.com/docs/workbox/caching-strategies-overview
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

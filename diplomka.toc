@@ -30,7 +30,7 @@
 \contentsline {subsection}{\numberline {2.1.4}Conclusion}{23}{subsection.2.1.4}%
 \contentsline {section}{\numberline {2.2}Local data management}{24}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Request intercepting and processing}{24}{subsection.2.2.1}%
-\contentsline {subsubsection}{Client validation}{24}{section*.23}%
+\contentsline {subsubsection}{Client validation}{25}{section*.23}%
 \contentsline {subsubsection}{Incorporating mutations into local data}{25}{section*.24}%
 \contentsline {subsubsection}{POST - PUT chain}{26}{section*.25}%
 \contentsline {subsection}{\numberline {2.2.2}Local database}{27}{subsection.2.2.2}%
@@ -45,16 +45,19 @@
 \contentsline {subsubsection}{CRDT}{32}{section*.26}%
 \contentsline {subsubsection}{GIT}{33}{section*.27}%
 \contentsline {subsection}{\numberline {2.3.7}Final synchronization remark}{34}{subsection.2.3.7}%
-\contentsline {chapter}{\numberline {3}\bfseries Implementation}{35}{chapter.3}%
+\contentsline {chapter}{\numberline {3}\bfseries Case study}{35}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Functional and non-functional requirements}{35}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Architecture, technology stack}{35}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Service Worker}{35}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Axios Interceptor}{35}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Local data management}{35}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Synchronization}{35}{section.3.6}%
-\contentsline {chapter}{\numberline {4}\bfseries Testing, issues, and future work}{36}{chapter.4}%
-\contentsline {chapter}{Conclusion}{37}{chapter*.28}%
-\contentsline {chapter}{Bibliography}{38}{chapter*.29}%
+\contentsline {section}{\numberline {3.3}Service Worker}{36}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Workbox + Vite}{37}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Workbox strategies}{39}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Vite PWA}{40}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Local data management}{42}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Axios Interceptor}{42}{subsection.3.4.1}%
+\contentsline {section}{\numberline {3.5}Synchronization}{42}{section.3.5}%
+\contentsline {chapter}{\numberline {4}\bfseries Testing, issues, and future work}{43}{chapter.4}%
+\contentsline {chapter}{Conclusion}{44}{chapter*.28}%
+\contentsline {chapter}{Bibliography}{45}{chapter*.29}%
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
@@ -123,4 +126,10 @@
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{\numberline {A}\bfseries Electronic attachments}{41}{appendix.A}%
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {A}\bfseries Electronic attachments}{48}{appendix.A}%
