@@ -54,10 +54,14 @@
 \contentsline {subsection}{\numberline {3.3.3}Vite PWA}{40}{subsection.3.3.3}%
 \contentsline {section}{\numberline {3.4}Local data management}{42}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}Axios Interceptor}{42}{subsection.3.4.1}%
-\contentsline {section}{\numberline {3.5}Synchronization}{42}{section.3.5}%
-\contentsline {chapter}{\numberline {4}\bfseries Testing, issues, and future work}{43}{chapter.4}%
-\contentsline {chapter}{Conclusion}{44}{chapter*.28}%
-\contentsline {chapter}{Bibliography}{45}{chapter*.29}%
+\contentsline {subsection}{\numberline {3.4.2}Incorporating the staged data}{43}{subsection.3.4.2}%
+\contentsline {section}{\numberline {3.5}Synchronization}{44}{section.3.5}%
+\contentsline {chapter}{\numberline {4}\bfseries Selected issues}{45}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Offline testing}{45}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Dependent requests}{45}{section.4.2}%
+\contentsline {section}{\numberline {4.3}?}{45}{section.4.3}%
+\contentsline {chapter}{Conclusion}{46}{chapter*.28}%
+\contentsline {chapter}{Bibliography}{47}{chapter*.29}%
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
@@ -132,4 +136,8 @@
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{\numberline {A}\bfseries Electronic attachments}{48}{appendix.A}%
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {A}\bfseries Electronic attachments}{50}{appendix.A}%

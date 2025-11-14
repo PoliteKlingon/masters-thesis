@@ -34,8 +34,12 @@
 \BOOKMARK [2][-]{subsection.3.3.3}{Vite\040PWA}{section.3.3}% 34
 \BOOKMARK [1][-]{section.3.4}{Local\040data\040management}{chapter.3}% 35
 \BOOKMARK [2][-]{subsection.3.4.1}{Axios\040Interceptor}{section.3.4}% 36
-\BOOKMARK [1][-]{section.3.5}{Synchronization}{chapter.3}% 37
-\BOOKMARK [0][-]{chapter.4}{Testing,\040issues,\040and\040future\040work}{}% 38
-\BOOKMARK [0][-]{chapter*.28}{Conclusion}{}% 39
-\BOOKMARK [0][-]{chapter*.29}{Bibliography}{}% 40
-\BOOKMARK [0][-]{appendix.A}{Electronic\040attachments}{}% 41
+\BOOKMARK [2][-]{subsection.3.4.2}{Incorporating\040the\040staged\040data}{section.3.4}% 37
+\BOOKMARK [1][-]{section.3.5}{Synchronization}{chapter.3}% 38
+\BOOKMARK [0][-]{chapter.4}{Selected\040issues}{}% 39
+\BOOKMARK [1][-]{section.4.1}{Offline\040testing}{chapter.4}% 40
+\BOOKMARK [1][-]{section.4.2}{Dependent\040requests}{chapter.4}% 41
+\BOOKMARK [1][-]{section.4.3}{?}{chapter.4}% 42
+\BOOKMARK [0][-]{chapter*.28}{Conclusion}{}% 43
+\BOOKMARK [0][-]{chapter*.29}{Bibliography}{}% 44
+\BOOKMARK [0][-]{appendix.A}{Electronic\040attachments}{}% 45

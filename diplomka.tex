@@ -726,24 +726,65 @@ export function ReloadPrompt() {
 \end{lstlisting}
 
 \section{Local data management}
-malo creations, hodne mutations, state-dependent data, timing is crucial
+In this application, the majority of data is not created, but mutated. Prepared Orders are fulfilled, activities completed, data filled, there is only a few usecases that create data, like, for example, attachments. The POST-PUT chaining problem therefore might be ommited as updating created instances may be forbidden, while only allowing deleting the instance and re-creating it if necessary. A lot of the data is also state-dependent and timing and order of operations crucial --- the Order state dictates what data can be accesed and generally what can be done in the app.
 
--> intercepting requests, storing a queue
+For those reasons, the intercepting approach was chosen for managing local data. Therefore there is no local mirrored database, only a middleware that intercepts requests in offline mode and stores them in a queue. That FIFO\footnote{First In, First Out} queue is then queried for any staged data and synchronized after reconnecting to the internet. 
 
--> why not hybrid? huge offline independence not needed, it's overkill
+To answer the question why the hybrid approach was not chosed as it is more robust, the main point is that the requirements towards considerable offline independence are not present. The application will not remain offline for more than a work shift and the typical scenario is spending only a couple of hours offline and then coming back online. The application is not request-intensive and managing a mirrored local database under the middleware would, in this case, be excessive.
 \subsection{Axios Interceptor}
-The actual implementation of the middleware, using axios
+The intercepting middleware is implemented as an Axios interceptor. Axios, being the HTTP client, offers an option to set up two interceptors, one for requests and one for responses. Each interceptor has a processing function that may modify the payload, react to it in a custom way or even capture it and not propagate further\cite{axios_interceptors}. For response interceptor, it may mean that every response with an error code is displayed as an error snackbar in one place intead of handling it per request. For request interceptor, it may be used for capturing offline requests.
 
-request queue
+The request interceptor used in this application is set up in the following way\footnote{The relevant code is in \texttt{src/api/axios-config.ts}.}: 
+\begin{enumerate}
+  \item It queries the browser if it is online.
+  \item If so, it just passes the request.
+  \item If not, it enqueues the request into the request FIFO and aborts the original request. For this purpose, in the response interceptor, there is a filter for aborted responses --- they are not to be propagated into the app as they have been aborted by the request interceptor.
+\end{enumerate} 
 
-incorporating it into the data - example of combining cache and resuest queue
+The request FIFO itself is persisted in the browser's localStorage in order to survive app reloads\footnote{Its code is in \texttt{src/offline/request-fifo.ts}}. It stores the so-called \textit{Axios configs} --- objects storing all the relevant attributes, data, metadata, and options for a request, like url, method, request body, parameters, headers, flags, transformers or proxies\cite{axios_req_config}. Later, when online, the config can just be passed to Axios, which composes the request and transmits it.
+
+\subsection{Incorporating the staged data}
+When offline, the application fetches data as normal (they are, in fact, served from cache by the service worker), then retrieves staged data from the FIFO, and finally decides how to merge the fetched data with the staged data --- overlaying them, proritizing one over another or any other merging strategy. As an example, let's take the Activity detail. The Activity is fetched from \texttt{/api/activity/<activityId>}, its staged data retrieved by \texttt{getStagedActivityData} from the queue, and the component that renders it, in this case, prioritizes the staged data over the fetched data.
+\begin{lstlisting}[language=java,caption={Staged data retrieval}]
+  export function getStagedActivityData(
+  activityId: string,
+): ActivityPerformedData | undefined {
+  const fifo = getFifo();
+  // go from start of array - last updates
+  for (const req of fifo) {
+    if (
+      req.request.url?.includes("activity") &&
+      req.request.url?.includes(activityId)
+    ) {
+      return req.request.data;
+    }
+  }
+  return undefined;
+}
+\end{lstlisting}
+\begin{lstlisting}[language=java,caption={Simplified data enrichment}]
+  const methods = useForm<ActivityPerformedDataForm>({
+    resolver: zodResolver(activityPerformedDataFormSchema),
+    defaultValues: 
+      stagedActivityData
+        ?? freshActivityData
+        ?? defaultActivityData
+  });
+\end{lstlisting}
+
 \section{Synchronization}
 zminit ze posilam nejaky offline timestamp?
 
 acceptance, businessove poresene. low effort kinda
 
-\chapter{Testing, issues, and future work}
-???
+zminit UI asi?
+
+\chapter{Selected issues}
+\section{Offline testing}
+\section{Dependent requests}
+file uploads
+-> separate queue
+\section{?}
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
 

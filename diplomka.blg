@@ -1,15 +1,15 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
 [0] Config.pm:331> INFO - Logfile is 'diplomka.blg'
-[40] biber:342> INFO - === so lis  8, 2025, 20:20:21
-[50] Biber.pm:421> INFO - Reading 'diplomka.bcf'
-[94] Biber.pm:1002> INFO - Found 21 citekeys in bib section 0
-[104] Biber.pm:4487> INFO - Processing section 0
-[110] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
-[110] bibtex.pm:1713> INFO - LaTeX decoding ...
-[120] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
-[218] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[218] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[218] Biber.pm:4307> INFO - Sorting list 'none/global//global/global/global' of type 'entry' with template 'none' and locale 'en-US'
-[218] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
-[227] bbl.pm:676> INFO - Writing 'diplomka.bbl' with encoding 'UTF-8'
-[232] bbl.pm:779> INFO - Output to diplomka.bbl
+[38] biber:342> INFO - === pá lis 14, 2025, 21:56:36
+[47] Biber.pm:421> INFO - Reading 'diplomka.bcf'
+[90] Biber.pm:1002> INFO - Found 23 citekeys in bib section 0
+[100] Biber.pm:4487> INFO - Processing section 0
+[105] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
+[106] bibtex.pm:1713> INFO - LaTeX decoding ...
+[115] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[215] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[215] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[215] Biber.pm:4307> INFO - Sorting list 'none/global//global/global/global' of type 'entry' with template 'none' and locale 'en-US'
+[215] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
+[224] bbl.pm:676> INFO - Writing 'diplomka.bbl' with encoding 'UTF-8'
+[229] bbl.pm:779> INFO - Output to diplomka.bbl

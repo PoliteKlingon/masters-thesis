@@ -766,6 +766,64 @@
       \verb https://developer.chrome.com/docs/workbox/caching-strategies-overview
       \endverb
     \endentry
+    \entry{axios_interceptors}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=7b4877429366febcc4251eed5fc488fb}{%
+           family={{Axios Documentation Team}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{7b4877429366febcc4251eed5fc488fb}
+      \strng{fullhash}{7b4877429366febcc4251eed5fc488fb}
+      \strng{fullhashraw}{7b4877429366febcc4251eed5fc488fb}
+      \strng{bibnamehash}{7b4877429366febcc4251eed5fc488fb}
+      \strng{authorbibnamehash}{7b4877429366febcc4251eed5fc488fb}
+      \strng{authornamehash}{7b4877429366febcc4251eed5fc488fb}
+      \strng{authorfullhash}{7b4877429366febcc4251eed5fc488fb}
+      \strng{authorfullhashraw}{7b4877429366febcc4251eed5fc488fb}
+      \field{extraname}{1}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{accessed: 2025-11-14}
+      \field{title}{Interceptors · Axios Docs}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://axios-http.com/docs/interceptors
+      \endverb
+      \verb{url}
+      \verb https://axios-http.com/docs/interceptors
+      \endverb
+    \endentry
+    \entry{axios_req_config}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=7b4877429366febcc4251eed5fc488fb}{%
+           family={{Axios Documentation Team}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{7b4877429366febcc4251eed5fc488fb}
+      \strng{fullhash}{7b4877429366febcc4251eed5fc488fb}
+      \strng{fullhashraw}{7b4877429366febcc4251eed5fc488fb}
+      \strng{bibnamehash}{7b4877429366febcc4251eed5fc488fb}
+      \strng{authorbibnamehash}{7b4877429366febcc4251eed5fc488fb}
+      \strng{authornamehash}{7b4877429366febcc4251eed5fc488fb}
+      \strng{authorfullhash}{7b4877429366febcc4251eed5fc488fb}
+      \strng{authorfullhashraw}{7b4877429366febcc4251eed5fc488fb}
+      \field{extraname}{2}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{accessed: 2025-11-14}
+      \field{title}{Request Config · Axios Docs}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://axios-http.com/docs/req_config
+      \endverb
+      \verb{url}
+      \verb https://axios-http.com/docs/req_config
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
