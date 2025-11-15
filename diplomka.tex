@@ -773,11 +773,13 @@ When offline, the application fetches data as normal (they are, in fact, served 
 \end{lstlisting}
 
 \section{Synchronization}
-zminit ze posilam nejaky offline timestamp?
+The synchronization approach in this aplication is a combination of mitigation and acceptance: it is expected that each user has their own data that they work with. In case there might be two users cooperating on the same order, they each have their part of data that they interact with. In the unexpected (and technically unsupported) case they do not cooperate, the risk is simply accepted: they will overwrite each other's data (last write wins) or they might cause conflicts when the pending changes are no longer applicable to the current version of the data.
 
-acceptance, businessove poresene. low effort kinda
+The stored Axios configs (requests) can be seen in the application as pending in the synchronization dialog. They have a timestamp when they have been recorded, which is then sent as $validFrom$ query parameter to the backend during synchronization. Each config is resent by Axios in the order in which they have been recorded. There are some requests that can be aborted (and, therefore, deleted from the queue) --- yet not all of them should have the option to be aborted, for example, all state-dependent requests and state-changing requests should not be tampered with as they can corrupt the validity of the following requests.
 
-zminit UI asi?
+If a request fails during the synchronization, the user has an option to either try again, delete the failing request if possible, or throw away all the offline changes.
+
+TODO screenshoty 
 
 \chapter{Selected issues}
 \section{Offline testing}

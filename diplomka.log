@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.9.21)  14 NOV 2025 22:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.9.21)  15 NOV 2025 11:54
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1864,35 +1864,37 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [43]
 
 [44]
-Chapter 4.
-
 
 [45]
+Chapter 4.
+
 
 [46]
 
 [47]
 
 [48]
-Overfull \hbox (4.37935pt too wide) in paragraph at lines 793--793
+
+[49]
+Overfull \hbox (4.37935pt too wide) in paragraph at lines 795--795
 \T1/qpl/m/n/12 (-20) WIRSKI, Marek. Conflict-Free Repli-cated Data Types. []In[]: DÉFAGO,
  []
 
 
-Overfull \hbox (14.4882pt too wide) in paragraph at lines 793--793
+Overfull \hbox (14.4882pt too wide) in paragraph at lines 795--795
 \T1/qpl/m/it/12 (-20) Safety, and Se-cu-rity of Dis-tributed Sys-tems\T1/qpl/m/n/12 (-20) . Berlin, Hei-del-berg: Springer
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+qpl on input line 793.
+LaTeX Font Info:    Trying to load font information for TS1+qpl on input line 795.
 (/usr/share/texmf-dist/tex/latex/tex-gyre/ts1qpl.fd
 File: ts1qpl.fd 2009/09/25 v1.2 font definition file for TS1/qpl
 )
 
-[49{/usr/share/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
+[50{/usr/share/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
 Appendix A.
 
 
-[50] (./diplomka.aux)
+[51] (./diplomka.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2020/03/25>
@@ -1904,18 +1906,18 @@ Package logreq Info: Writing requests to 'diplomka.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 43348 strings out of 474529
- 820967 string characters out of 5755266
+ 43349 strings out of 474529
+ 820974 string characters out of 5755266
  1810343 words of memory out of 5000000
  64928 multiletter control sequences out of 15000+600000
  641467 words of font info for 208 fonts, out of 8000000 for 9000
  464 hyphenation exceptions out of 8191
  100i,8n,123p,1239b,3032s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplri.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on diplomka.pdf (60 pages, 501262 bytes).
+Output written on diplomka.pdf (61 pages, 503852 bytes).
 PDF statistics:
- 1138 PDF objects out of 1200 (max. 8388607)
- 1037 compressed objects within 11 object streams
- 459 named destinations out of 1000 (max. 500000)
+ 1143 PDF objects out of 1200 (max. 8388607)
+ 1041 compressed objects within 11 object streams
+ 460 named destinations out of 1000 (max. 500000)
  42908 words of extra memory for PDF output out of 42996 (max. 10000000)
 

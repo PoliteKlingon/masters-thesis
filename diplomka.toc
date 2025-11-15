@@ -56,12 +56,12 @@
 \contentsline {subsection}{\numberline {3.4.1}Axios Interceptor}{42}{subsection.3.4.1}%
 \contentsline {subsection}{\numberline {3.4.2}Incorporating the staged data}{43}{subsection.3.4.2}%
 \contentsline {section}{\numberline {3.5}Synchronization}{44}{section.3.5}%
-\contentsline {chapter}{\numberline {4}\bfseries Selected issues}{45}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Offline testing}{45}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Dependent requests}{45}{section.4.2}%
-\contentsline {section}{\numberline {4.3}?}{45}{section.4.3}%
-\contentsline {chapter}{Conclusion}{46}{chapter*.28}%
-\contentsline {chapter}{Bibliography}{47}{chapter*.29}%
+\contentsline {chapter}{\numberline {4}\bfseries Selected issues}{46}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Offline testing}{46}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Dependent requests}{46}{section.4.2}%
+\contentsline {section}{\numberline {4.3}?}{46}{section.4.3}%
+\contentsline {chapter}{Conclusion}{47}{chapter*.28}%
+\contentsline {chapter}{Bibliography}{48}{chapter*.29}%
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
@@ -140,4 +140,4 @@
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{\numberline {A}\bfseries Electronic attachments}{50}{appendix.A}%
+\contentsline {chapter}{\numberline {A}\bfseries Electronic attachments}{51}{appendix.A}%
