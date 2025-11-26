@@ -32,6 +32,7 @@
                %% with `nolot` to hide the List of Tables.
 ]{fithesis4}
 %% The following section sets up the locales used in the thesis.
+\usepackage{morewrites}
 \usepackage[resetfonts]{cmap} %% We need to load the T2A font encoding
 \usepackage[T1,T2A]{fontenc}  %% to use the Cyrillic fonts with Russian texts.
 \usepackage[
@@ -50,6 +51,29 @@
 %% fonts:
 \usepackage{paratype}
 \def\textrussian#1{{\usefont{T2A}{PTSerif-TLF}{m}{rm}#1}}
+\usepackage[acronym]{glossaries}
+\makeglossaries
+
+\newacronym{cpu}{CPU}{Central Processing Unit}
+\newacronym{pwa}{PWA}{Progressive Web Application}
+\newacronym{ui}{UI}{User Interface}
+\newacronym{ux}{UX}{User Experience}
+\newacronym{sdk}{SDK}{Software Development Kit}
+\newacronym{api}{API}{Application Programming Interface}
+\newacronym{os}{OS}{Operating System}
+\newacronym{db}{DB}{Database}
+\newacronym{js}{JS}{JavaScript}
+\newacronym{ts}{TS}{TypeScript}
+\newacronym{http}{HTTP}{HyperText Transfer Protocol}
+\newacronym{html}{HTML}{HyperText Markup Language}
+\newacronym{css}{CSS}{Cascading Style Sheets}
+\newacronym{spa}{SPA}{Single Page Application}
+\newacronym{jvm}{JVM}{Java Virtual Machine}
+\newacronym{ssr}{SSR}{Server-Side Rendering}
+\newacronym{nfc}{NFC}{Near Field Communication}
+\newacronym{crdt}{CRDT}{Conflict-free Replicated Data Type}
+\newacronym{llm}{LLM}{Large Language Model}
+
 %%
 %% The following section sets up the metadata of the thesis.
 \thesissetup{
@@ -69,7 +93,7 @@
       This thesis documents the process of designing and implementing an enterprise mobile application with offline support in a real-world scenario with specific functional requirements to be fulfilled. By analyzing viable solutions and architectures, this thesis also serves as a reference for architects to be consulted when designing an optimal approach for a similar application.
     },
     thanks      = {%
-      TBA
+      I would like to express my gratitude towards my advisor for their valuable insights during the academic aspect of the thesis-making process, and towards my colleagues J. Glos, J. Ondruch, and T. Szabó for their technical and business expertise and advice on the topic. I am also grateful to my family and close friends for supporting me emotionally.
     },
     bib         = references.bib,
     %% Remove the following line to use the JVS 2018 faculty logo.
@@ -105,6 +129,12 @@
 \graphicspath{ {./images/} }
 
 \begin{document}
+
+\printglossary[type=\acronymtype]
+
+\chapter*{\gls{llm} usage declaration}
+During the thesis-making process, I used the ChatGPT \gls{llm} developed by OpenAI \footnote{https://chatgpt.com/} for searching for relevant literature and other sources, and it also helped me generate the \texttt{.bib} bibliography entries for citations in the thesis afterwards. I also used it to help me find appropriate word translations and synonyms.
+
 %% The \chapter* command can be used to produce unnumbered chapters:
 \chapter*{Introduction}
 %% Unlike \chapter, \chapter* does not update the headings and does not
@@ -123,8 +153,9 @@ The end application conforms with the requirements and is deployed to production
 
 ~
 
-Decribe motivation and purpose, business context ... TODO Tibi + nejaky clanek idealne?
-Why does the app solve the problem? What value does it bring?
+Mobile applications are often a desirable part of a software solution. In the modern world where everyone uses their smartphone for a variety of tasks, it is expected to provide support for these devices in enterprise solutions. As there are areas without internet coverage, it is often expected that the applications will have some degree of offline independence. Offline-first (sometimes also called local-first) applications are becoming more and more relevant with rising user expectations for availability and maturing ecosystems that can support it \cite{OfflineFirst}. 
+
+Incorporating the offline functionality to an application brings certain technical, but also conceptual challenges --- questions like where is the source of truth, how should synchronization conflicts be resolved, and much more.
 
 \chapter{Offline-enabled mobile applications}
 First, it is needed to take a look at offline-enabled enterprise mobile applications as a whole and identify the challenges they have to solve in addition to conventional mobile applications. By offline-enabled is meant an application that provides a significant part of its functionality without access to a server, while the extent of said functionality may vary based on a particular project and customer's needs. 
@@ -135,13 +166,13 @@ Mobile applications in the context of enterprise solutions always conform with t
 
 A server-heavy solution will rely largely on the backend capabilities. Any list filtering or sorting will be done through an endpoint, for example using a data search engine such as Elasticsearch\footnote{https://www.elastic.co/elasticsearch}. The app will store as little state as possible on the client and will depend on server-managed state, settings, or data. 
 
-If this concept is deepened further in the context of web applications, whole pages can be rendered on the server and sent already partially prepared (pre-rendered, waiting to be hydrated --- enriched by client-rendered functionality --- on the client) to the client's browser. Such approach is called SSR (Server Side Rendering) and is currently on the rise with frameworks such as Next.js\footnote{https://nextjs.org/} --- a framework which has gained a lot of popularity in the recent years, according to \citefullauthor{nextJsArticle}\cite{nextJsArticle}.
+If this concept is deepened further in the context of web applications, whole pages can be rendered on the server and sent already partially prepared (pre-rendered, waiting to be hydrated --- enriched by client-rendered functionality --- on the client) to the client's browser. Such approach is called \gls{ssr} and is currently on the rise with frameworks such as Next.js\footnote{https://nextjs.org/} --- a framework which has gained a lot of popularity in the recent years, according to \citefullauthor{nextJsArticle} \cite{nextJsArticle}.
 
 A client-heavy application, on the other hand, will rather utilize the client's resources to process or transform data instead of asking the server to do it. It will prefer sorting or filtering data in the browser or managing state locally --- for example, by using a state-management library like Redux\footnote{https://redux.js.org/} or Zustand\footnote{https://github.com/pmndrs/zustand}.
 
 When considering any offline capabilities, the application must not be heavily dependent on the server and thus will go in the cleint-heavy direction. To accomodate the offline needs, the concept of the application will need to further deepen the client's independence in order to be able to retain its functionality even when the server is not responsive due to signal loss. The specific problems that one encounters while developing such an app are further explored in the next section.
 \section{Issues to be tackled}
-The first and the most obvious task is to make the application available offline as a whole. While it may seem trivial for certain platforms --- e.g. installing an Android application from Google Play Store --- it may be the first obstacle in other approaches, e.g. React PWA (Progressive Web Application). These specifics will be examined in the following chapter; at present, we turn to more conceptual issues.
+The first and the most obvious task is to make the application available offline as a whole. While it may seem trivial for certain platforms --- e.g. installing an Android application from Google Play Store --- it may be the first obstacle in other approaches, e.g. React \gls{pwa}. These specifics will be examined in the following chapter; at present, we turn to more conceptual issues.
 \subsection{Offline data availability}
 In order for the aplication to be able to work with data in offline mode, these data must be downloaded in advance and kept updated. This presents a unique challenge that is not dependent on platform or framework choice --- it is, generally, not a good practice to download all data that could possibly be accessed in the application --- that would practically mean data mirroring of whole database or a large part of it. That might not even be possible due to the database size. It is, therefore, quite imperative to try to limit the amount of data that should be available offline from the business logic side.
 
@@ -150,7 +181,7 @@ As an example, let's imagine a remote-synchronized enterprise calendar applicati
 \subsection{Partial changes management}
 A related topic to the previous section is partial changes management --- a concept of recording changes of data, not entire snapshots. 
 
-The use-case here is updating the local data to match the server state --- the longer the application has been in offline mode, the higher the probability of the data being out of date. Specifically, the probability of the data being out of date after a certain period of time follows the Poisson's distribution\cite{poissonArticle}: \begin{equation}P(X = k) = \frac{ \lambda^k }{k!} e^{-\lambda} \end{equation} where $\lambda$ is expected rate of occurrence and $k$ is the number of occurrences. Let's assume that on average an instance of an entity is changed once every 2 hours during working hours by some user. That is 4 changes during a whole working day. Therefore $\lambda = 4$. The probability that the instance is still up to date the next day (after 8 working hours), in other words, $k = 0$, is approximately 1.83\%.
+The use-case here is updating the local data to match the server state --- the longer the application has been in offline mode, the higher the probability of the data being out of date. Specifically, the probability of the data being out of date after a certain period of time follows the Poisson's distribution \cite{poissonArticle}: \begin{equation}P(X = k) = \frac{ \lambda^k }{k!} e^{-\lambda} \end{equation} where $\lambda$ is expected rate of occurrence and $k$ is the number of occurrences. Let's assume that on average an instance of an entity is changed once every 2 hours during working hours by some user. That is 4 changes during a whole working day. Therefore $\lambda = 4$. The probability that the instance is still up to date the next day (after 8 working hours), in other words, $k = 0$, is approximately 1.83\%.
 
 Therefore, the local data should be periodically or manually updated to minimize the occurrence of synchronization conflicts. The reason why the system should support partial changes management is that if there is none, the only option of a local data update is to bulk-download all data, as if there were none stored, and overwrite them. 
 
@@ -230,20 +261,20 @@ First, there is the crucial decision over the base architecture of the applicati
 
 Since the topic at hand is mobile applications, naturally the first thing that comes to mind are mobile-specific languages and frameworks. These can be split into native approaches such as Kotlin or Swift, and cross-platform ones such as React Native or Flutter. 
 
-But there has been a strong tendency to favor browser-based solutions over native ones in recent history, as \citefullauthor{WebAppsReplacingNative}\cite{WebAppsReplacingNative} comments. He argues that Google has been one of the biggest driving forces on the market and that the sheer market share of their browser, Google Chrome, can in part be attributed to this transformation. The architecture in question is SPA (single page application), specifically in form of PWAs (progressive web applications). 
+But there has been a strong tendency to favor browser-based solutions over native ones in recent history, as \citefullauthor{WebAppsReplacingNative} \cite{WebAppsReplacingNative} comments. He argues that Google has been one of the biggest driving forces on the market and that the sheer market share of their browser, Google Chrome, can in part be attributed to this transformation. The architecture in question is \gls{spa}, specifically in form of \gls{pwa}s. 
 
-Tools that \citeauthor{WebAppsReplacingNative} mentions, like Google Meet, YouTube or Canva, are only a fraction of the sheer quantity of applications that use this web-based architecture. Spotify, Netflix, or applications like BandLab\footnote{https://www.bandlab.com/} --- a fully-featured in-browser music creation platform --- after all, even Microsoft's office suite has been migrated to the browser with the Office 365 package and as \citefullauthor{OfficeForWeb}\cite{OfficeForWeb} explains, Microsoft has been heavily investing to make their office suite web-first for quite a few years now, even prioritising the web variant over the native one for new feature releases.
+Tools that \citeauthor{WebAppsReplacingNative} mentions, like Google Meet, YouTube or Canva, are only a fraction of the sheer quantity of applications that use this web-based architecture. Spotify, Netflix, or applications like BandLab\footnote{https://www.bandlab.com/} --- a fully-featured in-browser music creation platform --- after all, even Microsoft's office suite has been migrated to the browser with the Office 365 package and as \citefullauthor{OfficeForWeb} \cite{OfficeForWeb} explains, Microsoft has been heavily investing to make their office suite web-first for quite a few years now, even prioritising the web variant over the native one for new feature releases.
 \subsection{Native approaches}
-The main argument to use native solutions is the closeness to the operating system. That means, the fewer layers the better performance, smoother UX (user experience) and better system integration. But it may also bring greater complexity and management.
+The main argument to use native solutions is the closeness to the operating system. That means, the fewer layers the better performance, smoother \gls{ux} and better system integration. But it may also bring greater complexity and management.
 
 \subsubsection{Advantages}
-Performance is among the most prominent reasons to go native. \citefullauthor{NativeVsWeb}\cite{NativeVsWeb} performed a qualitative study that compared Native Applications with their web-based counterparts, finding that there is a statistically significant advantage of native apps in not only performance (startup time, responsiveness), but also power consumption, resource consumption (such as CPU\footnote{Cetral Processing Unit} or memory) and network traffic. Therefore, when the application is performance-demanding, the native approach should not be overlooked. 
+Performance is among the most prominent reasons to go native. \citefullauthor{NativeVsWeb} \cite{NativeVsWeb} performed a qualitative study that compared Native Applications with their web-based counterparts, finding that there is a statistically significant advantage of native apps in not only performance (startup time, responsiveness), but also power consumption, resource consumption (such as \gls{cpu} or memory) and network traffic. Therefore, when the application is performance-demanding, the native approach should not be overlooked. 
 
-There is a related advantage of native applications that enhances the user's perception of performance --- the UI (user interface) / UX integration into the system. Since the applications are native, they respect the animations, navigation, and overall user experience of the system they are running on. They will be very well optimized for the device and may even be coupled with haptic feedback, system shortcuts or widgets.
+There is a related advantage of native applications that enhances the user's perception of performance --- the \gls{ui} / \gls{ux} integration into the system. Since the applications are native, they respect the animations, navigation, and overall user experience of the system they are running on. They will be very well optimized for the device and may even be coupled with haptic feedback, system shortcuts or widgets.
 
-The last notable strength of this architecture that should be discussed is operating-system-level integration. Native apps can communicate with the device's hardware and core features significantly better than a browser application ever will. That includes all the sensors that a mobile device has --- camera, Bluetooth, NFC (Near Field Communication), Accelerometer/Gyroscope, ambient light, temperature sensors, and a lot more. All of these can be directly integrated into a native app. Their data are presented through respective system APIs in (more or less) raw form. There is little abstraction and maximum control.
+The last notable strength of this architecture that should be discussed is operating-system-level integration. Native apps can communicate with the device's hardware and core features significantly better than a browser application ever will. That includes all the sensors that a mobile device has --- camera, Bluetooth, \gls{nfc}, Accelerometer/Gyroscope, ambient light, temperature sensors, and a lot more. All of these can be directly integrated into a native app. Their data are presented through respective system APIs in (more or less) raw form. There is little abstraction and maximum control.
 
-This area is not only limited to hardware itself, there is the OS (Operating System) layer as well --- managing foreground and background jobs, having full control over OS notification channels, battery optimizations, or native sharing options and integration with other native applications. To conclude, when the application needs to have a deep hardware or operating level integration, the native approach plays its prime.
+This area is not only limited to hardware itself, there is the \gls{os}  layer as well --- managing foreground and background jobs, having full control over \gls{os} notification channels, battery optimizations, or native sharing options and integration with other native applications. To conclude, when the application needs to have a deep hardware or operating level integration, the native approach plays its prime.
 
 \subsubsection{Disadvantages}
 On the other hand, there certainly are disadvantages to this approach. The greatest one being the fact that when multiple operating systems need to be supported, there have to be multiple codebases in use --- each for one platform. 
@@ -252,26 +283,26 @@ Typically, that would mean Kotlin for Android support and Swift for iOS support.
 
 Additionaly, there may also be a need to support Windows mobile devices as well, not even mentioning Ubuntu mobile and other alternatives. 
 
-The other disadvantage that should be talked about comes from the very same reason that is mentioned earlier as an advantage --- the closeness to the OS and the level of control over it, or in other words, the absence of abstracting layers between the application and the OS. Less abstraction leads to heavier reliance on specific OS versions and flavors. 
+The other disadvantage that should be talked about comes from the very same reason that is mentioned earlier as an advantage --- the closeness to the \gls{os} and the level of control over it, or in other words, the absence of abstracting layers between the application and the \gls{os}. Less abstraction leads to heavier reliance on specific \gls{os} versions and flavors. 
 
 For example, every Android version on every phone brand differs slightly and to ensure the app compliance with a wide variety of supported devices, the testing needs to be extensive and the development might have to include a lot more specific case handling.
 
 \subsubsection{Kotlin}
-What is often referenced as Kotlin is in fact Kotlin + Android SDK (software development kit) + Jetpack Compose. Kotlin\footnote{https://kotlinlang.org/} is a programming language developed by JetBrains. It was designed to be a modern yet mature programming language that takes a lot of inspiration from languages like Java, C\# or Scala\cite{kotlinOverview}. One of its strong points is that it is fully interoperable with Java, which makes migration as painless as possible. 
+What is often referenced as Kotlin is in fact Kotlin + Android \gls{sdk} (software development kit) + Jetpack Compose. Kotlin\footnote{https://kotlinlang.org/} is a programming language developed by JetBrains. It was designed to be a modern yet mature programming language that takes a lot of inspiration from languages like Java, C\# or Scala \cite{kotlinOverview}. One of its strong points is that it is fully interoperable with Java, which makes migration as painless as possible. 
 
-Google states that Kotlin provides better expressiveness, conciseness and safety over Java, which are the main reasons of why in 2019, Google annouced that Android development will be Kotlin-first\cite{KotlinFirst}. According to the Stack Overflow Developer Survey from 2024\cite{StackOverflow2024}, developers enjoy working with Kotlin more than with Java, which is shown by the admiration index where Kotlin surpasses Java by almost 15\% (47.6\% for Java, 60.9\% for Kotlin).
+Google states that Kotlin provides better expressiveness, conciseness and safety over Java, which are the main reasons of why in 2019, Google annouced that Android development will be Kotlin-first \cite{KotlinFirst}. According to the Stack Overflow Developer Survey from 2024 \cite{StackOverflow2024}, developers enjoy working with Kotlin more than with Java, which is shown by the admiration index where Kotlin surpasses Java by almost 15\% (47.6\% for Java, 60.9\% for Kotlin).
 
-Calling the whole stack just `Kotlin' is the norm in the developer community not only because of it being the official language chosen by Google, but also because the main usage of the Kotlin language is Android development, as can be seen in the JetBrains 2021 Developer Ecosystem Report\cite{jetbrainsSurvey}.
+Calling the whole stack just ``Kotlin'' is the norm in the developer community not only because of it being the official language chosen by Google, but also because the main usage of the Kotlin language is Android development, as can be seen in the JetBrains 2021 Developer Ecosystem Report \cite{jetbrainsSurvey}.
 
-To comment on the other parts of the Android development stack, the Android SDK is a layer between the Android OS and the Kotlin code that enables developers to communicate with system resources in a form of an API (application programming interface) together with build tools or an emulator for testing. Jetpack Compose is a UI toolkit for Android applications. It is the recommended way to design and build the UI by Google\cite{JetpackCompose}.
+To comment on the other parts of the Android development stack, the Android \gls{sdk} is a layer between the Android \gls{os} and the Kotlin code that enables developers to communicate with system resources in a form of an \gls{api} together with build tools or an emulator for testing. Jetpack Compose is a \gls{ui} toolkit for Android applications. It is the recommended way to design and build the \gls{ui} by Google \cite{JetpackCompose}.
 
 \subsubsection{Swift}
-Swift\footnote{https://www.swift.org/} for iOS is what Kotlin is for Android. Developed by Apple, designed to replace Objective-C, much like Kotlin was designed to replace Java, it is the official language for its respective OS. Its main focus is on speed, expressiveness and safety while providing interoperability with C and C++.
-According to the aforementioned Stack Overflow Developer Survey\cite{StackOverflow2024}, Swift is even more admired amongst developers with 63.3\% admiration index, while virtually obliterating Objective-C with its 26.3\%.
+Swift\footnote{https://www.swift.org/} for iOS is what Kotlin is for Android. Developed by Apple, designed to replace Objective-C, much like Kotlin was designed to replace Java, it is the official language for its respective \gls{os}. Its main focus is on speed, expressiveness and safety while providing interoperability with C and C++.
+According to the aforementioned Stack Overflow Developer Survey \cite{StackOverflow2024}, Swift is even more admired amongst developers with 63.3\% admiration index, while virtually obliterating Objective-C with its 26.3\%.
 
-In the technology stack, similarly to the Android ecosystem, Apple SDK provides the above-OS layer, and SwiftUI is the counterpart to Jetpack Compose. 
+In the technology stack, similarly to the Android ecosystem, Apple \gls{sdk} provides the above-\gls{os} layer, and SwiftUI is the counterpart to Jetpack Compose. 
 
-Talking about comparisons between Kotlin and Swift, performance is the first that might come to mind. According to a set of benchmarks\footnote{https://programming-language-benchmarks.vercel.app/swift-vs-kotlin}, Kotlin seems to generally complete tasks faster when coupled with JVM (Java Virtual Machine). There are other technical differences such as Kotlin's JVM-powered Garbage Collection Approach (GCA) versus Swift's Automatic References Counting (ARC) for memory management\cite{KotlinSwift} and other caveats, yet there is not much sense in such comparisons as the languages are designed for completely different environments. 
+Talking about comparisons between Kotlin and Swift, performance is the first that might come to mind. According to a set of benchmarks\footnote{https://programming-language-benchmarks.vercel.app/swift-vs-kotlin}, Kotlin seems to generally complete tasks faster when coupled with \gls{jvm}. There are other technical differences such as Kotlin's JVM-powered Garbage Collection Approach versus Swift's Automatic References Counting for memory management \cite{KotlinSwift} and other caveats, yet there is not much sense in such comparisons as the languages are designed for completely different environments. 
 
 There is one direct comparison, however, that is to be made - the syntax of the languages, revealing their expressiveness. Two code snippets of a simple class follow, the former in Swift and the latter in Kotlin. As expressiveness is subjective, it is up to the reader to decide the superior one.
 
@@ -318,23 +349,23 @@ class Pet(
 \subsection{Cross-platform approaches}
 As has been highlighted in the last section, one of the main drawbacks of the native approaches is that when multiple operating systems must be supported, the same functionality has to be implemented in multiple codebases. That is a major reason not to elect them as the ideal solution --- and that is where multiplatform approaches come into play. There are two main options on the market to choose --- Flutter or React Native.
 
-A layer of isolation between the application and the OS is introduced that abstracts the OS-specific differences such as system APIs or other SDK functionality --- which carries with it its pros and cons.
+A layer of isolation between the application and the \gls{os} is introduced that abstracts the \gls{os}-specific differences such as system APIs or other \gls{sdk} functionality --- which carries with it its pros and cons.
 \subsubsection{Advantages}
-The most significant advantage is having a single codebase, which reduces costs dramatically. The layer of abstraction over the OS ensures that no matter the specificity of the OS, there will be common functionality that is expected to work on all of them. This layer communicates directly with the OS itself, so harware availability, like access to camera, filesystem, or sensors, is still supported.
+The most significant advantage is having a single codebase, which reduces costs dramatically. The layer of abstraction over the \gls{os} ensures that no matter the specificity of the \gls{os}, there will be common functionality that is expected to work on all of them. This layer communicates directly with the \gls{os} itself, so harware availability, like access to camera, filesystem, or sensors, is still supported.
 \subsubsection{Disadvantages}
-Despite this approach solving the biggest problems with native solutions, it is far from perfect. According to research done by \citefullauthor{NativeVsMultiplatform}\cite{NativeVsMultiplatform}, Flutter and especially React Native have poorer performance when compared to their native counterparts. 
+Despite this approach solving the biggest problems with native solutions, it is far from perfect. According to research done by Ihor Demedyuk and Nazar Tsybulskyi \cite{NativeVsMultiplatform}, Flutter and especially React Native have poorer performance when compared to their native counterparts. 
 
-The abstraction over more operating systems also means the control over specific functionality may not be so precise. For example, there might be some camera controls or sensors available only on one OS that may get dropped during the abstraction or must be handled with platform-specific code. New features may also come with a delay as they have to be layered over first instead of just implementing the system API in Kotlin or Swift. 
+The abstraction over more operating systems also means the control over specific functionality may not be so precise. For example, there might be some camera controls or sensors available only on one \gls{os} that may get dropped during the abstraction or must be handled with platform-specific code. New features may also come with a delay as they have to be layered over first instead of just implementing the system \gls{api} in Kotlin or Swift. 
 
 Also, the app still needs to be distributed over multiple system app stores, which may cause delay in delivering new versions of the software.
 \subsubsection{Flutter}
-Flutter\footnote{https://flutter.dev/} is a framework developed by Google that can be compiled to native code and be used on Android, iOS, desktop or web\cite{FlutterFAQ}. It uses its own rendering engine developed with Skia (a 2D rendering engine) and Impeller (iOS rendering engine), which means that the UI will be uniform on all platforms regardless of the platform-specific UI or animations. While that may improve brand consistency, it may suffer from OS inconsistencies. 
+Flutter\footnote{https://flutter.dev/} is a framework developed by Google that can be compiled to native code and be used on Android, iOS, desktop or web \cite{FlutterFAQ}. It uses its own rendering engine developed with Skia (a 2D rendering engine) and Impeller (iOS rendering engine), which means that the \gls{ui} will be uniform on all platforms regardless of the platform-specific \gls{ui} or animations. While that may improve brand consistency, it may suffer from \gls{os} inconsistencies. 
 
-Flutter uses Dart\footnote{https://dart.dev/} as its programming language. Developed by Google, Dart is not a broadly used language --- in the 2024 Stack Overflow Developer Survey\cite{StackOverflow2024}, it reached only 6\% in popularity and 6.2\% in desirability. Its admirability index is not anything special either with the score of 55\%. It is a strongly typed, object oriented language that can be compiled to machine code, JavaScript, or WebAssembly.
+Flutter uses Dart\footnote{https://dart.dev/} as its programming language. Developed by Google, Dart is not a broadly used language --- in the 2024 Stack Overflow Developer Survey \cite{StackOverflow2024}, it reached only 6\% in popularity and 6.2\% in desirability. Its admirability index is not anything special either with the score of 55\%. It is a strongly typed, object oriented language that can be compiled to machine code, JavaScript, or WebAssembly.
 
 In the aforementioned performance benchmark, Flutter achieves significantly higher performance in intensive tests. If performance is an important factor, but native approach is not to be considered, Flutter is the better option.
 
-Flutter uses a tree-like widget structure for its UI --- a widget is a single building block for any UI element. It resembles native-like syntax, meaning Kotlin or Swift developers should find it approachable. A short code snippet follows that illustrates the widget declaration --- a simple clickable User Card that displays the user's name and profile picture; clicking it navigates the user to the user screen.
+Flutter uses a tree-like widget structure for its \gls{ui} --- a widget is a single building block for any \gls{ui} element. It resembles native-like syntax, meaning Kotlin or Swift developers should find it approachable. A short code snippet follows that illustrates the widget declaration --- a simple clickable User Card that displays the user's name and profile picture; clicking it navigates the user to the user screen.
 
 \begin{lstlisting}[language=java, caption={Flutter example --- User Card}]
 class UserCard extends StatelessWidget {
@@ -361,13 +392,13 @@ class UserCard extends StatelessWidget {
 \end{lstlisting}
 
 \subsubsection{React Native}
-React Native\footnote{https://reactnative.dev/} is a cross-platform framework developed by Meta that can be used to develop mobile applications for both iOS and Android. It uses JavaScript (JS) or TypeScript (TS) as its programming language. This is one of the biggest advantages over Flutter as those languages are very popular, meaning there is a huge developer base and an abundance of tutorials, guides and forum pages to help the developer when encountering an issue. 
+React Native\footnote{https://reactnative.dev/} is a cross-platform framework developed by Meta that can be used to develop mobile applications for both iOS and Android. It uses JavaScript or TypeScript  as its programming language. This is one of the biggest advantages over Flutter as those languages are very popular, meaning there is a huge developer base and an abundance of tutorials, guides and forum pages to help the developer when encountering an issue. 
 
-Specifically, according to the Stack Overflow 2024 Developer Survey\cite{StackOverflow2024}, Javascript is the most popular language with 62.3\% popularity while TypeScript is fifth overall with 38.5\% populartiy. They are also desired (39.8\% --- second place overall --- for JS and 33.8\% --- fifth place overall --- for TS) and TypeScript is also admired with 69.5\% of admirability (JavaScript falls short at 58.3\%).
+Specifically, according to the Stack Overflow 2024 Developer Survey \cite{StackOverflow2024}, Javascript is the most popular language with 62.3\% popularity while TypeScript is fifth overall with 38.5\% populartiy. They are also desired (39.8\% --- second place overall --- for \gls{js} and 33.8\% --- fifth place overall --- for \gls{ts}) and TypeScript is also admired with 69.5\% of admirability (JavaScript falls short at 58.3\%).
 
 The JavaScript/TypeScript popularity also means there is a vast universe of third party libraries developed for them, meaning that when in need of a specific library, e.g. a barcode scanner, there is a good chance someone has built that library and it can be used in the project as a plug-and-play component.
 
-React Native does not have a custom rendering engine like Flutter does, its code is rendered as native UI elements. This connection between the JavaScript and the native world is possible thanks to a ``bridge''\cite{ReactNative}. This bridge can also be used to write platform-specific native code, for example in Kotlin. This unique feature allows React Native applications to overcome the abstraction layer when needed, which may be very powerful.
+React Native does not have a custom rendering engine like Flutter does, its code is rendered as native \gls{ui} elements. This connection between the JavaScript and the native world is possible thanks to a ``bridge'' \cite{ReactNative}. This bridge can also be used to write platform-specific native code, for example in Kotlin. This unique feature allows React Native applications to overcome the abstraction layer when needed, which may be very powerful.
 
 React Native uses \textit{components} as building blocks, much like Flutter uses widgets. They, much like in React, are JSX/TSX functions, therefore written in markup style. To illustrate the syntax difference compared to Flutter, a JSX component of a User Card follows:
 
@@ -393,15 +424,15 @@ export default function UserCard({ user }) {
 }
 \end{lstlisting}
 
-\subsection{React PWA}
-React.js\footnote{https://react.dev/} is a powerful JavaScript frontend library/framework used for building modern user interfaces. Developed by Facebook/Meta and published in 2013\cite{ReactVersions}, it is by far the most popular frontend framework at 39.5\%, followed by Next.js\footnote{https://nextjs.org/} at 17.9\%, which is a web framework built on top of React. It is also the most desired at 33.4\% by a considerable margin and is reasonably admired at 62.2\%, according to the Stack Overflow Developer Survey 2024\cite{StackOverflow2024}. 
+\subsection{React \gls{pwa}}
+React.js\footnote{https://react.dev/} is a powerful JavaScript frontend library/framework used for building modern user interfaces. Developed by Facebook/Meta and published in 2013 \cite{ReactVersions}, it is by far the most popular frontend framework at 39.5\%, followed by Next.js\footnote{https://nextjs.org/} at 17.9\%, which is a web framework built on top of React. It is also the most desired at 33.4\% by a considerable margin and is reasonably admired at 62.2\%, according to the Stack Overflow Developer Survey 2024 \cite{StackOverflow2024}. 
 
 From these numbers, it is safe to say that React is the single most used and important frontend framework on the current market. That means there is a massive amount of packages to be used for development in React and a multitude of guides, forums and other content about the framework which serves as an invaluable source of assistance during development. There is also a remarkable number of React developers on the market.
 
-React uses JavaScript or TypeScript as the programming language (pros and cons of this choice are mentioned in the previous section about React Native), conceptually splitting the UI into singular components written in JSX (or TSX for TypeScript projects) syntax that serves as a JavaScript extension to write markup code --- similar to HTML (Hypertext Markup Language), but enriched with JS elements --- inside of JS functions\cite{jsx}. For styling purposes, pure CSS (Cascading Style Sheets\footnote{https://developer.mozilla.org/en-US/docs/Web/CSS}) or any of its frameworks like Tailwind\footnote{https://tailwindcss.com/} may be used.
+React uses JavaScript or TypeScript as the programming language (pros and cons of this choice are mentioned in the previous section about React Native), conceptually splitting the \gls{ui} into singular components written in JSX (or TSX for TypeScript projects) syntax that serves as a JavaScript extension to write markup code --- similar to \gls{html}, but enriched with \gls{js} elements --- inside of \gls{js} functions \cite{jsx}. For styling purposes, pure \gls{css}\footnote{https://developer.mozilla.org/en-US/docs/Web/CSS} or any of its frameworks like Tailwind\footnote{https://tailwindcss.com/} may be used.
 
 An example of the (by now well-known) User Card follows:
-
+\newpage
 \begin{lstlisting}[language=java, caption={React + Tailwind example --- User Card}]
 export default function UserCard({ user }: Props) {
   const navigate = useNavigate();
@@ -417,29 +448,29 @@ export default function UserCard({ user }: Props) {
 }
 \end{lstlisting}
 
-\subsubsection{PWA}
-A PWA (Progressive Web Application)\footnote{https://web.dev/explore/progressive-web-apps} is a web application built as a capable standalone installable application enhanced with modern browser system APIs and offline capabilities\cite{pwaInfo}. 
+\subsubsection{\gls{pwa}}
+A \gls{pwa}\footnote{https://web.dev/explore/progressive-web-apps} is a web application built as a capable standalone installable application enhanced with modern browser system APIs and offline capabilities \cite{pwaInfo}. 
 
-A PWA can be installed straight from the browser through a context menu, meaning there is no need to handle app store publication or different builds for different platforms. There is only a singular codebase and a singular deployment --- the ``browser one'' --- that also provides the option to install the application on any platform, transforming it to a natively-feeling one. The updates are also managed fully in the application and are distributed from the server to all clients. That brings the option for the developer to always automatically update the client as soon as an update arrives, eliminating the risk of users using out-of-date applictation versions.
+A \gls{pwa} can be installed straight from the browser through a context menu, meaning there is no need to handle app store publication or different builds for different platforms. There is only a singular codebase and a singular deployment --- the ``browser one'' --- that also provides the option to install the application on any platform, transforming it to a natively-feeling one. The updates are also managed fully in the application and are distributed from the server to all clients. That brings the option for the developer to always automatically update the client as soon as an update arrives, eliminating the risk of users using out-of-date applictation versions.
 
 If needed, there is also a packaging option called PWABuilder\footnote{https://pwabuilder.com/} that can produce a application package that can be distributed to several app stores like Google Play Store, but using that option means losing the updating advantages described in the previous paragraph.
 
-An installed PWA can be pinned to a mobile home screen, PC desktop, or a taskbar. It can be managed inside the OS, set up to use push notifications, registered to accept content from other system applications, set up to override browser keyboard shortcuts, or chosen to be the default application for opening files of certain types.
+An installed \gls{pwa} can be pinned to a mobile home screen, PC desktop, or a taskbar. It can be managed inside the \gls{os}, set up to use push notifications, registered to accept content from other system applications, set up to override browser keyboard shortcuts, or chosen to be the default application for opening files of certain types.
 
-A PWA also makes web applications offline-ready. It has become a user-expected standard in the last couple of years for applications to provide some form of content even when offline. In the traditional Web Application context, that is not possible --- the web application frontend itself is provided to the browser from the server, and when the request to load a page fails (because of network issues or server unavailability), the browser just displays an error page. A PWA enables advanced caching strategies handled by service workers.
+A \gls{pwa} also makes web applications offline-ready. It has become a user-expected standard in the last couple of years for applications to provide some form of content even when offline. In the traditional Web Application context, that is not possible --- the web application frontend itself is provided to the browser from the server, and when the request to load a page fails (because of network issues or server unavailability), the browser just displays an error page. A \gls{pwa} enables advanced caching strategies handled by service workers.
 
-A Service Worker is a middleware residing in the browser that can act as a network proxy between the client and the server\cite{serviceWorkers}. Being a browser API running in the background, it practically enables offline mode or push notifications. The service worker has a developer-specified scope of network requests that it handles. Depending on the strategy chosen for each section of endpoints, it can handle them accordingly --- serving fresh or cached, serving a custom-made data, or, for example, serving from cahe and fetching a fresh version of data in the background and updating the cache. 
+A Service Worker is a middleware residing in the browser that can act as a network proxy between the client and the server \cite{serviceWorkers}. Being a browser \gls{api} running in the background, it practically enables offline mode or push notifications. The service worker has a developer-specified scope of network requests that it handles. Depending on the strategy chosen for each section of endpoints, it can handle them accordingly --- serving fresh or cached, serving a custom-made data, or, for example, serving from cahe and fetching a fresh version of data in the background and updating the cache. 
 
 \subsubsection{Advantages and Disadvantages}
-When weighing pros and cons of progressive web applications, one can view it is the polar opposite of the native approach --- while the native solution is as close to the hardware and OS, this approach is as abstracted as possible, layering over the OS with not only a cross-platform layer over the system APIs like Flutter does, but a whole browser layer over it as well. 
+When weighing pros and cons of progressive web applications, one can view it is the polar opposite of the native approach --- while the native solution is as close to the hardware and \gls{os}, this approach is as abstracted as possible, layering over the \gls{os} with not only a cross-platform layer over the system APIs like Flutter does, but a whole browser layer over it as well. 
 
-There is a certain level of advantages coming from this fact --- with the solution practically detached from the OS, the developer only needs to care about the browser capabilities. Features like camera support include the enumeration of front or back facing cameras, abstracting from PC webcams to multiple lenses on smartphones. Another example may be a file picker, handled by the browser, bringing up the correct dialog or window on any system and handling the file upload itself.
+There is a certain level of advantages coming from this fact --- with the solution practically detached from the \gls{os}, the developer only needs to care about the browser capabilities. Features like camera support include the enumeration of front or back facing cameras, abstracting from PC webcams to multiple lenses on smartphones. Another example may be a file picker, handled by the browser, bringing up the correct dialog or window on any system and handling the file upload itself.
 
-The browser abstraction layer also means that the PWA can only do things that the underlying browser can --- opposite to native, the browser cannot influence the battery management, reach sensors like fingerprint sensor, WiFi details or any health-related sensor data. 
+The browser abstraction layer also means that the \gls{pwa} can only do things that the underlying browser can --- opposite to native, the browser cannot influence the battery management, reach sensors like fingerprint sensor, WiFi details or any health-related sensor data. 
 
-The extent to which other system data or functionality is available is also restricted. Bringing up the camera once again, the in-browser camera capabilities are limited by the WebRTC\footnote{https://webrtc.org/} protocol stack --- the camera quality is typically heavily reduced and its raw output is not processed by the OS like it would be in the native camera applictation on the device. That may lead to user frustration --- why is the quality so much worse compared to taking the photo outside of the application when the harware is the same? 
+The extent to which other system data or functionality is available is also restricted. Bringing up the camera once again, the in-browser camera capabilities are limited by the WebRTC\footnote{https://webrtc.org/} protocol stack --- the camera quality is typically heavily reduced and its raw output is not processed by the \gls{os} like it would be in the native camera applictation on the device. That may lead to user frustration --- why is the quality so much worse compared to taking the photo outside of the application when the harware is the same? 
 
-All the abstraction over the OS also means that the performance will be poorer when compared to native solutions when doing resource-intensive tasks. Yet the PWA may try to tackle this using smart caching strategies.
+All the abstraction over the \gls{os} also means that the performance will be poorer when compared to native solutions when doing resource-intensive tasks. Yet the \gls{pwa} may try to tackle this using smart caching strategies.
 
 \subsection{Conclusion}
 There are a few clear takeaways from the selected approaches to be taken when choosing the main application framework:
@@ -447,8 +478,8 @@ There are a few clear takeaways from the selected approaches to be taken when ch
   \item When performance in resource-intensive tasks is crucial, there is no better solution than native. Yet for ``normal'' usage, which is the expected one when talking about the context of enterprise mobile applications, the user may not feel the speed difference.
   \item When the application's focus is on utilizing the device's hardware capabilities like NFC or heart-rate sensor, the correct choice is also to go native.
   \item If possible and in accordance with the functional requirements, when needing to support more operation systems, going cross-platform may save a lot of resources thanks to only maintaining a single codebase.
-  \item When there is an option to go the PWA route, it should always be considered as it may be the cheapest and smoothest one thanks to a large developer base and a plethora of libraries to be used to enhance the application.
-  \item PWA is the easiest to distribute, fastest to install and most consistent over multiple platforms. But being the most abstracted one, precise access to various system resources is restricted.
+  \item When there is an option to go the \gls{pwa} route, it should always be considered as it may be the cheapest and smoothest one thanks to a large developer base and a plethora of libraries to be used to enhance the application.
+  \item \gls{pwa} is the easiest to distribute, fastest to install and most consistent over multiple platforms. But being the most abstracted one, precise access to various system resources is restricted.
 \end{enumerate}
 \section{Local data management}
 As chapter one explains, keeping track of local data and its changes in offline mode is a crucial issue to tackle. There are two magnitudes to be chosen for resolving this problem --- faking just the server or also faking a database.
@@ -456,14 +487,14 @@ As chapter one explains, keeping track of local data and its changes in offline 
 The first option is to build a custom proxy-like layer serving as a form of middleware between the client and the server. This layer intercepts all the mutating requests. The data getting (GET) requests are handled separately, for example in the form of cache. The POST, PUT, PATCH, and DELETE requests are stored as pending operations and a success state (200, 201, etc.) is returned to the client as if the request was successfully processed by the server. Later all the pending operations are synchronized one by one, in order, with the server. 
 
 \subsubsection{Client validation}
-This \textit{optimistic} UI update strategy also means that the data validation must always be done on the client and data consistency must be enforced there --- there is no server to handle it, the client needs to ensure that the requests have the highest possible probability of succeding once they are actually transmitted throught the network and processed by the server. 
+This \textit{optimistic} \gls{ui} update strategy also means that the data validation must always be done on the client and data consistency must be enforced there --- there is no server to handle it, the client needs to ensure that the requests have the highest possible probability of succeding once they are actually transmitted throught the network and processed by the server. 
 
 Importance of this principle grows with any inter-endpoint or stateful dependencies. As an example, let's imagine an entity with several states and a lot of attributes. In each state, a certain subset of attributes is displayed to be filled. A change of state of an instance requires the instance (or its related/dependent entitites) to be filled with a valid values for the currently displayed set of attributes. The state change opens another subset of data to be filled, depending on the values of the previously submitted values. 
 
 That is a \textit{dependency path} --- a sequence of unique steps dependent on each other. If the user fills the first step incorrectly and the client fails to enforce the validity to the same extent that the server eventually will, each subsequent update to this instance must be thrown away during synchronization. As the validity of the first step is compromised, it is effectively compromising all the following steps --- the first state change was not valid and therefore all subsequent dependent actions will not be either.
 
 \subsubsection{Incorporating mutations into local data}
-Assuming the validation is handled correctly, there is still one aspect that needs to be talked about --- displaying the mutated data correctly. Earlier in this section, it was stated that the cached version of data is used for presentation. That fails as soon as there is a need to display mutated (updated) data in the UI --- the pending operations need to be incorporated into the data. 
+Assuming the validation is handled correctly, there is still one aspect that needs to be talked about --- displaying the mutated data correctly. Earlier in this section, it was stated that the cached version of data is used for presentation. That fails as soon as there is a need to display mutated (updated) data in the \gls{ui} --- the pending operations need to be incorporated into the data. 
 
 The solution is to proxy also the GET requests and include any pending changes into the data presented by the client. As each entity is identified by its name (and therefore a specific endpoint group) and every instance is identified by its ID, it effectively means fetching the instance data from the cache and searching through the pending mutations to filter those that affect this very instance --- in other words, searching for a match in endpoint name and instance ID. All found mutations are then applied to the fetched (cached) data inside the middleware and presented to the client.
 
@@ -479,7 +510,7 @@ The second option is to generate the ID on POST on the client and later during t
 Generally, if the vast majority of functionality includes creating new instances and potenitially subsequently mutating them, this approach is not ideal and may not scale well; but when the majority is about stateful and dependent mutations, it has the upper hand.
 
 \subsection{Local database}
-The second, more robust, scalable, but also complex and demanding solution is to manage a local database on the client. The support for local databases is present in all frameworks mentioned in this thesis --- from the Room database in Kotlin\footnote{https://developer.android.com/training/data-storage/room} to the browser's IndexedDB for PWAs\footnote{https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB\_API}. 
+The second, more robust, scalable, but also complex and demanding solution is to manage a local database on the client. The support for local databases is present in all frameworks mentioned in this thesis --- from the Room database in Kotlin\footnote{https://developer.android.com/training/data-storage/room} to the browser's IndexedDB for PWAs\footnote{https://developer.mozilla.org/en-US/docs/Web/\gls{api}/IndexedDB\_API}. 
 
 The local database schema needs to closely mirror the server one and must implement the same integrity constraints, keys, or unique constraints to mitigate synchronization conflicts. The validation needs on the client are also as relevant in this approach as in the last one. The relevant data is fetched and stored to the local database while online and then, when offline, the application only works with the local database to access and mutate data, no requests are attempted. Relevant instances may be retrieved, created, updated or deleted from the database.
 
@@ -534,23 +565,23 @@ There is then the question about any dependent instances\footnote{Dependent inst
 There is one last remark to be made about this approach: the server must notify the client about any duplicates being created and the ID mapping of originals and duplicates. The client then must respect this mapping in all following requests to affected instances.
 
 \subsection{Mitigation by atribute timestamping}
-In some cases, the best option may be to timestamp the last update of every attribute of an entity. While effectively doubling the attribute count, it is guaranteed that only the latest update of every attribute is persisted. For the backend, it means updating per attribute while always checking which value is the latest. For the frontend, it usually means managing the local data in a mirrored local database that also reflects this procedure, and also implementing an attribute-precise timestamp control in any forms in the UI.
+In some cases, the best option may be to timestamp the last update of every attribute of an entity. While effectively doubling the attribute count, it is guaranteed that only the latest update of every attribute is persisted. For the backend, it means updating per attribute while always checking which value is the latest. For the frontend, it usually means managing the local data in a mirrored local database that also reflects this procedure, and also implementing an attribute-precise timestamp control in any forms in the \gls{ui}.
 
-This method of conflict resolution is often referenced as ``Last Write Wins'' and there are database systems specifically designed to utilize this strategy like Apache Cassandra\cite{cassandra}, a distributed NoSQL database that timestamps every attribute. 
+This method of conflict resolution is often referenced as ``Last Write Wins'' and there are database systems specifically designed to utilize this strategy like Apache Cassandra \cite{cassandra}, a distributed NoSQL database that timestamps every attribute. 
 
 \subsection{Advanced synchronization conflicts resolution concepts}
 There are countless ways to design a custom solution finetuned to specific business requirements. The following concepts can also be employed when creating a more specialized approach:
 
-\subsubsection{CRDT}
-A CRDT (Conflict-free Replicated Data Type) is a data structure that ensures eventual consistency between multiple nodes of a distributed peer-to-peer system without a central node, even when updates occur concurrently.
+\subsubsection{\gls{crdt}}
+A \gls{crdt} is a data structure that ensures eventual consistency between multiple nodes of a distributed peer-to-peer system without a central node, even when updates occur concurrently.
 
-As Shapiro et al. (2011)\cite{crdt1} explain, each node can independently modify its local copy and propagate the changes through the network, and the CRDT's merge function guarantees that all nodes eventually converge to the same final state once all updates are propagated. It is however essetial to be able to create a merge strategy for each attribute. A merge strategy defines how conflicting updates are resolved in a deterministic way. It strongly depends on the attribute type: sometimes it is taking the latest timestamp, sometimes merging sets, sometimes combining counters, etc.
+As Shapiro et al. (2011) \cite{crdt1} explain, each node can independently modify its local copy and propagate the changes through the network, and the CRDT's merge function guarantees that all nodes eventually converge to the same final state once all updates are propagated. It is however essetial to be able to create a merge strategy for each attribute. A merge strategy defines how conflicting updates are resolved in a deterministic way. It strongly depends on the attribute type: sometimes it is taking the latest timestamp, sometimes merging sets, sometimes combining counters, etc.
 
 The context od this thesis is somewhat related --- there is a central node (the server), but each client may have their truth and there needs to be a strategy to determine what is the final shared truth per attribute.
 
 In practical use, this can be represented by a key-value structure where each client (key) sends its own version of a value, optionally tagged with timestamp or version. The server holds all the key-value pairs and figures out a final value for each attribute that is then propagated to all clients. 
 
-In reality, there may be data types that cannot have a simple deterministic strategy to merge multiple versions. In that case, the UI can display all the key-value pairs for an attribute to the instance owner and let them manually merge the conflict and choose a single value that will be stored instead of all the conflicting items.
+In reality, there may be data types that cannot have a simple deterministic strategy to merge multiple versions. In that case, the \gls{ui} can display all the key-value pairs for an attribute to the instance owner and let them manually merge the conflict and choose a single value that will be stored instead of all the conflicting items.
 
 \subsubsection{GIT}
 Talking about resolving merge conflicts should ring a developer's bell --- there is a versioning system that handles merging data from multiple users and entails resolving merge conflicts: GIT. Its core concepts may be transformed to tackle issues in the context of this thesis. 
@@ -562,29 +593,31 @@ There is one remark that has yet to be made concerning the aforementioned approa
 
 \chapter{Case study}
 To illustrate the real designing process of an offline-enabled application and all the architectural decisions based on the guide from chapter two, in this chapter will be documented a case study of a real-world solution.
-\section{Functional and non-functional requirements}
+\section{Functional requirements}
+The project in question is an application for technicians that maintain equipment in terrain. They receive orders with lists of devices they have to check or maintain. The technician may report malfunctions, gather data or repair previously reported malfunctions. Due to some areas being out of signal, the application has to be able to operate in offline mode.
+
 \section{Architecture, technology stack}
 This application needs to be supported both on mobile devices with Android or iOS and on Windows devices. As in the majority of enterprise applications, there is no need for resource-intensive calculations, no performance-critical tasks and there is minimal operating system integration --- the only functional requirement in this area that needs to be fulfilled is camera support.
 
-Therefore, the only options left are React PWA and Flutter. In this case, the browser-first PWA option won as it is easier to integrate into a web ecosystem, can be consistently used on any device equipped with a browser, does not have to be installed, and quite importantly, the updates are fully managed by the application. That means eliminating any version inconsistencies and therefore potential issues with a user base that tends to be reluctant to update applications unless it is forced to.
+Therefore, the only options left are React \gls{pwa} and Flutter. In this case, the browser-first \gls{pwa} option won as it is easier to integrate into a web ecosystem, can be consistently used on any device equipped with a browser, does not have to be installed, and quite importantly, the updates are fully managed by the application. That means eliminating any version inconsistencies and therefore potential issues with a user base that tends to be reluctant to update applications unless it is forced to.
 
-As the programming language, TypeScript\footnote{https://www.typescriptlang.org/} was chosen for type safety to help minimize runtime errors. TypeScript alows using static typing, generics or interfaces. Vite\footnote{https://vite.dev/} was chosen as the build tool for its speed and features. On top of the React-TS PWA platform, a reliable and powerful set of libraries was chosen to ensure stability and extensibility. To mention a few of the most prominent: 
+As the programming language, TypeScript\footnote{https://www.typescriptlang.org/} was chosen for type safety to help minimize runtime errors. TypeScript alows using static typing, generics or interfaces. Vite\footnote{https://vite.dev/} was chosen as the build tool for its speed and features. On top of the React-\gls{ts} \gls{pwa} platform, a reliable and powerful set of libraries was chosen to ensure stability and extensibility. To mention a few of the most prominent: 
 \begin{enumerate}
   \item Tanstack Query\footnote{https://tanstack.com/query/latest} is a library for request, state, and asynchronous data management --- primarily used for consistent, state-aware handling of fetching and mutating any data.
-  \item Axios HTTP\footnote{https://axios-http.com/} is a promise-based HTTP client with concise syntax and powerful tools like interceptors or proxies.
-  \item React Hook Form\footnote{https://react-hook-form.com/} is a modern, fully featured, UX oriented, and flexible library to be used for form handling in React apps with state management and broad validation support.
+  \item Axios \gls{http}\footnote{https://axios-http.com/} is a promise-based \gls{http} client with concise syntax and powerful tools like interceptors or proxies.
+  \item React Hook Form\footnote{https://react-hook-form.com/} is a modern, fully featured, \gls{ux} oriented, and flexible library to be used for form handling in React apps with state management and broad validation support.
   \item Zod\footnote{https://zod.dev/} is a TypeScript-first validation library that enabled building complex validation schemas with the option to infer types from the schemas to use. It is fully compatible with React Hook Form.
-  \item Tailwind CSS\footnote{https://tailwindcss.com/} is a concise and expressive CSS framework that is utility based. It minimizes CSS bundle size while providing a fast and powerful way to build UIs.
-  \item ShadCN\footnote{https://ui.shadcn.com/} is a highly customizable and extensible component library that is based on Tailwind CSS. 
+  \item Tailwind \gls{css}\footnote{https://tailwindcss.com/} is a concise and expressive \gls{css} framework that is utility based. It minimizes \gls{css} bundle size while providing a fast and powerful way to build UIs.
+  \item ShadCN\footnote{https://ui.shadcn.com/} is a highly customizable and extensible component library that is based on Tailwind \gls{css}. 
 \end{enumerate}
 \section{Service Worker}
 What a service worker is has been explained in detail in chapter two. Here the focus is on the actual implementation with emphasis on the different strategies to be employed in different scenarios.
 
 \subsection{Workbox + Vite}
 
-Workbox\footnote{https://developer.chrome.com/docs/workbox} is a high-level Service Worker library developed by Google to simplify working with service workers. It provides a set of modules to abstract over the complex service worker API.
+Workbox\footnote{https://developer.chrome.com/docs/workbox} is a high-level Service Worker library developed by Google to simplify working with service workers. It provides a set of modules to abstract over the complex service worker \gls{api}.
 
-Inside of Vite config, there is a manifest for the PWA to be injected into the build. Inside it, things like application name or icon are specified. There is also the reference to the service worker source code file. This file, \texttt{prompt-sw.ts} includes these logical parts: the setup and the caching strategies
+Inside of Vite config, there is a manifest for the \gls{pwa} to be injected into the build. Inside it, things like application name or icon are specified. There is also the reference to the service worker source code file. This file, \texttt{prompt-sw.ts} includes these logical parts: the setup and the caching strategies
 
 \begin{lstlisting}[language=java,caption={Setup}]
 import {
@@ -667,15 +700,15 @@ registerRoute(stylesRoute);
 \end{lstlisting}
 
 \subsection{Workbox strategies}
-As can be seen in the provided example, there are different caches and caching strategies used for different offline assets. For API requests, the Network-First strategy is used. That means, whenever there is access to the network and a request is intercepted by the service worker, fresh data is always fetched and if applicable, stored in the \texttt{api} cache\cite{strategies}. Only when the server is not reachable, cached data is served. This ensures that whenever possible, the latest data is fetched and presented.
+As can be seen in the provided example, there are different caches and caching strategies used for different offline assets. For \gls{api} requests, the Network-First strategy is used. That means, whenever there is access to the network and a request is intercepted by the service worker, fresh data is always fetched and if applicable, stored in the \texttt{api} cache \cite{strategies}. Only when the server is not reachable, cached data is served. This ensures that whenever possible, the latest data is fetched and presented.
 
-Second strategy used, Cache-First, is utilized for styles and scripts --- in other words, parts of the source code of the application itself. The strategy, as the name suggests, fetches the data straight from the cache and requests the server only if the data is not present in the cache\cite{strategies}. This approach is used because on every applictation update and therefore service worker registration, the cache is cleaned by the \texttt{cleanupOutdatedCaches} function. Therefore, the aforementioned resources are cached at the longest until a new application version arrives, which is perfectly fitting for this type of assets --- the cache is, technically, never outdated and loading the data from it is way quicker than fetching it from the server.
+Second strategy used, Cache-First, is utilized for styles and scripts --- in other words, parts of the source code of the application itself. The strategy, as the name suggests, fetches the data straight from the cache and requests the server only if the data is not present in the cache \cite{strategies}. This approach is used because on every applictation update and therefore service worker registration, the cache is cleaned by the \texttt{cleanupOutdatedCaches} function. Therefore, the aforementioned resources are cached at the longest until a new application version arrives, which is perfectly fitting for this type of assets --- the cache is, technically, never outdated and loading the data from it is way quicker than fetching it from the server.
 
-The last of the used strategies is called Stale-While-Revalidate. It fetches the data from the cache if possible and returns them to the client, while fetching a fresh version from the server and upon receiving a response, it updates the cache\cite{strategies}. The data might not be fresh everytime, but they are \textit{eventually consistent}, while prioritizing load times. The strategy is used for images, as those may usually take a while to load and their freshness is not critical.
+The last of the used strategies is called Stale-While-Revalidate. It fetches the data from the cache if possible and returns them to the client, while fetching a fresh version from the server and upon receiving a response, it updates the cache \cite{strategies}. The data might not be fresh everytime, but they are \textit{eventually consistent}, while prioritizing load times. The strategy is used for images, as those may usually take a while to load and their freshness is not critical.
 
-\subsection{Vite PWA}
+\subsection{Vite \gls{pwa}}
 
-The Vite PWA plugin\footnote{https://vite-pwa-org.netlify.app/} builds upon the Workbox to provide ready to use React hooks like \texttt{useRegisterSW} that handles registering and updating the application. In this case, as has been foreshadowed earlier, the updates are forced upon the user, as illustrated by the \texttt{useEffect} hook used for updating the service worker as soon as an update is detected. The following snippet is simplified to convey the main point, its full content is attached as an electronic attachment in the file \texttt{reload-prompt.tsx}.
+The Vite \gls{pwa} plugin\footnote{https://vite-pwa-org.netlify.app/} builds upon the Workbox to provide ready to use React hooks like \texttt{useRegisterSW} that handles registering and updating the application. In this case, as has been foreshadowed earlier, the updates are forced upon the user, as illustrated by the \texttt{useEffect} hook used for updating the service worker as soon as an update is detected. The following snippet is simplified to convey the main point, its full content is attached as an electronic attachment in the file \texttt{reload-prompt.tsx}.
 
 \begin{lstlisting}[language=java,caption={Service worker registration and updates management}]
 import { useRegisterSW } from "virtual:pwa-register/react";
@@ -732,7 +765,7 @@ For those reasons, the intercepting approach was chosen for managing local data.
 
 To answer the question why the hybrid approach was not chosed as it is more robust, the main point is that the requirements towards considerable offline independence are not present. The application will not remain offline for more than a work shift and the typical scenario is spending only a couple of hours offline and then coming back online. The application is not request-intensive and managing a mirrored local database under the middleware would, in this case, be excessive.
 \subsection{Axios Interceptor}
-The intercepting middleware is implemented as an Axios interceptor. Axios, being the HTTP client, offers an option to set up two interceptors, one for requests and one for responses. Each interceptor has a processing function that may modify the payload, react to it in a custom way or even capture it and not propagate further\cite{axios_interceptors}. For response interceptor, it may mean that every response with an error code is displayed as an error snackbar in one place intead of handling it per request. For request interceptor, it may be used for capturing offline requests.
+The intercepting middleware is implemented as an Axios interceptor. Axios, being the \gls{http} client, offers an option to set up two interceptors, one for requests and one for responses. Each interceptor has a processing function that may modify the payload, react to it in a custom way or even capture it and not propagate further \cite{axios_interceptors}. For response interceptor, it may mean that every response with an error code is displayed as an error snackbar in one place intead of handling it per request. For request interceptor, it may be used for capturing offline requests.
 
 The request interceptor used in this application is set up in the following way\footnote{The relevant code is in \texttt{src/api/axios-config.ts}.}: 
 \begin{enumerate}
@@ -741,7 +774,7 @@ The request interceptor used in this application is set up in the following way\
   \item If not, it enqueues the request into the request FIFO and aborts the original request. For this purpose, in the response interceptor, there is a filter for aborted responses --- they are not to be propagated into the app as they have been aborted by the request interceptor.
 \end{enumerate} 
 
-The request FIFO itself is persisted in the browser's localStorage in order to survive app reloads\footnote{Its code is in \texttt{src/offline/request-fifo.ts}}. It stores the so-called \textit{Axios configs} --- objects storing all the relevant attributes, data, metadata, and options for a request, like url, method, request body, parameters, headers, flags, transformers or proxies\cite{axios_req_config}. Later, when online, the config can just be passed to Axios, which composes the request and transmits it.
+The request FIFO itself is persisted in the browser's localStorage in order to survive app reloads\footnote{Its code is in \texttt{src/offline/request-fifo.ts}}. It stores the so-called \textit{Axios configs} --- objects storing all the relevant attributes, data, metadata, and options for a request, like url, method, request body, parameters, headers, flags, transformers or proxies \cite{axios_req_config}. Later, when online, the config can just be passed to Axios, which composes the request and transmits it.
 
 \subsection{Incorporating the staged data}
 When offline, the application fetches data as normal (they are, in fact, served from cache by the service worker), then retrieves staged data from the FIFO, and finally decides how to merge the fetched data with the staged data --- overlaying them, proritizing one over another or any other merging strategy. As an example, let's take the Activity detail. The Activity is fetched from \texttt{/api/activity/<activityId>}, its staged data retrieved by \texttt{getStagedActivityData} from the queue, and the component that renders it, in this case, prioritizes the staged data over the fetched data.
@@ -782,13 +815,34 @@ If a request fails during the synchronization, the user has an option to either 
 TODO screenshoty 
 
 \chapter{Selected issues}
+This chapter highlights specific problems that had to be tackled during the development and testing of the application. The focus is on offline-specific functionality.
 \section{Offline testing}
+Service workers are only enabled on HTTPS connections dute to security reasons \cite{mdn_service_workers}, it is therefore important to have the testing deployment running in a secure environment. Then, when testing, offline mode can be forced in the browser in the Network tab in Developer options in the \textit{Throttling} menu. The offline mode adds a considerable amount of functionality to be tested --- caching every relevant endpoint, storing mutations, incorporating them into the presented data, and the synchronization itself. 
+
+During real life testing of the offline functionality, a need to force offline mode in slow network environments arose --- in areas with unstable connection, the offline mode kept switching on and off and even on slow but stable connection, the server responses took an unpleasant amount of time, which significantly reduced usability. A latency and bandwidth threshold has been set for deciding when offline mode should be enforced. Then, all relevant parts of the application including the service worker query the browser's Navigator \gls{api} for network quality information \cite{mdn_netinfo} and determine if offline should be enabled based on \texttt{downlink} and \texttt{rtt}.
+
 \section{Dependent requests}
-file uploads
--> separate queue
-\section{?}
+One of the main issues with the request queue are dependent requests. A prime example are attachments. The file added by the user neds to first be uploaded to the file server, which returns a unique file ID, and this file reference needs to be uploaded in the body of the attachment endpoint request. Why is this an issue? The second request needs to contain an ID which is unknown at the moment of the request dispatch --- it is to be returned from the file server request. 
+
+There is an option to mock the file server in offline mode and generate a file ID as the response for the file server request. Then, during synchronization, the device must maintain a mapping between the local generated file IDs and those generated by the file server, thus on each file server response store the original and the new ID as a pair. This mapping needs to be queried in every subsequent request containing any file reference and the local ID has to be mapped to the server one. Additionaly, the order of requests must always be file server first, attachment endpoint second; and there must not be any form of parallel synchronization present --- the mapping must be properly updated before the attachment request is dispatched.
+
+The second approach, the one which was chosen and implemented in this project, is to maintain a second request pool, this time particularly for attachment requests. This does not need to be a queue as attachment adding is not order-dependent. It is stored as an array in the indexedDB storage space as it may be quite considerable in size. The application stores these requests separately and with the file content directly as the body --- the file server request is not stored nor created. The requests are abortable (deletable from the synchronizing dialog). 
+
+Then, during the synchronization, the attachments are synchronized before the other requests and the synchronization handler creates two consecutive requests out of every attachment request stored --- the file server request takes the attachment content from the body, and its response is used in the attachment endpoint request itself.
+
+\section{Future work}
+There are certain areas that could be improved in the application --- for example, better error handling in offline request synchronization or better error reporting. There could be an option to allow the user to delete a certain request that has failed multiple times if they believe the following ones could succeed nonetheless.
+
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
+This thesis compared the different approaches to be taken when designing a offline-enabled mobile enterprise application. First, framework choices have been explored, ranging from native options like Kotlin or Swift development environments, through cross-platform approches like React Native or Flutter, to \gls{pwa}s. It has been noted that each solution has their advantages and disadvantages - for example, native has the best performance, while PWAs are very platform-versatile and easy to maintain. 
+
+
+Then, specific offline issues and their solutions have been explored --- data availability, local management, synchronization, or offline security. There are several solutions to be implemented for every issue and the correct one is dependent on the context of the specific application. 
+
+To illustrate this phenomenon, a real-world application based on a set of specific functional requirements has been designed and implemented, while documenting the reasons why certain paths have been taken in the designing process. In particular, it has been implemented as a React \gls{pwa} with Workbox Service Worker caching, Axios Interceptor proxy and an offline request queue.
+
+The result is a comprehensive study on offline-enabled enterprise applications and their architectures, accompanied by an implemented application that demonstrates the discussed conceppts in practice. 
 
 \setcounter{biburllcpenalty}{7000}
 \setcounter{biburlucpenalty}{8000}

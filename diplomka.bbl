@@ -19,6 +19,38 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global/global}
+    \entry{OfflineFirst}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=367896d024e7f02b5450887bb6ff4a4a}{%
+           family={Developer},
+           familyi={D\bibinitperiod},
+           given={Software},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{367896d024e7f02b5450887bb6ff4a4a}
+      \strng{fullhash}{367896d024e7f02b5450887bb6ff4a4a}
+      \strng{fullhashraw}{367896d024e7f02b5450887bb6ff4a4a}
+      \strng{bibnamehash}{367896d024e7f02b5450887bb6ff4a4a}
+      \strng{authorbibnamehash}{367896d024e7f02b5450887bb6ff4a4a}
+      \strng{authornamehash}{367896d024e7f02b5450887bb6ff4a4a}
+      \strng{authorfullhash}{367896d024e7f02b5450887bb6ff4a4a}
+      \strng{authorfullhashraw}{367896d024e7f02b5450887bb6ff4a4a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Medium}
+      \field{month}{8}
+      \field{note}{Accessed: 2025-11-26}
+      \field{title}{Local-First Apps: Why Offline-First is Becoming Essential in 2025 (and How React Native Developers Can Adapt)}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://medium.com/@ssshubham660/local-first-apps-why-offline-first-is-becoming-essential-in-2025-and-how-react-native-developers-f03d5cc39e32
+      \endverb
+      \verb{url}
+      \verb https://medium.com/@ssshubham660/local-first-apps-why-offline-first-is-becoming-essential-in-2025-and-how-react-native-developers-f03d5cc39e32
+      \endverb
+    \endentry
     \entry{nextJsArticle}{article}{}{}
       \name{author}{1}{}{%
         {{hash=1abf626204b6de9eac7c5efb90eb5d16}{%
@@ -35,8 +67,8 @@
       \strng{authornamehash}{1abf626204b6de9eac7c5efb90eb5d16}
       \strng{authorfullhash}{1abf626204b6de9eac7c5efb90eb5d16}
       \strng{authorfullhashraw}{1abf626204b6de9eac7c5efb90eb5d16}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{day}{26}
@@ -99,8 +131,8 @@
       \strng{authornamehash}{a04750013a16e9840786571ebfd1ba02}
       \strng{authorfullhash}{a04750013a16e9840786571ebfd1ba02}
       \strng{authorfullhashraw}{a04750013a16e9840786571ebfd1ba02}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Journal of Physics: Conference Series}
@@ -133,8 +165,8 @@
       \strng{authornamehash}{332241a3ea41ce37df7a26a84b751a0f}
       \strng{authorfullhash}{332241a3ea41ce37df7a26a84b751a0f}
       \strng{authorfullhashraw}{332241a3ea41ce37df7a26a84b751a0f}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{Accessed: 2025-10-20}
@@ -166,8 +198,8 @@
       \strng{authornamehash}{6eca695546d0e8f26415e680910506a1}
       \strng{authorfullhash}{6eca695546d0e8f26415e680910506a1}
       \strng{authorfullhashraw}{6eca695546d0e8f26415e680910506a1}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{Accessed: 2025-10-20}
@@ -206,8 +238,8 @@
       \strng{authornamehash}{ab8d126679a3cb1e52589e95b674ae3e}
       \strng{authorfullhash}{ab8d126679a3cb1e52589e95b674ae3e}
       \strng{authorfullhashraw}{ab8d126679a3cb1e52589e95b674ae3e}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{arXiv preprint arXiv:2308.16734}
@@ -822,6 +854,76 @@
       \endverb
       \verb{url}
       \verb https://axios-http.com/docs/req_config
+      \endverb
+    \endentry
+    \entry{mdn_service_workers}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=8f023d217837bb3fa4839c97871b2600}{%
+           family={{MDN Contributors}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Mozilla}%
+      }
+      \strng{namehash}{8f023d217837bb3fa4839c97871b2600}
+      \strng{fullhash}{8f023d217837bb3fa4839c97871b2600}
+      \strng{fullhashraw}{8f023d217837bb3fa4839c97871b2600}
+      \strng{bibnamehash}{8f023d217837bb3fa4839c97871b2600}
+      \strng{authorbibnamehash}{8f023d217837bb3fa4839c97871b2600}
+      \strng{authornamehash}{8f023d217837bb3fa4839c97871b2600}
+      \strng{authorfullhash}{8f023d217837bb3fa4839c97871b2600}
+      \strng{authorfullhashraw}{8f023d217837bb3fa4839c97871b2600}
+      \field{extraname}{1}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Using Service Workers}
+      \field{urlday}{16}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers
+      \endverb
+      \verb{url}
+      \verb https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers
+      \endverb
+    \endentry
+    \entry{mdn_netinfo}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=8f023d217837bb3fa4839c97871b2600}{%
+           family={{MDN Contributors}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Mozilla}%
+      }
+      \strng{namehash}{8f023d217837bb3fa4839c97871b2600}
+      \strng{fullhash}{8f023d217837bb3fa4839c97871b2600}
+      \strng{fullhashraw}{8f023d217837bb3fa4839c97871b2600}
+      \strng{bibnamehash}{8f023d217837bb3fa4839c97871b2600}
+      \strng{authorbibnamehash}{8f023d217837bb3fa4839c97871b2600}
+      \strng{authornamehash}{8f023d217837bb3fa4839c97871b2600}
+      \strng{authorfullhash}{8f023d217837bb3fa4839c97871b2600}
+      \strng{authorfullhashraw}{8f023d217837bb3fa4839c97871b2600}
+      \field{extraname}{2}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{NetworkInformation}
+      \field{urlday}{16}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation
+      \endverb
+      \verb{url}
+      \verb https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation
       \endverb
     \endentry
   \enddatalist
