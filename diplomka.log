@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.11.20)  26 NOV 2025 23:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.11.20)  1 DEC 2025 01:27
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1535,8 +1535,8 @@ Package biblatex Info: ... and expl3
  (/usr/share/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty
 Package: blx-case-expl3 2024/03/21 v3.20 expl3 case changing code for biblatex
 )))
-Package hyperref Info: Option `unicode' set `true' on input line 131.
-Package hyperref Info: Option `unicode' set `true' on input line 131.
+Package hyperref Info: Option `unicode' set `true' on input line 133.
+Package hyperref Info: Option `unicode' set `true' on input line 133.
  (/usr/share/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 )
@@ -1545,27 +1545,27 @@ Package csquotes Info: ... found 'babel' package.
  (./diplomka.aux)
 \openout1 = `diplomka.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Info: Redefining \th on input line 131.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Info: Redefining \th on input line 133.
  (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count545
@@ -1607,23 +1607,23 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 Package microtype Info: Patching varwidth to enable character protrusion.
 \MT@vwid@leftmargin=\dimen336
 \MT@vwid@rightmargin=\dimen337
-LaTeX Info: Redefining \microtypecontext on input line 131.
+LaTeX Info: Redefining \microtypecontext on input line 133.
 
 
-Package microtype Warning: Unable to apply patch `item' on input line 131.
+Package microtype Warning: Unable to apply patch `item' on input line 133.
 
-Package microtype Info: Applying patch `toc' on input line 131.
-Package microtype Info: Applying patch `eqnum' on input line 131.
-Package microtype Info: Applying patch `footnote' on input line 131.
-Package microtype Info: Applying patch `verbatim' on input line 131.
-LaTeX Info: Redefining \microtypesetup on input line 131.
+Package microtype Info: Applying patch `toc' on input line 133.
+Package microtype Info: Applying patch `eqnum' on input line 133.
+Package microtype Info: Applying patch `footnote' on input line 133.
+Package microtype Info: Applying patch `verbatim' on input line 133.
+LaTeX Info: Redefining \microtypesetup on input line 133.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 131.
+LaTeX Info: Redefining \showhyphens on input line 133.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1631,7 +1631,7 @@ Package microtype Info: Redefining babel's language switching commands.
 (/usr/share/texmf-dist/tex/latex/microtype/mt-ppl.cfg
 File: mt-ppl.cfg 2005/11/16 v1.6 microtype config. file: Palatino (RS)
 )
-Package hyperref Info: Link coloring OFF on input line 131.
+Package hyperref Info: Link coloring OFF on input line 133.
  (./diplomka.out) (./diplomka.out)
 \@outlinefile=\write138
 \openout3 = `diplomka.out'.
@@ -1713,43 +1713,43 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'diplomka.bbl' found.
  (./diplomka.bbl)
-Package biblatex Info: Reference section=0 on input line 131.
-Package biblatex Info: Reference segment=0 on input line 131.
+Package biblatex Info: Reference section=0 on input line 133.
+Package biblatex Info: Reference segment=0 on input line 133.
 \@logowidth=\skip118
 \@logoheight=\skip119
 <fithesis/logo/mu/fithesis-base-english.pdf, id=189, 202.7575pt x 52.195pt>
 File: fithesis/logo/mu/fithesis-base-english.pdf Graphic file (type pdf)
 <use fithesis/logo/mu/fithesis-base-english.pdf>
-Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english.pdf  used on input line 131.
+Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english.pdf  used on input line 133.
 (pdftex.def)             Requested size: 182.48006pt x 46.97505pt.
 File: fithesis/logo/mu/fithesis-base-english.pdf Graphic file (type pdf)
 <use fithesis/logo/mu/fithesis-base-english.pdf>
-Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english.pdf  used on input line 131.
+Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english.pdf  used on input line 133.
 (pdftex.def)             Requested size: 182.48006pt x 46.97505pt.
 File: fithesis/logo/mu/fithesis-base-english.pdf Graphic file (type pdf)
 <use fithesis/logo/mu/fithesis-base-english.pdf>
-Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english.pdf  used on input line 131.
+Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english.pdf  used on input line 133.
 (pdftex.def)             Requested size: 182.48006pt x 46.97505pt.
-LaTeX Font Info:    Trying to load font information for T1+qhv on input line 131.
+LaTeX Font Info:    Trying to load font information for T1+qhv on input line 133.
  (/usr/share/texmf-dist/tex/latex/tex-gyre/t1qhv.fd
 File: t1qhv.fd 2009/09/25 v1.2 font definition file for T1/qhv
 )
 LaTeX Font Info:    Font shape `T1/qhv/m/n' will be
-(Font)              scaled to size 10.35608pt on input line 131.
+(Font)              scaled to size 10.35608pt on input line 133.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `qhv' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/qhv/m/n' will be
-(Font)              scaled to size 12.42728pt on input line 131.
+(Font)              scaled to size 12.42728pt on input line 133.
 LaTeX Font Info:    Font shape `T1/qhv/b/n' will be
-(Font)              scaled to size 10.35608pt on input line 131.
+(Font)              scaled to size 10.35608pt on input line 133.
 LaTeX Font Info:    Font shape `T1/qhv/b/n' will be
-(Font)              scaled to size 21.4716pt on input line 131.
+(Font)              scaled to size 21.4716pt on input line 133.
 LaTeX Font Info:    Font shape `T1/qhv/m/n' will be
-(Font)              scaled to size 14.91275pt on input line 131.
+(Font)              scaled to size 14.91275pt on input line 133.
 LaTeX Font Info:    Font shape `T1/qhv/m/n' will be
-(Font)              scaled to size 17.89876pt on input line 131.
+(Font)              scaled to size 17.89876pt on input line 133.
 
 
 \openout3 = `diplomka.mw'.
@@ -1884,15 +1884,15 @@ LaTeX Font Info:    Font shape `T1/qhv/m/n' will be
 <fithesis/logo/mu/fithesis-base-english-color.pdf, id=198, 202.7575pt x 52.195pt>
 File: fithesis/logo/mu/fithesis-base-english-color.pdf Graphic file (type pdf)
 <use fithesis/logo/mu/fithesis-base-english-color.pdf>
-Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english-color.pdf  used on input line 131.
+Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english-color.pdf  used on input line 133.
 (pdftex.def)             Requested size: 182.48006pt x 46.97505pt.
 File: fithesis/logo/mu/fithesis-base-english-color.pdf Graphic file (type pdf)
 <use fithesis/logo/mu/fithesis-base-english-color.pdf>
-Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english-color.pdf  used on input line 131.
+Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english-color.pdf  used on input line 133.
 (pdftex.def)             Requested size: 182.48006pt x 46.97505pt.
 File: fithesis/logo/mu/fithesis-base-english-color.pdf Graphic file (type pdf)
 <use fithesis/logo/mu/fithesis-base-english-color.pdf>
-Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english-color.pdf  used on input line 131.
+Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english-color.pdf  used on input line 133.
 (pdftex.def)             Requested size: 182.48006pt x 46.97505pt.
 
 
@@ -1906,15 +1906,15 @@ Package pdftex.def Info: fithesis/logo/mu/fithesis-base-english-color.pdf  used 
 <fithesis/logo/mu/fithesis-fi-color.pdf, id=204, 291.0875pt x 291.0875pt>
 File: fithesis/logo/mu/fithesis-fi-color.pdf Graphic file (type pdf)
 <use fithesis/logo/mu/fithesis-fi-color.pdf>
-Package pdftex.def Info: fithesis/logo/mu/fithesis-fi-color.pdf  used on input line 131.
+Package pdftex.def Info: fithesis/logo/mu/fithesis-fi-color.pdf  used on input line 133.
 (pdftex.def)             Requested size: 276.53154pt x 276.53154pt.
 File: fithesis/logo/mu/fithesis-fi-color.pdf Graphic file (type pdf)
 <use fithesis/logo/mu/fithesis-fi-color.pdf>
-Package pdftex.def Info: fithesis/logo/mu/fithesis-fi-color.pdf  used on input line 131.
+Package pdftex.def Info: fithesis/logo/mu/fithesis-fi-color.pdf  used on input line 133.
 (pdftex.def)             Requested size: 276.53154pt x 276.53154pt.
 File: fithesis/logo/mu/fithesis-fi-color.pdf Graphic file (type pdf)
 <use fithesis/logo/mu/fithesis-fi-color.pdf>
-Package pdftex.def Info: fithesis/logo/mu/fithesis-fi-color.pdf  used on input line 131.
+Package pdftex.def Info: fithesis/logo/mu/fithesis-fi-color.pdf  used on input line 133.
 (pdftex.def)             Requested size: 276.53154pt x 276.53154pt.
 
 
@@ -2045,7 +2045,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 ] (./diplomka.mw)
 \openout3 = `diplomka.mw'.
 
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 136.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 138.
  (/usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -2179,6 +2179,9 @@ Overfull \vbox (6.51537pt too high) has occurred while \output is active []
 
 [8] (./diplomka.mw)
 \openout3 = `diplomka.mw'.
+
+
+Overfull \vbox (10.21469pt too high) has occurred while \output is active []
 
 
 
@@ -2319,6 +2322,10 @@ Underfull \vbox (badness 2951) has occurred while \output is active []
 
 \openout3 = `diplomka.mw'.
 
+\openout3 = `diplomka.mw'.
+
+\openout3 = `diplomka.mw'.
+
 
 Underfull \vbox (badness 6063) has occurred while \output is active []
 
@@ -2368,9 +2375,6 @@ Underfull \vbox (badness 6063) has occurred while \output is active []
 \openout3 = `diplomka.mw'.
 
 \openout3 = `diplomka.mw'.
-
-
-Overfull \vbox (10.13135pt too high) has occurred while \output is active []
 
 
 
@@ -2985,10 +2989,6 @@ Underfull \vbox (badness 1442) has occurred while \output is active []
 
 \openout3 = `diplomka.mw'.
 
-\openout3 = `diplomka.mw'.
-
-\openout3 = `diplomka.mw'.
-
 
 Overfull \vbox (0.81175pt too high) has occurred while \output is active []
 
@@ -3086,6 +3086,10 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [44] (./diplomka.mw)
 \openout3 = `diplomka.mw'.
 
+\openout3 = `diplomka.mw'.
+
+\openout3 = `diplomka.mw'.
+
 
 
 \openout3 = `diplomka.mw'.
@@ -3106,6 +3110,9 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 \openout3 = `diplomka.mw'.
 
 
+Overfull \vbox (5.13135pt too high) has occurred while \output is active []
+
+
 
 \openout3 = `diplomka.mw'.
 
@@ -3119,6 +3126,25 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 \openout3 = `diplomka.mw'.
 
 \openout3 = `diplomka.mw'.
+
+\openout3 = `diplomka.mw'.
+
+\openout3 = `diplomka.mw'.
+
+\openout3 = `diplomka.mw'.
+
+\openout3 = `diplomka.mw'.
+
+\openout3 = `diplomka.mw'.
+
+\openout3 = `diplomka.mw'.
+
+\openout3 = `diplomka.mw'.
+
+\openout3 = `diplomka.mw'.
+
+
+Underfull \vbox (badness 3312) has occurred while \output is active []
 
 
 
@@ -4701,18 +4727,18 @@ Package logreq Info: Writing requests to 'diplomka.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 53127 strings out of 474529
- 1014625 string characters out of 5755265
- 2316805 words of memory out of 5000000
- 72567 multiletter control sequences out of 15000+600000
- 641613 words of font info for 209 fonts, out of 8000000 for 9000
- 464 hyphenation exceptions out of 8191
+ 53208 strings out of 474529
+ 1015815 string characters out of 5755265
+ 2317339 words of memory out of 5000000
+ 72632 multiletter control sequences out of 15000+600000
+ 641467 words of font info for 208 fonts, out of 8000000 for 9000
+ 468 hyphenation exceptions out of 8191
  100i,8n,123p,2407b,3308s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplri.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on diplomka.pdf (65 pages, 513965 bytes).
+Output written on diplomka.pdf (65 pages, 513894 bytes).
 PDF statistics:
- 1180 PDF objects out of 1200 (max. 8388607)
- 1074 compressed objects within 11 object streams
- 470 named destinations out of 1000 (max. 500000)
+ 1178 PDF objects out of 1200 (max. 8388607)
+ 1072 compressed objects within 11 object streams
+ 469 named destinations out of 1000 (max. 500000)
  42908 words of extra memory for PDF output out of 42996 (max. 10000000)
 

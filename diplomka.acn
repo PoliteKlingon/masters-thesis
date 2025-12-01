@@ -11,6 +11,7 @@
 \glossaryentry{UI?\glossentry{ui}|setentrycounter[]{page}"\glsnumberformat}{14}
 \glossaryentry{UX?\glossentry{ux}|setentrycounter[]{page}"\glsnumberformat}{14}
 \glossaryentry{NFC?\glossentry{nfc}|setentrycounter[]{page}"\glsnumberformat}{14}
+\glossaryentry{API?\glossentry{api}|setentrycounter[]{page}"\glsnumberformat}{14}
 \glossaryentry{OS?\glossentry{os}|setentrycounter[]{page}"\glsnumberformat}{15}
 \glossaryentry{OS?\glossentry{os}|setentrycounter[]{page}"\glsnumberformat}{15}
 \glossaryentry{OS?\glossentry{os}|setentrycounter[]{page}"\glsnumberformat}{15}
@@ -77,7 +78,6 @@
 \glossaryentry{TS?\glossentry{ts}|setentrycounter[]{page}"\glsnumberformat}{39}
 \glossaryentry{PWA?\glossentry{pwa}|setentrycounter[]{page}"\glsnumberformat}{39}
 \glossaryentry{HTTP?\glossentry{http}|setentrycounter[]{page}"\glsnumberformat}{39}
-\glossaryentry{HTTP?\glossentry{http}|setentrycounter[]{page}"\glsnumberformat}{39}
 \glossaryentry{UX?\glossentry{ux}|setentrycounter[]{page}"\glsnumberformat}{39}
 \glossaryentry{CSS?\glossentry{css}|setentrycounter[]{page}"\glsnumberformat}{39}
 \glossaryentry{CSS?\glossentry{css}|setentrycounter[]{page}"\glsnumberformat}{39}
@@ -88,7 +88,12 @@
 \glossaryentry{API?\glossentry{api}|setentrycounter[]{page}"\glsnumberformat}{42}
 \glossaryentry{PWA?\glossentry{pwa}|setentrycounter[]{page}"\glsnumberformat}{43}
 \glossaryentry{PWA?\glossentry{pwa}|setentrycounter[]{page}"\glsnumberformat}{43}
+\glossaryentry{FIFO?\glossentry{fifo}|setentrycounter[]{page}"\glsnumberformat}{45}
 \glossaryentry{HTTP?\glossentry{http}|setentrycounter[]{page}"\glsnumberformat}{46}
+\glossaryentry{FIFO?\glossentry{fifo}|setentrycounter[]{page}"\glsnumberformat}{46}
+\glossaryentry{FIFO?\glossentry{fifo}|setentrycounter[]{page}"\glsnumberformat}{46}
+\glossaryentry{URL?\glossentry{url}|setentrycounter[]{page}"\glsnumberformat}{46}
+\glossaryentry{FIFO?\glossentry{fifo}|setentrycounter[]{page}"\glsnumberformat}{47}
 \glossaryentry{API?\glossentry{api}|setentrycounter[]{page}"\glsnumberformat}{49}
 \glossaryentry{PWA?\glossentry{pwa}|setentrycounter[]{page}"\glsnumberformat}{51}
 \glossaryentry{PWA?\glossentry{pwa}|setentrycounter[]{page}"\glsnumberformat}{51}

@@ -54,7 +54,7 @@
 \contentsline {subsection}{\numberline {3.3.3}Vite \gls {pwa}}{43}{subsection.3.3.3}%
 \contentsline {section}{\numberline {3.4}Local data management}{45}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}Axios Interceptor}{46}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Incorporating the staged data}{47}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.2}Incorporating the staged data}{46}{subsection.3.4.2}%
 \contentsline {section}{\numberline {3.5}Synchronization}{48}{section.3.5}%
 \contentsline {chapter}{\numberline {4}\bfseries Selected issues}{49}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Offline testing}{49}{section.4.1}%

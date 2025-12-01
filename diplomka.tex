@@ -73,6 +73,8 @@
 \newacronym{nfc}{NFC}{Near Field Communication}
 \newacronym{crdt}{CRDT}{Conflict-free Replicated Data Type}
 \newacronym{llm}{LLM}{Large Language Model}
+\newacronym{fifo}{FIFO}{First In, First Out}
+\newacronym{url}{URL}{Uniform Resource Locator}
 
 %%
 %% The following section sets up the metadata of the thesis.
@@ -90,7 +92,7 @@
     keywords    = {Mobile, React, React Native, Kotlin, Offline mode, Architecture, Synchronization},
     TeXkeywords = {Mobile, React, React Native, Kotlin, Offline mode, Architecture, Synchronization},
     abstract    = {%
-      This thesis documents the process of designing and implementing an enterprise mobile application with offline support in a real-world scenario with specific functional requirements to be fulfilled. By analyzing viable solutions and architectures, this thesis also serves as a reference for architects to be consulted when designing an optimal approach for a similar application.
+      This thesis documents the process of designing and implementing an enterprise mobile application with offline support in a real-world scenario with specific functional requirements to be fulfilled. By analyzing\hyphenation{a-na-ly-zing} viable solutions and architectures, this thesis also serves as a reference for architects to be consulted when designing an optimal approach for a similar application.
     },
     thanks      = {%
       I would like to express my gratitude towards my advisor for their valuable insights during the academic aspect of the thesis-making process, and towards my colleagues J. Glos, J. Ondruch, and T. Szabó for their technical and business expertise and advice on the topic. I am also grateful to my family and close friends for supporting me emotionally.
@@ -133,7 +135,7 @@
 \printglossary[type=\acronymtype]
 
 \chapter*{\gls{llm} usage declaration}
-During the thesis-making process, I used the ChatGPT \gls{llm} developed by OpenAI \footnote{https://chatgpt.com/} for searching for relevant literature and other sources, and it also helped me generate the \texttt{.bib} bibliography entries for citations in the thesis afterwards. I also used it to help me find appropriate word translations and synonyms.
+During the thesis-making process, I used the ChatGPT \gls{llm} developed by OpenAI \footnote{https://chatgpt.com/} for searching for relevant literature and other sources. It also helped me generate the \texttt{.bib} bibliography entries for citations in the thesis afterwards. Finally, I used it to help me find appropriate word translations and synonyms.
 
 %% The \chapter* command can be used to produce unnumbered chapters:
 \chapter*{Introduction}
@@ -145,20 +147,18 @@ During the thesis-making process, I used the ChatGPT \gls{llm} developed by Open
 
 The primary objective of this thesis is to design and implemtent an offline-ready enterprise mobile client application. The secondary objective is to provide a comprehensive guide through designing such an applictation while considering different requirements. This guide features a list of available technological solutions with their advantages and setbacks while addressing the specific issues that arise in this architecture. The guide will be evaluated against a set of real-world functional and non-functional requirements and a real application that adheres to the result of that evaluation will be designed and implemented to be used by a customer as an enterprise solution.
 
-The thesis consists of 4 chapters; the first chapter investigates the concept of offline-enabled mobile applications, their advantages, disadvantages, and specific challenges and architectural demands. The second chapter explores the approaches to be taken when designing an architecture and technology stack of such app - each approach is further documented, stating its strengths and weaknesses and practical scenarios in which each of them play their prime. Here the thesis not only focuses on different frameworks or languages, but also, the challenges introduced in the first chapter are confronted with different technical solutions and evaluated.
+The thesis consists of 4 chapters; the first chapter investigates the concept of offline-enabled mobile applications and their specific challenges and architectural demands. The second chapter explores the approaches to be taken when designing an architecture and technology\hyphenation{tech-no-lo-gy} stack of such application --- each approach is further documented, stating its strengths and weaknesses and practical scenarios in which each of them play their prime. Here the thesis not only focuses on different frameworks or languages, but also, the challenges introduced in the first chapter are confronted with different technical solutions and those are evaluated.
 
-The third and fourth chapters focus on selecting the right approaches in different areas based on the functional and non-functional requirements, implementation of a mobile frontend client, testing, and other aspects of the practical execution of the project in the context of a real solution for a real customer.
-
-The end application conforms with the requirements and is deployed to production for the end users to work with.
+The third and fourth chapters focus on selecting the right approaches in different areas based on the functional and non-functional requirements, implementing a mobile frontend client, unique issues, and other aspects of the practical execution of the project in the context of a real solution for a real customer. 
 
 ~
 
-Mobile applications are often a desirable part of a software solution. In the modern world where everyone uses their smartphone for a variety of tasks, it is expected to provide support for these devices in enterprise solutions. As there are areas without internet coverage, it is often expected that the applications will have some degree of offline independence. Offline-first (sometimes also called local-first) applications are becoming more and more relevant with rising user expectations for availability and maturing ecosystems that can support it \cite{OfflineFirst}. 
+Mobile applications are often a desirable part of a software solution. In the modern world where everyone uses their smartphone for a variety of tasks, it is expected from software companies to provide support for these devices in enterprise solutions. As there are areas without internet coverage, it is often expected that the applications will have some degree of offline independence. Offline-first (sometimes also called local-first) applications are becoming more and more relevant with rising user expectations for availability and maturing ecosystems that can support it \cite{OfflineFirst}. 
 
-Incorporating the offline functionality to an application brings certain technical, but also conceptual challenges --- questions like where is the source of truth, how should synchronization conflicts be resolved, and much more.
+Incorporating the offline functionality to an application brings certain technical, but also conceptual challenges --- raising questions like what is the source of truth, how should synchronization conflicts be resolved, and much more.
 
 \chapter{Offline-enabled mobile applications}
-First, it is needed to take a look at offline-enabled enterprise mobile applications as a whole and identify the challenges they have to solve in addition to conventional mobile applications. By offline-enabled is meant an application that provides a significant part of its functionality without access to a server, while the extent of said functionality may vary based on a particular project and customer's needs. 
+First, it is needed to take a look at offline-enabled enterprise mobile applications as a whole and identify the new challenges they have to solve compared to conventional mobile applications. Offline-enabled means an application that provides a significant part of its functionality without access to a server; while the extent of said functionality may vary based on a particular project and customer's needs. 
 
 What also tends to vary, and has a great influence on the project complexity, is the ``extent'' of offline capabilities. There may be applications that only need to display some data offline without modifying anything, or applications that need to survive only a couple of hours without synchronizing data with the server, but there may be applications that need to be backend-independent for days and then be able to synchronize the data with the server while running into as few conflicts as possible.
 \section{Concept}
@@ -172,9 +172,9 @@ A client-heavy application, on the other hand, will rather utilize the client's 
 
 When considering any offline capabilities, the application must not be heavily dependent on the server and thus will go in the cleint-heavy direction. To accomodate the offline needs, the concept of the application will need to further deepen the client's independence in order to be able to retain its functionality even when the server is not responsive due to signal loss. The specific problems that one encounters while developing such an app are further explored in the next section.
 \section{Issues to be tackled}
-The first and the most obvious task is to make the application available offline as a whole. While it may seem trivial for certain platforms --- e.g. installing an Android application from Google Play Store --- it may be the first obstacle in other approaches, e.g. React \gls{pwa}. These specifics will be examined in the following chapter; at present, we turn to more conceptual issues.
+The first and the most obvious task is to make the application available offline as a whole. While it may seem trivial for certain platforms --- e.g. installing an Android application from Google Play Store --- it may be the first obstacle in other approaches, e.g. React \gls{pwa}. These specifics will be examined in the following chapter; at present, issues that are rather conceptual are considered.
 \subsection{Offline data availability}
-In order for the aplication to be able to work with data in offline mode, these data must be downloaded in advance and kept updated. This presents a unique challenge that is not dependent on platform or framework choice --- it is, generally, not a good practice to download all data that could possibly be accessed in the application --- that would practically mean data mirroring of whole database or a large part of it. That might not even be possible due to the database size. It is, therefore, quite imperative to try to limit the amount of data that should be available offline from the business logic side.
+In order for the aplication to be able to work with data in offline mode, these data must be downloaded in advance and kept updated. This presents a unique challenge that is not dependent on platform nor framework choice. It is, generally, not a good practice to download all data that could possibly be accessed in the application --- that would practically mean data mirroring of the whole database or a large part of it. That might not even be possible due to the database size. It is, therefore, quite imperative to try to limit the amount of data that should be available offline from the business-logic point of view.
 
 As an example, let's imagine a remote-synchronized enterprise calendar application for planning meetings. Meetings can be input from a device and synchronized to a server. All devices that are subscribed to a certain calendar (e.g. meetings for project X) have it automatically synced with the server to display events submitted from other devices. It might very well suffice to automatically download only the current week or month for offline purposes as there is probably low business value in viewing meeting plans several months in advance or in history. 
 
@@ -183,7 +183,7 @@ A related topic to the previous section is partial changes management --- a conc
 
 The use-case here is updating the local data to match the server state --- the longer the application has been in offline mode, the higher the probability of the data being out of date. Specifically, the probability of the data being out of date after a certain period of time follows the Poisson's distribution \cite{poissonArticle}: \begin{equation}P(X = k) = \frac{ \lambda^k }{k!} e^{-\lambda} \end{equation} where $\lambda$ is expected rate of occurrence and $k$ is the number of occurrences. Let's assume that on average an instance of an entity is changed once every 2 hours during working hours by some user. That is 4 changes during a whole working day. Therefore $\lambda = 4$. The probability that the instance is still up to date the next day (after 8 working hours), in other words, $k = 0$, is approximately 1.83\%.
 
-Therefore, the local data should be periodically or manually updated to minimize the occurrence of synchronization conflicts. The reason why the system should support partial changes management is that if there is none, the only option of a local data update is to bulk-download all data, as if there were none stored, and overwrite them. 
+Therefore, the local data should be periodically or manually updated to minimize the occurrence of synchronization conflicts. The reason why the system should support partial changes management is that if there is none, the only option of a local data update is to bulk-download all data, as if there were none stored, and overwrite any stored data snapshot.
 
 There are two layers of this principle that a system can implement:
 
@@ -221,38 +221,38 @@ Going even deeper in granularity, each attribute can have its timestamp and thus
 Extending the simple request-response schema from the previous section, the only change would be that \texttt{updated} would be of type \texttt{MeetingPartial} - containing only meeting ID and attributes that have been changed.
 
 \subsection{Local data management}
-In a traditional client-server based application, the client should not persist any data that might be volatile. The aim is to fetch a fresh copy of data each time the user displays a certain page for them to work with the latest version of data\footnote{Here the realm of real-time applications is ommited as those are rather specific.}. That is especially important for data updates --- in case there is any form of version control (even a simple one --- every instance has a current version $v$ and every PUT request must have version $v + 1$, otherwise the server refuses to process the request due to version inconsistency), the data freshness might be the differentiator between having the request processed or not. 
+In a traditional client-server based application, the client should not persist any data that might be volatile. The aim is to fetch a fresh copy of data each time the user displays a certain page for them to work with the latest version of data\footnote{Here the realm of real-time applications is ommited as those are rather specific.}. That is especially important for data updates --- in case there is any form of version control (even a simple one where every instance has a current version $v$ and every PUT request must have version $v + 1$, otherwise the server refuses to process the request due to version mismatch), the data freshness might be the differentiator between having the request processed or not. 
 
-After working with the data and possibly mutating them, they are sent to the server to process them and after receiving a positive response, the data is refreshed. Hence, the local copy of data is fresh once again and the old copy is thrown away - as an example, let's imagine a \texttt{updated} attribute --- one that stores the date and time of the last change that has been done to the instance. Updating the value of this attribute will only be done on the server, but the client definitely wants to see this attribute updated after submitting a mutation to the entity.
+After working with the data and possibly mutating them, they are sent to the server to process them and after receiving a positive response, the data is refreshed. Hence, the local copy of data is fresh once again and the old copy is thrown away - as an example, let's imagine an \texttt{updated} attribute --- one that stores the date and time of the last change that has been done to the instance. Updating the value of this attribute will only be done on the server, but the client definitely wants to see this attribute updated after submitting a mutation to the entity.
 
 In the offline world, there is no fresh data and there is no server. All mutations have to be done on the local data copy, including attributes like \texttt{updated}. The server interaction needs to be faked by the application itself --- which, in reality, means implementing a lot of server functionality on the client, which represents the client thickness. 
 
 \subsection{Server synchronization}
-Synchronizing the changes ade on the client to the server and managing potential conflicts is arguably one of the most difficult tasks to tackle in the field of offline-enabled applications. The task is to synchronize all changes made in offline mode to the server when coming back online as seamlessly as possible. 
+Synchronizing the changes made on the client to the server and managing\hyphenation{ma-na-ging} potential conflicts is arguably one of the most difficult tasks to tackle in the field of offline-enabled applications. The task is to synchronize all changes made in offline mode to the server when coming back online as seamlessly as possible. 
 
-The reason why conflicts arise is that the system, and therefore (generally) any data in it can be accessed and mutated by other users, while one or more users are making changes in offline mode. There may be two general approaches:
+The reason why conflicts arise is that the system, and therefore (generally) any data in it, can be accessed and mutated by multiple users, while one or more users may be making their changes in offline mode. There are two general approaches:
 \subsubsection{State-based synchronization}
-All the mutating changes done in offline mode affect directly the local copy of data while marking it $dirty$ --- when switching back to online, every dirty instance is synchronized to the server in one mutation - one PUT request. Newly created (POST) instances that have later been updated are synchronized as one POST with all the updates already put in. Updating an instance and then deleting it means only the DELETE request is synchronized and the updates are thrown away.
+All the mutating changes done in offline mode affect directly the local copy of data while marking it $dirty$ --- when switching back to online, every dirty instance is synchronized to the server in one mutation --- one PUT request. Newly created (POST) instances that have later been updated are synchronized as one POST with all the updates already put in. Updating an instance and then deleting it means only the DELETE request is synchronized and the updates are thrown away.
 
 \subsubsection{Operation-based synchronization}
-Each and every update is propagated to the server. That means, there is a layer that tracks all the requests that have been done (preferably with a timestamp) and when the device comes back online, transmits them all for the server to deal with each change in sequence\footnote{Optimally, the server also accepts the client's timestamp and records the change to have been done in the time of the timestamp, not the request time. Therefore, the real timing of changes, creation, or deletion is also recorded.}. This approach may lead to a lot more conflicts to be resolved --- every request might generate a conflict, so more requests means more potential conflicts. 
+Each and every update is propagated to the server. That means, there is a layer that tracks all the requests that have been done (preferably with a timestamp) and when the device comes back online, transmits them all for the server to deal with each change in sequence\footnote{Optimally, the server also accepts the client's timestamp and records the change to have been done at the time of the timestamp, not the request time. Therefore, the real timing of changes, creation, or deletion is also recorded.}. This approach may lead to a lot more conflicts to be resolved --- every request might generate a conflict, so more requests means more potential conflicts. 
 
-There is one more issue that arises in this approach: when creating a new instance, it is assigned an ID (locally) for unique identification. Later, but still in offline, the instance might be updated --- this change will be recorded as a PUT with the generated ID. When the synchronization to server starts and the POST is transmitted, the server may assign it an ID based on its ID-generation strategy and this ID will probably be different than the locally generated one. The subsequent PUT would then have an invalid ID. To resolve the issue, the client needs to keep a relation of local and server IDs, much like a translation table, and use it to modify any subsequent calls that reference the instance.
+There is one more issue that arises in this approach: when creating a new instance, it is assigned an ID (locally) for unique identification. Later, but still in offline, the instance might be updated --- this change will be recorded as a PUT with the generated ID. When the synchronization to the server starts and the POST is transmitted, the server may assign it an ID based on its ID-generation strategy and this ID will probably be different than the locally generated one. The subsequent PUT would then have an invalid ID. To resolve the issue, the client needs to keep a relation of local and server IDs, much like a translation table, and use it to modify any subsequent calls that reference the instance.
 
 Despite these limitations and added complexity, there are several reasons to prefer this approach: 
 
 \begin{enumerate}
   \item Auditability: each change is recorded, so there is full control over who did what and when it has been done.
   \item Granularity: when one change out of ten causes a conflict, in the operation-based approach it is clear which one it is, while the state-based approach will diffuse it.
-  \item Business logic: it may not be possible to implement the state-based approach in some cases due to functional requirements --- when a change of an attribute has its meaning. Imagine a package delivery app where the pacakge has a state (in warehouse, in delivery, delivered). The courier's phone is currently not connected to the interet as he picks up the package from a warehouse and delivers it to the customer. It is only after that when their phone finally connects to the internet. In state-based approach, the package would go straight from $inWarehouse$ state to $delivered$ state --- which is probably not the expected behaviour.
+  \item Business logic: it may not be possible to implement the state-based approach in some cases due to functional requirements --- when a change of an attribute has its meaning. Imagine a package delivery app where the package has a state (in warehouse, in delivery, delivered). The courier's phone is currently not connected to the interet as he picks up the package from a warehouse and delivers it to the customer. It is only after that when their phone finally connects to the internet. In state-based approach, the package would go straight from $inWarehouse$ state to $delivered$ state --- which is probably not the expected behaviour.
 \end{enumerate}
   
 \subsection{Offline authentication, authorization}
-Application usability strongly relies on the user remaining authenticated while offline --- they cannot be automatically signed out when their token expires. Either the token-checking logic has to be suspended while offline, or the server response to such request must be mocked to a succesful call.
+Application usability strongly relies on the user remaining authenticated while offline --- they cannot be automatically signed out when their token expires. Either the token-checking logic has to be suspended while offline, or the server response to such request must be mocked locally as a succesful call.
 
 But, remaining signed into the application while offline may cause a security issue --- the local data can be sensitive and without authorization, an intruder that has taken over the device, even after a long time trying, can see the data unauthorized, provided that the device remains offline. This risk can be mitigated by, for example, signing the user out after a specific amount of time in offline, but that has to be agreed-upon from the business side. 
 
-Yet there is still an additional issue. Even when the user is signed out from the application, the local data is still present in the storage of the device. In case this poses a considerable security issue in the customer's context, the data must be encrypted by the application.
+Yet there is still an additional issue. Even when the user is signed out from the application, the local data is still present in the storage of the device. In case this poses a considerable security issue in the customer's context, the data must be encrypted by the application or automatically deleted after a certain amount of time.
 
 \chapter{Technical approaches}
 This chapter explores different technical approaches to employ when designing an enterprise solution in the context outlined in the previous chapter.
@@ -261,7 +261,7 @@ First, there is the crucial decision over the base architecture of the applicati
 
 Since the topic at hand is mobile applications, naturally the first thing that comes to mind are mobile-specific languages and frameworks. These can be split into native approaches such as Kotlin or Swift, and cross-platform ones such as React Native or Flutter. 
 
-But there has been a strong tendency to favor browser-based solutions over native ones in recent history, as \citefullauthor{WebAppsReplacingNative} \cite{WebAppsReplacingNative} comments. He argues that Google has been one of the biggest driving forces on the market and that the sheer market share of their browser, Google Chrome, can in part be attributed to this transformation. The architecture in question is \gls{spa}, specifically in form of \gls{pwa}s. 
+But there has been a strong tendency to favor browser-based solutions over native ones in recent history, as \citefullauthor{WebAppsReplacingNative} \cite{WebAppsReplacingNative} comments. He argues that Google has been one of the biggest driving forces on the market and that the sheer market share of their browser, Google Chrome, can in part be attributed to this transformation. The architecture in question is \gls{spa}, specifically in form of a \gls{pwa}. 
 
 Tools that \citeauthor{WebAppsReplacingNative} mentions, like Google Meet, YouTube or Canva, are only a fraction of the sheer quantity of applications that use this web-based architecture. Spotify, Netflix, or applications like BandLab\footnote{https://www.bandlab.com/} --- a fully-featured in-browser music creation platform --- after all, even Microsoft's office suite has been migrated to the browser with the Office 365 package and as \citefullauthor{OfficeForWeb} \cite{OfficeForWeb} explains, Microsoft has been heavily investing to make their office suite web-first for quite a few years now, even prioritising the web variant over the native one for new feature releases.
 \subsection{Native approaches}
@@ -272,12 +272,12 @@ Performance is among the most prominent reasons to go native. \citefullauthor{Na
 
 There is a related advantage of native applications that enhances the user's perception of performance --- the \gls{ui} / \gls{ux} integration into the system. Since the applications are native, they respect the animations, navigation, and overall user experience of the system they are running on. They will be very well optimized for the device and may even be coupled with haptic feedback, system shortcuts or widgets.
 
-The last notable strength of this architecture that should be discussed is operating-system-level integration. Native apps can communicate with the device's hardware and core features significantly better than a browser application ever will. That includes all the sensors that a mobile device has --- camera, Bluetooth, \gls{nfc}, Accelerometer/Gyroscope, ambient light, temperature sensors, and a lot more. All of these can be directly integrated into a native app. Their data are presented through respective system APIs in (more or less) raw form. There is little abstraction and maximum control.
+The last notable strength of this architecture that should be discussed is operating-system-level integration. Native apps can communicate with the device's hardware and core features significantly better than a browser application ever will. That includes all the sensors that a mobile device has --- camera, Bluetooth, \gls{nfc}, Accelerometer/Gyroscope, ambient light, temperature sensors, and a lot more. All of these can be directly integrated into a native app. Their data are presented through respective system \gls{api}s in (more or less) raw form. There is little abstraction and maximum control.
 
 This area is not only limited to hardware itself, there is the \gls{os}  layer as well --- managing foreground and background jobs, having full control over \gls{os} notification channels, battery optimizations, or native sharing options and integration with other native applications. To conclude, when the application needs to have a deep hardware or operating level integration, the native approach plays its prime.
 
 \subsubsection{Disadvantages}
-On the other hand, there certainly are disadvantages to this approach. The greatest one being the fact that when multiple operating systems need to be supported, there have to be multiple codebases in use --- each for one platform. 
+On the other hand, there certainly are disadvantages to this approach. The greatest one being the fact that when multiple operating systems need to be supported, there have to be multiple codebases in use --- one for each platform. 
 
 Typically, that would mean Kotlin for Android support and Swift for iOS support. There is quite a limited extent to which certain logic can be shared between different languages and frameworks. That means a lot more cost to develop and maintain two application versions instead of one. The applications also need to be published and then updated by respective app stores, so the deployment process can be a little more difficult. 
 
@@ -288,7 +288,7 @@ The other disadvantage that should be talked about comes from the very same reas
 For example, every Android version on every phone brand differs slightly and to ensure the app compliance with a wide variety of supported devices, the testing needs to be extensive and the development might have to include a lot more specific case handling.
 
 \subsubsection{Kotlin}
-What is often referenced as Kotlin is in fact Kotlin + Android \gls{sdk} (software development kit) + Jetpack Compose. Kotlin\footnote{https://kotlinlang.org/} is a programming language developed by JetBrains. It was designed to be a modern yet mature programming language that takes a lot of inspiration from languages like Java, C\# or Scala \cite{kotlinOverview}. One of its strong points is that it is fully interoperable with Java, which makes migration as painless as possible. 
+What is often referenced as Kotlin is in fact Kotlin + Android \gls{sdk} + Jetpack Compose. Kotlin\footnote{https://kotlinlang.org/} is a programming language developed by JetBrains. It was designed to be a modern yet mature programming language that takes a lot of inspiration from languages like Java, C\# or Scala \cite{kotlinOverview}. One of its strong points is that it is fully interoperable with Java, which makes migration as painless as possible. 
 
 Google states that Kotlin provides better expressiveness, conciseness and safety over Java, which are the main reasons of why in 2019, Google annouced that Android development will be Kotlin-first \cite{KotlinFirst}. According to the Stack Overflow Developer Survey from 2024 \cite{StackOverflow2024}, developers enjoy working with Kotlin more than with Java, which is shown by the admiration index where Kotlin surpasses Java by almost 15\% (47.6\% for Java, 60.9\% for Kotlin).
 
@@ -304,7 +304,7 @@ In the technology stack, similarly to the Android ecosystem, Apple \gls{sdk} pro
 
 Talking about comparisons between Kotlin and Swift, performance is the first that might come to mind. According to a set of benchmarks\footnote{https://programming-language-benchmarks.vercel.app/swift-vs-kotlin}, Kotlin seems to generally complete tasks faster when coupled with \gls{jvm}. There are other technical differences such as Kotlin's JVM-powered Garbage Collection Approach versus Swift's Automatic References Counting for memory management \cite{KotlinSwift} and other caveats, yet there is not much sense in such comparisons as the languages are designed for completely different environments. 
 
-There is one direct comparison, however, that is to be made - the syntax of the languages, revealing their expressiveness. Two code snippets of a simple class follow, the former in Swift and the latter in Kotlin. As expressiveness is subjective, it is up to the reader to decide the superior one.
+There is one direct comparison, however, that is to be made --- the syntax of the languages, revealing their expressiveness. Two code snippets of a simple class follow, the former in Swift and the latter in Kotlin. As expressiveness is subjective, it is up to the reader to decide the superior one.
 
 \begin{lstlisting}[language=Swift, caption={Swift example}]
 class Pet {
@@ -604,9 +604,9 @@ Therefore, the only options left are React \gls{pwa} and Flutter. In this case, 
 As the programming language, TypeScript\footnote{https://www.typescriptlang.org/} was chosen for type safety to help minimize runtime errors. TypeScript alows using static typing, generics or interfaces. Vite\footnote{https://vite.dev/} was chosen as the build tool for its speed and features. On top of the React-\gls{ts} \gls{pwa} platform, a reliable and powerful set of libraries was chosen to ensure stability and extensibility. To mention a few of the most prominent: 
 \begin{enumerate}
   \item Tanstack Query\footnote{https://tanstack.com/query/latest} is a library for request, state, and asynchronous data management --- primarily used for consistent, state-aware handling of fetching and mutating any data.
-  \item Axios \gls{http}\footnote{https://axios-http.com/} is a promise-based \gls{http} client with concise syntax and powerful tools like interceptors or proxies.
+  \item Axios HTTP\footnote{https://axios-http.com/} is a promise-based \gls{http} client with concise syntax and powerful tools like interceptors or proxies.
   \item React Hook Form\footnote{https://react-hook-form.com/} is a modern, fully featured, \gls{ux} oriented, and flexible library to be used for form handling in React apps with state management and broad validation support.
-  \item Zod\footnote{https://zod.dev/} is a TypeScript-first validation library that enabled building complex validation schemas with the option to infer types from the schemas to use. It is fully compatible with React Hook Form.
+  \item Zod\footnote{https://zod.dev/} is a TypeScript-first validation library that enables building complex validation schemas with the option to infer types from the schemas to use. It is fully compatible with React Hook Form.
   \item Tailwind \gls{css}\footnote{https://tailwindcss.com/} is a concise and expressive \gls{css} framework that is utility based. It minimizes \gls{css} bundle size while providing a fast and powerful way to build UIs.
   \item ShadCN\footnote{https://ui.shadcn.com/} is a highly customizable and extensible component library that is based on Tailwind \gls{css}. 
 \end{enumerate}
@@ -617,7 +617,7 @@ What a service worker is has been explained in detail in chapter two. Here the f
 
 Workbox\footnote{https://developer.chrome.com/docs/workbox} is a high-level Service Worker library developed by Google to simplify working with service workers. It provides a set of modules to abstract over the complex service worker \gls{api}.
 
-Inside of Vite config, there is a manifest for the \gls{pwa} to be injected into the build. Inside it, things like application name or icon are specified. There is also the reference to the service worker source code file. This file, \texttt{prompt-sw.ts} includes these logical parts: the setup and the caching strategies
+Inside of Vite config, there is a manifest for the \gls{pwa} to be injected into the build. Inside it, things like application name or icon are specified. There is also the reference to the service worker source code file. This file, \texttt{prompt-sw.ts} includes two logical parts: the setup and the caching strategies.
 
 \begin{lstlisting}[language=java,caption={Setup}]
 import {
@@ -759,9 +759,9 @@ export function ReloadPrompt() {
 \end{lstlisting}
 
 \section{Local data management}
-In this application, the majority of data is not created, but mutated. Prepared Orders are fulfilled, activities completed, data filled, there is only a few usecases that create data, like, for example, attachments. The POST-PUT chaining problem therefore might be ommited as updating created instances may be forbidden, while only allowing deleting the instance and re-creating it if necessary. A lot of the data is also state-dependent and timing and order of operations crucial --- the Order state dictates what data can be accesed and generally what can be done in the app.
+In this application, the majority of data is not created, but mutated. Prepared orders are fulfilled, activities completed, data filled, there is only a few usecases that create data, like, for example, attachments. The POST-PUT chaining problem therefore might be ommited as updating created instances may be forbidden, while only allowing deleting the instance and re-creating it if necessary. A lot of the data is also state-dependent and timing and order of operations crucial --- the order's state dictates what data can be accesed and generally what can be done in the app.
 
-For those reasons, the intercepting approach was chosen for managing local data. Therefore there is no local mirrored database, only a middleware that intercepts requests in offline mode and stores them in a queue. That FIFO\footnote{First In, First Out} queue is then queried for any staged data and synchronized after reconnecting to the internet. 
+For those reasons, the intercepting approach was chosen for managing local data. Therefore there is no local mirrored database, only a middleware that intercepts requests in offline mode and stores them in a queue. That \gls{fifo} queue is then queried for any staged data and synchronized after reconnecting to the internet. 
 
 To answer the question why the hybrid approach was not chosed as it is more robust, the main point is that the requirements towards considerable offline independence are not present. The application will not remain offline for more than a work shift and the typical scenario is spending only a couple of hours offline and then coming back online. The application is not request-intensive and managing a mirrored local database under the middleware would, in this case, be excessive.
 \subsection{Axios Interceptor}
@@ -769,15 +769,15 @@ The intercepting middleware is implemented as an Axios interceptor. Axios, being
 
 The request interceptor used in this application is set up in the following way\footnote{The relevant code is in \texttt{src/api/axios-config.ts}.}: 
 \begin{enumerate}
-  \item It queries the browser if it is online.
+  \item It queries the browser whether it is online.
   \item If so, it just passes the request.
-  \item If not, it enqueues the request into the request FIFO and aborts the original request. For this purpose, in the response interceptor, there is a filter for aborted responses --- they are not to be propagated into the app as they have been aborted by the request interceptor.
+  \item If not, it enqueues the request into the request \gls{fifo} and aborts the original request. For this purpose, in the response interceptor, there is a filter for aborted responses --- they are not to be propagated into the app as they have been aborted by the request interceptor.
 \end{enumerate} 
 
-The request FIFO itself is persisted in the browser's localStorage in order to survive app reloads\footnote{Its code is in \texttt{src/offline/request-fifo.ts}}. It stores the so-called \textit{Axios configs} --- objects storing all the relevant attributes, data, metadata, and options for a request, like url, method, request body, parameters, headers, flags, transformers or proxies \cite{axios_req_config}. Later, when online, the config can just be passed to Axios, which composes the request and transmits it.
+The request \gls{fifo} itself is persisted in the browser's local storage in order to survive app reloads\footnote{Its code is in \texttt{src/offline/request-fifo.ts}}. It stores the so-called \textit{Axios configs} --- objects storing all the relevant attributes, data, metadata, and options for a request, like \gls{url}, method, request body, parameters, headers, flags, transformers or proxies \cite{axios_req_config}. Later, when online, the config can just be passed to Axios, which composes the request and transmits it.
 
 \subsection{Incorporating the staged data}
-When offline, the application fetches data as normal (they are, in fact, served from cache by the service worker), then retrieves staged data from the FIFO, and finally decides how to merge the fetched data with the staged data --- overlaying them, proritizing one over another or any other merging strategy. As an example, let's take the Activity detail. The Activity is fetched from \texttt{/api/activity/<activityId>}, its staged data retrieved by \texttt{getStagedActivityData} from the queue, and the component that renders it, in this case, prioritizes the staged data over the fetched data.
+When offline, the application fetches data as normal (they are, in fact, served from cache by the service worker), then retrieves staged data from the \gls{fifo}, and finally decides how to merge the fetched data with the staged data --- overlaying them, proritizing one over another or any other merging strategy. As an example, let's take the Activity detail. The Activity is fetched from \texttt{/api/activity/<activityId>}, its staged data retrieved by \texttt{getStagedActivityData} from the queue, and the component that renders it, in this case, prioritizes the staged data over the fetched data.
 \begin{lstlisting}[language=java,caption={Staged data retrieval}]
   export function getStagedActivityData(
   activityId: string,
@@ -808,11 +808,11 @@ When offline, the application fetches data as normal (they are, in fact, served 
 \section{Synchronization}
 The synchronization approach in this aplication is a combination of mitigation and acceptance: it is expected that each user has their own data that they work with. In case there might be two users cooperating on the same order, they each have their part of data that they interact with. In the unexpected (and technically unsupported) case they do not cooperate, the risk is simply accepted: they will overwrite each other's data (last write wins) or they might cause conflicts when the pending changes are no longer applicable to the current version of the data.
 
-The stored Axios configs (requests) can be seen in the application as pending in the synchronization dialog. They have a timestamp when they have been recorded, which is then sent as $validFrom$ query parameter to the backend during synchronization. Each config is resent by Axios in the order in which they have been recorded. There are some requests that can be aborted (and, therefore, deleted from the queue) --- yet not all of them should have the option to be aborted, for example, all state-dependent requests and state-changing requests should not be tampered with as they can corrupt the validity of the following requests.
+The stored Axios configs (requests) can be seen in the application as pending in the synchronization dialog. They have a timestamp when they have been recorded, which is then sent as $validFrom$ query parameter to the backend during synchronization. Each config is resent by Axios in the order in which they have been recorded. There are some requests that can be aborted (and, therefore, deleted from the queue) --- yet not all of them have the option to be aborted, for example, all state-dependent requests and state-changing requests should not be tampered with as they can corrupt the validity of the following requests.
 
 If a request fails during the synchronization, the user has an option to either try again, delete the failing request if possible, or throw away all the offline changes.
 
-TODO screenshoty 
+TODO screenshoty z appky
 
 \chapter{Selected issues}
 This chapter highlights specific problems that had to be tackled during the development and testing of the application. The focus is on offline-specific functionality.
@@ -826,7 +826,7 @@ One of the main issues with the request queue are dependent requests. A prime ex
 
 There is an option to mock the file server in offline mode and generate a file ID as the response for the file server request. Then, during synchronization, the device must maintain a mapping between the local generated file IDs and those generated by the file server, thus on each file server response store the original and the new ID as a pair. This mapping needs to be queried in every subsequent request containing any file reference and the local ID has to be mapped to the server one. Additionaly, the order of requests must always be file server first, attachment endpoint second; and there must not be any form of parallel synchronization present --- the mapping must be properly updated before the attachment request is dispatched.
 
-The second approach, the one which was chosen and implemented in this project, is to maintain a second request pool, this time particularly for attachment requests. This does not need to be a queue as attachment adding is not order-dependent. It is stored as an array in the indexedDB storage space as it may be quite considerable in size. The application stores these requests separately and with the file content directly as the body --- the file server request is not stored nor created. The requests are abortable (deletable from the synchronizing dialog). 
+The second approach, the one which was chosen and implemented in this project, is to maintain a second request pool, this time particularly\hyphenation{par-ti-cu-lar-ly} for attachment requests. This does not need to be a queue as attachment adding is not order-dependent. It is stored as an array in the indexedDB storage space as it may be quite considerable in size. The application stores these requests separately and with the file content directly as the body --- the file server request is not stored nor created. The requests are abortable (deletable from the synchronizing dialog). 
 
 Then, during the synchronization, the attachments are synchronized before the other requests and the synchronization handler creates two consecutive requests out of every attachment request stored --- the file server request takes the attachment content from the body, and its response is used in the attachment endpoint request itself.
 
@@ -835,14 +835,14 @@ There are certain areas that could be improved in the application --- for exampl
 
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
-This thesis compared the different approaches to be taken when designing a offline-enabled mobile enterprise application. First, framework choices have been explored, ranging from native options like Kotlin or Swift development environments, through cross-platform approches like React Native or Flutter, to \gls{pwa}s. It has been noted that each solution has their advantages and disadvantages - for example, native has the best performance, while PWAs are very platform-versatile and easy to maintain. 
+This thesis compared the different approaches to be taken when designing a offline-enabled mobile enterprise application. First, framework choices have been explored, ranging from native options like Kotlin or Swift development environments, through cross-platform approches like React Native or Flutter, to \gls{pwa}s. It has been noted that each solution has their advantages and disadvantages --- for example, native has the best performance, while PWAs are very platform-versatile and easy to maintain. 
 
 
 Then, specific offline issues and their solutions have been explored --- data availability, local management, synchronization, or offline security. There are several solutions to be implemented for every issue and the correct one is dependent on the context of the specific application. 
 
 To illustrate this phenomenon, a real-world application based on a set of specific functional requirements has been designed and implemented, while documenting the reasons why certain paths have been taken in the designing process. In particular, it has been implemented as a React \gls{pwa} with Workbox Service Worker caching, Axios Interceptor proxy and an offline request queue.
 
-The result is a comprehensive study on offline-enabled enterprise applications and their architectures, accompanied by an implemented application that demonstrates the discussed conceppts in practice. 
+The result is a comprehensive study on offline-enabled enterprise applications and their architectures, accompanied by an implemented application that demonstrates the discussed concepts in practice. 
 
 \setcounter{biburllcpenalty}{7000}
 \setcounter{biburlucpenalty}{8000}
