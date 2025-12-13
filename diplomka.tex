@@ -26,9 +26,9 @@
   nocolorbold, %% The `nocolorbold` option disables the usage of the
                %% blue color for bold text, instead using black. Replace
                %% with `colorbold` to use blue for bold text.
-  lof,         %% The `lof` option prints the List of Figures. Replace
+  nolof,         %% The `lof` option prints the List of Figures. Replace
                %% with `nolof` to hide the List of Figures.
-  lot,         %% The `lot` option prints the List of Tables. Replace
+  nolot,         %% The `lot` option prints the List of Tables. Replace
                %% with `nolot` to hide the List of Tables.
 ]{fithesis4}
 %% The following section sets up the locales used in the thesis.
@@ -132,10 +132,12 @@
 
 \begin{document}
 
+\renewcommand*{\glspostdescription}{}
+\setacronymstyle{long-short}
 \printglossary[type=\acronymtype]
 
 \chapter*{\gls{llm} usage declaration}
-During the thesis-making process, I used the ChatGPT \gls{llm} developed by OpenAI \footnote{https://chatgpt.com/} for searching for relevant literature and other sources. It also helped me generate the \texttt{.bib} bibliography entries for citations in the thesis afterwards. Finally, I used it to help me find appropriate word translations and synonyms.
+During the thesis-making process, I used the ChatGPT \gls{llm} developed by OpenAI \footnote{https://chatgpt.com/} for searching for relevant literature and other sources. It also helped me generate the \texttt{.bib} bibliography entries for citations in the thesis afterwards. Finally, I used it to help me find appropriate word translations and synonyms. I take full responsibility for the aforementioned generated content.
 
 %% The \chapter* command can be used to produce unnumbered chapters:
 \chapter*{Introduction}
@@ -424,7 +426,7 @@ export default function UserCard({ user }) {
 }
 \end{lstlisting}
 
-\subsection{React \gls{pwa}}
+\subsection{React PWA}
 React.js\footnote{https://react.dev/} is a powerful JavaScript frontend library/framework used for building modern user interfaces. Developed by Facebook/Meta and published in 2013 \cite{ReactVersions}, it is by far the most popular frontend framework at 39.5\%, followed by Next.js\footnote{https://nextjs.org/} at 17.9\%, which is a web framework built on top of React. It is also the most desired at 33.4\% by a considerable margin and is reasonably admired at 62.2\%, according to the Stack Overflow Developer Survey 2024 \cite{StackOverflow2024}. 
 
 From these numbers, it is safe to say that React is the single most used and important frontend framework on the current market. That means there is a massive amount of packages to be used for development in React and a multitude of guides, forums and other content about the framework which serves as an invaluable source of assistance during development. There is also a remarkable number of React developers on the market.
@@ -613,6 +615,15 @@ As the programming language, TypeScript\footnote{https://www.typescriptlang.org/
 \section{Service Worker}
 What a service worker is has been explained in detail in chapter two. Here the focus is on the actual implementation with emphasis on the different strategies to be employed in different scenarios.
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth * 10 / 31]{images/download1.png}
+    \includegraphics[width=\textwidth * 10 / 31]{images/download2.png}
+    \includegraphics[width=\textwidth * 10 / 31]{images/download3.png}
+    \caption{Data download dialog}
+    \label{fig:download}
+\end{figure}
+
 \subsection{Workbox + Vite}
 
 Workbox\footnote{https://developer.chrome.com/docs/workbox} is a high-level Service Worker library developed by Google to simplify working with service workers. It provides a set of modules to abstract over the complex service worker \gls{api}.
@@ -706,7 +717,7 @@ Second strategy used, Cache-First, is utilized for styles and scripts --- in oth
 
 The last of the used strategies is called Stale-While-Revalidate. It fetches the data from the cache if possible and returns them to the client, while fetching a fresh version from the server and upon receiving a response, it updates the cache \cite{strategies}. The data might not be fresh everytime, but they are \textit{eventually consistent}, while prioritizing load times. The strategy is used for images, as those may usually take a while to load and their freshness is not critical.
 
-\subsection{Vite \gls{pwa}}
+\subsection{Vite PWA}
 
 The Vite \gls{pwa} plugin\footnote{https://vite-pwa-org.netlify.app/} builds upon the Workbox to provide ready to use React hooks like \texttt{useRegisterSW} that handles registering and updating the application. In this case, as has been foreshadowed earlier, the updates are forced upon the user, as illustrated by the \texttt{useEffect} hook used for updating the service worker as soon as an update is detected. The following snippet is simplified to convey the main point, its full content is attached as an electronic attachment in the file \texttt{reload-prompt.tsx}.
 
@@ -812,14 +823,21 @@ The stored Axios configs (requests) can be seen in the application as pending in
 
 If a request fails during the synchronization, the user has an option to either try again, delete the failing request if possible, or throw away all the offline changes.
 
-TODO screenshoty z appky
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth * 10 / 31]{images/offline1.png}
+    \includegraphics[width=\textwidth * 10 / 31]{images/offline2.png}
+    \includegraphics[width=\textwidth * 10 / 31]{images/offline3.png}
+    \caption{Synchronizing dialog}
+    \label{fig:offline}
+\end{figure}
 
 \chapter{Selected issues}
 This chapter highlights specific problems that had to be tackled during the development and testing of the application. The focus is on offline-specific functionality.
 \section{Offline testing}
 Service workers are only enabled on HTTPS connections dute to security reasons \cite{mdn_service_workers}, it is therefore important to have the testing deployment running in a secure environment. Then, when testing, offline mode can be forced in the browser in the Network tab in Developer options in the \textit{Throttling} menu. The offline mode adds a considerable amount of functionality to be tested --- caching every relevant endpoint, storing mutations, incorporating them into the presented data, and the synchronization itself. 
 
-During real life testing of the offline functionality, a need to force offline mode in slow network environments arose --- in areas with unstable connection, the offline mode kept switching on and off and even on slow but stable connection, the server responses took an unpleasant amount of time, which significantly reduced usability. A latency and bandwidth threshold has been set for deciding when offline mode should be enforced. Then, all relevant parts of the application including the service worker query the browser's Navigator \gls{api} for network quality information \cite{mdn_netinfo} and determine if offline should be enabled based on \texttt{downlink} and \texttt{rtt}.
+During real life user acceptance testing of the offline functionality, a need to force offline mode in slow network environments arose --- in areas with unstable connection, the offline mode kept switching on and off and even on slow but stable connection, the server responses took an unpleasant amount of time, which significantly reduced usability. A latency and bandwidth threshold has been set for deciding when offline mode should be enforced. Then, all relevant parts of the application including the service worker query the browser's Navigator \gls{api} for network quality information \cite{mdn_netinfo} and determine if offline should be enabled based on \texttt{downlink} and \texttt{rtt}.
 
 \section{Dependent requests}
 One of the main issues with the request queue are dependent requests. A prime example are attachments. The file added by the user neds to first be uploaded to the file server, which returns a unique file ID, and this file reference needs to be uploaded in the body of the attachment endpoint request. Why is this an issue? The second request needs to contain an ID which is unknown at the moment of the request dispatch --- it is to be returned from the file server request. 
